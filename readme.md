@@ -17,9 +17,9 @@ Laps is a Composer package and can be installed via:
 
 None... Yet.
 
-# Screenshots
+# Screenshot
 
-![Laps screenshot](https://bitbucket.org/Rarst/laps/downloads/laps-screenshot.png)
+![Laps screenshot](http://i.imgur.com/zFokmkU.png)
 
 # Changelog
 
