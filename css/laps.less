@@ -1,0 +1,77 @@
+@import "mixins.less";
+
+#wpadminbar {
+
+	#wp-admin-bar-laps .ab-sub-wrapper {
+//		display: block !important;
+		min-width: 90%;
+		width: 90%;
+		position: fixed;
+		left: 5%;
+	}
+
+	#wp-admin-bar-laps_output {
+
+		padding: 0 10px;
+
+		&:hover {
+			background-color: transparent;
+		}
+
+		.ab-empty-item {
+			display: none;
+		}
+
+	}
+
+	.laps-timeline {
+		overflow: hidden;
+		height: 20px;
+		#gradient > .vertical(#f5f5f5, #f9f9f9);
+		.box-shadow(inset 0 1px 2px rgba(0,0,0,.1));
+		.border-radius(4px);
+	}
+
+	.laps-timeline .event {
+		width: 0%;
+		height: 20px;
+		color: #fff;
+		float: left;
+		font-size: 12px;
+		text-align: center;
+		text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+		#gradient > .vertical(#ee5f5b, #c43c35);
+		.box-shadow(inset 0 -1px 0 rgba(0,0,0,.15));
+		.box-sizing(border-box);
+		.transition(width .6s ease);
+
+		position: absolute;
+	}
+
+	.laps-timeline .event + .event {
+		.box-shadow(~"inset 1px 0 0 rgba(0,0,0,.15), inset 0 -1px 0 rgba(0,0,0,.15)");
+	}
+
+	.laps-timeline .event-theme {
+		#gradient > .vertical(#62c462, #57a957);
+	}
+
+	.laps-timeline .event-plugin {
+		#gradient > .vertical(#5bc0de, #339bb9);
+	}
+
+	.laps-timeline .event-core {
+		#gradient > .vertical(lighten(#f89406, 15%), #f89406);
+	}
+
+	[data-hint]:after {
+		font-size: 13px;
+		background-color: #464646;
+		text-shadow: none;
+	}
+
+	.hint--bottom:before {
+	  border-bottom-color: #464646;
+	}
+}
+

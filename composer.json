@@ -1,0 +1,27 @@
+{
+	"name"       : "rarst/laps",
+	"description": "Light WordPress profiler.",
+	"keywords"   : ["wordpress", "performance"],
+	"type"       : "wordpress-plugin",
+	"homepage"   : "https://bitbucket.org/Rarst/laps",
+	"license"    : "MIT",
+	"authors"    : [
+		{
+			"name"    : "Andrey Savchenko",
+			"email"   : "contact@rarst.net",
+			"homepage": "http://www.Rarst.net/"
+		}
+	],
+	"support"    : {
+		"issues": "https://bitbucket.org/Rarst/laps/issues",
+		"source": "https://bitbucket.org/Rarst/laps/src"
+	},
+	"autoload"   : {
+		"classmap": ["src/"]
+	},
+	"require"    : {
+		"composer/installers": "~1.0",
+		"symfony/stopwatch"  : "~2.2.0",
+		"mustache/mustache"  : "~2.3.0"
+	}
+}
