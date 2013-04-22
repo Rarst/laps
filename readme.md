@@ -1,6 +1,6 @@
 # Description
 
-Laps is light WordPress profiler, which aims to be:
+Laps is light WordPress profiler (in a plugin), which aims to be:
 
  - always on and zero click (just hover on toolbar entry) away
  - quick indicator of what hogs page in general or right now
@@ -21,19 +21,19 @@ And some of third party hooks conventions for themes using:
  - Genesis
  - Thematic
 
+# Screenshot
+
+![Laps screenshot](http://i.imgur.com/zFokmkU.png)
+
 # Installation
 
-Laps is a Composer package and can be installed via:
+Laps is a Composer package and can be installed in plugin directory via:
 
     php composer.phar create-project rarst/laps --repository-url=http://rarst.net
 
 # Frequently Asked Questions
 
 None... Yet.
-
-# Screenshot
-
-![Laps screenshot](http://i.imgur.com/zFokmkU.png)
 
 # Changelog
 
