@@ -1,12 +1,12 @@
 <?php
 /*
 Plugin Name: Laps
-Plugin URI: 
+Plugin URI: https://bitbucket.org/Rarst/laps/
 Description: Light WordPress profiler.
 Author: Andrey "Rarst" Savchenko
 Version: 1.0
 Author URI: http://www.rarst.net/
-Text Domain: 
+Text Domain: laps
 Domain Path: /lang
 License: MIT
 
