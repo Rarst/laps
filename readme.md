@@ -7,6 +7,20 @@ Laps is light WordPress profiler, which aims to be:
 
 It is no match or replacement for *real* profiler, but is friendly and cute.
 
+Out of the box Laps supports common stage of WordPress page life cycle:
+
+ - plugins load
+ - themes load
+ - core init
+ - main loop
+
+And some of third party hooks conventions for themes using:
+
+ - Theme Hook Alliance
+ - Hybrid
+ - Genesis
+ - Thematic
+
 # Installation
 
 Laps is a Composer package and can be installed via:
