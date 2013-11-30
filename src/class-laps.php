@@ -12,6 +12,7 @@ class Laps {
 	/**  @var Stopwatch $stopwatch */
 	public static $stopwatch;
 	public static $events = array();
+	public static $query_starts = array();
 
 	/**
 	 * Start Stopwatch and timing plugin load immediately, then set up core events and needed hooks.
@@ -30,6 +31,9 @@ class Laps {
 		add_action( 'pre_update_site_option_active_sitewide_plugins', array( __CLASS__, 'pre_update_option_active_plugins' ) );
 		add_action( 'after_setup_theme', array( __CLASS__, 'after_setup_theme' ), 15 );
 		add_action( 'init', array( __CLASS__, 'init' ) );
+
+		if ( defined( 'SAVEQUERIES' ) && SAVEQUERIES )
+			add_filter( 'query', array( __CLASS__, 'query' ), 20 );
 	}
 
 	/**
@@ -97,6 +101,26 @@ class Laps {
 	}
 
 	/**
+	 * Capture SQL queries start times
+	 *
+	 * @param string $query
+	 *
+	 * @return string
+	 */
+	static function query( $query ) {
+
+		global $wpdb;
+
+		if ( empty( self::$query_starts ) && ! empty( $wpdb->queries ) ) {
+			self::$query_starts[count( $wpdb->queries )] = microtime( true ) * 1000;
+		} else {
+			self::$query_starts[] = microtime( true ) * 1000;
+		}
+
+		return $query;
+	}
+
+	/**
 	 * When theme is done possibly add theme-specific events.
 	 */
 	static function after_setup_theme() {
@@ -136,7 +160,7 @@ class Laps {
 		if ( ! apply_filters( 'laps_can_see', current_user_can( 'manage_options' ) ) )
 			return;
 
-		global $timestart;
+		global $timestart, $wpdb;
 
 		$mustache = new \Mustache_Engine( array(
 			'loader' => new \Mustache_Loader_FilesystemLoader( dirname( __DIR__ ) . '/views' ),
@@ -159,7 +183,33 @@ class Laps {
 			$event_data[] = compact( 'name', 'offset', 'duration', 'width', 'category', 'memory' );
 		}
 
-		$html = $mustache->render( 'laps', array( 'events' => $event_data ) );
+		$query_data     = array();
+		$last_query_end = 0;
+		$category       = 'query';
+
+		if ( defined( 'SAVEQUERIES' ) && SAVEQUERIES ) {
+
+			foreach ( $wpdb->queries as $key => $query ) {
+				$query_start = isset( self::$query_starts[$key] ) ? self::$query_starts[$key] : $last_query_end;
+				list( $sql, $duration, $trace ) = $query;
+				$duration *= 1000;
+				$last_query_end = $query_start + $duration;
+				$offset         = round( ( $query_start - $start ) / $total * 100, 2 );
+				$width          = round( $duration / $total * 100, 2 );
+
+				if ( 0 == $width ) {
+					$width = '2px';
+				} else {
+					$width .= '%';
+				}
+
+				$query_data[] = compact( 'sql', 'duration', 'offset', 'width', 'category' );
+			}
+		}
+
+//		!d( self::$query_starts, $wpdb->queries, $query_data );
+
+		$html = $mustache->render( 'laps', array( 'events' => $event_data, 'queries' => $query_data ) );
 
 		$wp_admin_bar->add_node( array(
 			'id'    => 'laps',

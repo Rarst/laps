@@ -3,3 +3,8 @@
 		<div class="event event-{{category}} hint--bottom" data-hint="{{name}} - {{duration}} ms - {{memory}} MB" style="width:{{width}}%; left:{{offset}}%;"></div>
 	{{/events}}
 </div>
+<div class="laps-timeline">
+	{{#queries}}
+		<div class="event event-{{category}} hint--bottom" data-hint="{{sql}}" style="width:{{width}}; left:{{offset}}%;"></div>
+	{{/queries}}
+</div>
