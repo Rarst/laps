@@ -1,10 +1,13 @@
 <div class="laps-timeline">
 	{{#events}}
-		<div class="event event-{{category}} hint--bottom" data-hint="{{name}} - {{duration}} ms - {{memory}} MB" style="width:{{width}}%; left:{{offset}}%;"></div>
+		<div class="event event-{{category}}" data-toggle="tooltip" title="{{name}} - {{duration}} ms - {{memory}} MB" style="width:{{width}}%; left:{{offset}}%;"></div>
 	{{/events}}
 </div>
+
+{{#savequeries}}
 <div class="laps-timeline">
 	{{#queries}}
-		<div class="event event-{{category}} hint--bottom" data-hint="{{sql}}" style="width:{{width}}; left:{{offset}}%;"></div>
+		<div class="event event-{{category}}" title="{{sql}}" style="width:{{width}}; left:{{offset}}%;"></div>
 	{{/queries}}
 </div>
+{{/savequeries}}

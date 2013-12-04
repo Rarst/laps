@@ -139,15 +139,35 @@ class Laps {
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
 		add_action( 'admin_bar_menu', array( __CLASS__, 'admin_bar_menu' ), 100 );
+		add_action( 'wp_print_footer_scripts', array( __CLASS__, 'print_footer_scripts' ), 11 );
+		add_action( 'admin_print_footer_scripts', array( __CLASS__, 'print_footer_scripts' ), 11 );
 	}
 
 	static function enqueue_scripts() {
 
-		wp_register_style( 'laps-hint', plugins_url( 'css/hint.css', __DIR__ ), array(), '1.2.1' );
-		wp_register_style( 'laps', plugins_url( 'css/laps.css', __DIR__ ), array( 'laps-hint' ) );
+		wp_register_script( 'laps-tooltip', plugins_url( 'js/tooltip.js', __DIR__ ), array( 'jquery' ), '3.0.2', true );
+		wp_register_style( 'laps', plugins_url( 'css/laps.css', __DIR__ ) );
 
-		if ( is_admin_bar_showing() )
+		if ( is_admin_bar_showing() ) {
 			wp_enqueue_style( 'laps' );
+		}
+	}
+
+	static function print_footer_scripts(  ) {
+
+		if ( ! is_admin_bar_showing()	)
+			return;
+
+		wp_print_scripts( 'laps-tooltip' );
+		?><script type="text/javascript">
+			jQuery(document).ready(function () {
+				jQuery(".laps-timeline .event").lapstooltip({
+					container: '#wpadminbar'
+					, placement: 'bottom'
+//					, trigger: 'click'
+				});
+			});
+		</script><?php
 	}
 
 	/**
@@ -209,7 +229,14 @@ class Laps {
 
 //		!d( self::$query_starts, $wpdb->queries, $query_data );
 
-		$html = $mustache->render( 'laps', array( 'events' => $event_data, 'queries' => $query_data ) );
+		$html = $mustache->render(
+			'laps',
+			array(
+				'events'      => $event_data,
+				'queries'     => $query_data,
+				'savequeries' => defined( 'SAVEQUERIES' ) && SAVEQUERIES,
+			)
+		);
 
 		$wp_admin_bar->add_node( array(
 			'id'    => 'laps',
