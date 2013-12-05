@@ -90,10 +90,13 @@ class Laps {
 		$filter   = current_filter();
 		$priority = key( $wp_filter[$filter] );
 
-		$event = wp_parse_args( self::$events[$filter][$priority], array(
-			'action'   => 'start',
-			'category' => null,
-		) );
+		$event = wp_parse_args(
+			self::$events[$filter][$priority],
+			array(
+				'action'   => 'start',
+				'category' => null,
+			)
+		);
 
 		self::$stopwatch->$event['action']( $event['event'], $event['category'] );
 
@@ -183,9 +186,11 @@ class Laps {
 
 		global $timestart, $wpdb;
 
-		$mustache = new \Mustache_Engine( array(
-			'loader' => new \Mustache_Loader_FilesystemLoader( dirname( __DIR__ ) . '/views' ),
-		) );
+		$mustache = new \Mustache_Engine(
+			array(
+				'loader' => new \Mustache_Loader_FilesystemLoader( dirname( __DIR__ ) . '/views' ),
+			)
+		);
 
 		$events     = self::$stopwatch->getSectionEvents( '__root__' );
 		$start      = $timestart * 1000;
@@ -262,15 +267,19 @@ class Laps {
 			)
 		);
 
-		$wp_admin_bar->add_node( array(
-			'id'    => 'laps',
-			'title' => sprintf( 'Lap: %ss', round( $total / 1000, 3 ) ),
-		) );
+		$wp_admin_bar->add_node(
+			array(
+				'id'    => 'laps',
+				'title' => sprintf( 'Lap: %ss', round( $total / 1000, 3 ) ),
+			)
+		);
 
-		$wp_admin_bar->add_node( array(
-			'id'     => 'laps_output',
-			'parent' => 'laps',
-			'meta'   => array( 'html' => $html ),
-		) );
+		$wp_admin_bar->add_node(
+			array(
+				'id'     => 'laps_output',
+				'parent' => 'laps',
+				'meta'   => array( 'html' => $html ),
+			)
+		);
 	}
 }

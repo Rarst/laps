@@ -29,7 +29,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 DEALINGS IN THE SOFTWARE.
 */
 
-if( file_exists( __DIR__ . '/vendor/autoload.php' ) )
+if ( file_exists( __DIR__ . '/vendor/autoload.php' ) )
 	require __DIR__ . '/vendor/autoload.php';
 
 Rarst\Laps\Laps::on_load();
