@@ -152,26 +152,24 @@ class Laps {
 		wp_register_style( 'laps', plugins_url( 'css/laps.css', __DIR__ ) );
 
 		if ( is_admin_bar_showing() ) {
+			wp_enqueue_script( 'laps-tooltip' );
 			wp_enqueue_style( 'laps' );
 		}
 	}
 
 	static function print_footer_scripts(  ) {
 
-		if ( ! is_admin_bar_showing()	)
-			return;
-
-		wp_print_scripts( 'laps-tooltip' );
-		?><script type="text/javascript">
-			jQuery(document).ready(function () {
-				jQuery(".laps-timeline .event").lapstooltip({
-					container: '#wpadminbar'
-					, placement: 'bottom'
-					, html: true
-//					, trigger: 'click'
+		if ( wp_script_is( 'laps-tooltip', 'done' ) ) {
+			?>
+			<script type="text/javascript">
+				jQuery(document).ready(function () {
+					jQuery(".laps-timeline .event").lapstooltip({
+						container: '#wpadminbar', placement: 'bottom', html: true
+//						, trigger: 'click'
+					});
 				});
-			});
-		</script><?php
+			</script><?php
+		}
 	}
 
 	/**
