@@ -19,8 +19,9 @@ class Laps {
 	 */
 	static function on_load() {
 
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX )
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			return;
+		}
 
 		self::$stopwatch = new Stopwatch();
 		self::$stopwatch->start( 'Plugins Load', 'plugin' );
@@ -32,8 +33,9 @@ class Laps {
 		add_action( 'after_setup_theme', array( __CLASS__, 'after_setup_theme' ), 15 );
 		add_action( 'init', array( __CLASS__, 'init' ) );
 
-		if ( defined( 'SAVEQUERIES' ) && SAVEQUERIES )
+		if ( defined( 'SAVEQUERIES' ) && SAVEQUERIES ) {
 			add_filter( 'query', array( __CLASS__, 'query' ), 20 );
+		}
 	}
 
 	/**
@@ -157,7 +159,7 @@ class Laps {
 		}
 	}
 
-	static function print_footer_scripts(  ) {
+	static function print_footer_scripts() {
 
 		if ( wp_script_is( 'laps-tooltip', 'done' ) ) {
 			?>
@@ -179,8 +181,9 @@ class Laps {
 	 */
 	static function admin_bar_menu( $wp_admin_bar ) {
 
-		if ( ! apply_filters( 'laps_can_see', current_user_can( 'manage_options' ) ) )
+		if ( ! apply_filters( 'laps_can_see', current_user_can( 'manage_options' ) ) ) {
 			return;
+		}
 
 		global $timestart, $wpdb;
 
