@@ -21,7 +21,7 @@
 	},
 	"require"    : {
 		"composer/installers": "~1.0",
-		"symfony/stopwatch"  : "~2.2.0",
-		"mustache/mustache"  : "~2.3.0"
+		"symfony/stopwatch"  : "~2.4",
+		"mustache/mustache"  : "~2.4"
 	}
 }
