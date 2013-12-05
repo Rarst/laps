@@ -11,3 +11,11 @@
 	{{/queries}}
 </div>
 {{/savequeries}}
+
+{{#savehttp}}
+<div class="laps-timeline">
+	{{#http}}
+		<div class="event event-{{category}}" title="{{name}} - {{duration}} ms" style="width:{{width}}%; left:{{offset}}%;"></div>
+	{{/http}}
+</div>
+{{/savehttp}}

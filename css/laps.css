@@ -52,6 +52,9 @@
 #wpadminbar .laps-timeline .event-query {
   background-color: #5bc0de;
 }
+#wpadminbar .laps-timeline .event-http {
+  background-color: #d9534f;
+}
 #wpadminbar .tooltip {
   position: absolute;
   z-index: 100000;

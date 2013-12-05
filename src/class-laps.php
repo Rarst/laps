@@ -30,6 +30,8 @@ class Laps {
 
 		add_action( 'pre_update_option_active_plugins', array( __CLASS__, 'pre_update_option_active_plugins' ) );
 		add_action( 'pre_update_site_option_active_sitewide_plugins', array( __CLASS__, 'pre_update_option_active_plugins' ) );
+		add_action( 'pre_http_request', array( __CLASS__, 'pre_http_request' ), 10, 3 );
+		add_action( 'http_api_debug', array( __CLASS__, 'http_api_debug' ), 10, 5 );
 		add_action( 'after_setup_theme', array( __CLASS__, 'after_setup_theme' ), 15 );
 		add_action( 'init', array( __CLASS__, 'init' ) );
 
@@ -125,6 +127,20 @@ class Laps {
 		return $query;
 	}
 
+	static function pre_http_request( $false, $args, $url ) {
+
+		self::$stopwatch->start( $url, 'http' );
+
+		return $false;
+	}
+
+	static function http_api_debug( $response, $type, $class, $args, $url ) {
+
+		self::$stopwatch->stop( $url );
+
+		return $response;
+	}
+
 	/**
 	 * When theme is done possibly add theme-specific events.
 	 */
@@ -198,6 +214,7 @@ class Laps {
 		$end        = microtime( true ) * 1000;
 		$total      = $end - $start;
 		$event_data = array();
+		$http_data  = array();
 
 		foreach ( $events as $name => $event ) {
 
@@ -205,7 +222,13 @@ class Laps {
 			$duration = $event->getDuration();
 			$width    = round( $duration / $total * 100, 2 );
 			$category = $event->getCategory();
-			$memory   = $event->getMemory() / 1024 / 1024;
+
+			if ( 'http' == $category ) {
+				$http_data[] = compact( 'name', 'offset', 'duration', 'width', 'category' );
+				continue;
+			}
+
+			$memory = $event->getMemory() / 1024 / 1024;
 
 			$event_data[] = compact( 'name', 'offset', 'duration', 'width', 'category', 'memory' );
 		}
@@ -265,6 +288,8 @@ class Laps {
 				'events'      => $event_data,
 				'queries'     => $query_data,
 				'savequeries' => defined( 'SAVEQUERIES' ) && SAVEQUERIES,
+				'http'        => $http_data,
+				'savehttp'    => ! empty( $http_data ),
 			)
 		);
 
