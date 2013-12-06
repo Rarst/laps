@@ -252,15 +252,9 @@ class Laps {
 				if ( $offset == $last_offset ) {
 					$key = count( $query_data ) - 1;
 					$query_data[$key]['sql'] .= '<br />' . $sql;
+
 					$last_duration += $duration;
-					$width = round( $last_duration / $total * 100, 2 );
-
-					if ( 0 == $width ) {
-						$width = '2px';
-					} else {
-						$width .= '%';
-					}
-
+					$width                     = round( $last_duration / $total * 100, 2 );
 					$query_data[$key]['width'] = $width;
 
 					continue;
@@ -269,12 +263,6 @@ class Laps {
 				$width         = round( $duration / $total * 100, 2 );
 				$last_offset   = $offset;
 				$last_duration = $duration;
-
-				if ( 0 == $width ) {
-					$width = '2px';
-				} else {
-					$width .= '%';
-				}
 
 				$query_data[] = compact( 'sql', 'duration', 'offset', 'width', 'category' );
 			}
