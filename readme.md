@@ -21,6 +21,11 @@ And some of third party hooks conventions for themes using:
  - Genesis
  - Thematic
 
+There are also additional optional timelines, displaying:
+
+ - SQL queries (with `SAVEQUERIES` constant enabled)
+ - HTTP requests performed
+
 # Screenshot
 
 ![Laps screenshot](http://i.imgur.com/zFokmkU.png)
@@ -29,13 +34,19 @@ And some of third party hooks conventions for themes using:
 
 Laps is a Composer package and can be installed in plugin directory via:
 
-    php composer.phar create-project rarst/laps --repository-url=http://rarst.net
+    composer create-project rarst/laps --repository-url=http://rarst.net
 
 # Frequently Asked Questions
 
 None... Yet.
 
 # Changelog
+
+## 1.1
+
+ - added SQL timeline
+ - added HTTP timeline
+ - switched tooltips implementation to Bootstrap script
 
 ## 1.0
 
@@ -49,4 +60,3 @@ Laps own code is licensed under MIT and it makes use of code from:
  - Symfony Stopwatch (MIT)
  - Mustache.php (MIT)
  - Twitter Bootstrap (Apache License 2.0)
- - Hint.css (MIT)
