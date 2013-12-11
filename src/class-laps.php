@@ -127,6 +127,15 @@ class Laps {
 		return $query;
 	}
 
+	/**
+	 * Capture start time of HTTP request
+	 *
+	 * @param boolean $false
+	 * @param array   $args
+	 * @param string  $url
+	 *
+	 * @return boolean
+	 */
 	static function pre_http_request( $false, $args, $url ) {
 
 		self::$stopwatch->start( $url, 'http' );
@@ -134,6 +143,17 @@ class Laps {
 		return $false;
 	}
 
+	/**
+	 * Capture end time of HTTP request
+	 *
+	 * @param array|\WP_Error $response
+	 * @param string          $type
+	 * @param object          $class
+	 * @param array           $args
+	 * @param string          $url
+	 *
+	 * @return mixed
+	 */
 	static function http_api_debug( $response, $type, $class, $args, $url ) {
 
 		self::$stopwatch->stop( $url );

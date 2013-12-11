@@ -2,8 +2,14 @@
 
 namespace Rarst\Laps;
 
+/**
+ * Main set of events for WordPress core
+ */
 class Core_Events extends Laps_Events {
 
+	/**
+	 * @return array
+	 */
 	public function get_events() {
 
 		$stops = array();

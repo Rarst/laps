@@ -2,13 +2,24 @@
 
 namespace Rarst\Laps;
 
+/**
+ * Events for Hybrid Core based themes
+ *
+ * @link http://themehybrid.com/hybrid-core
+ */
 class Hybrid_Events extends Laps_Events {
 
+	/**
+	 * @return bool
+	 */
 	protected function is_applicable() {
 
 		return defined( 'HYBRID_VERSION' );
 	}
 
+	/**
+	 * @return array
+	 */
 	protected function get_events() {
 
 		$events = array();
@@ -27,7 +38,7 @@ class Hybrid_Events extends Laps_Events {
 
 		$sidebars = get_theme_support( 'hybrid-core-sidebars' );
 
-		if ( ! empty( $sidebars[0] ) )
+		if ( ! empty( $sidebars[0] ) ) {
 			foreach ( $sidebars[0] as $sidebar ) {
 
 				$events["{$prefix}_before_{$sidebar}"][10] = array(
@@ -41,6 +52,7 @@ class Hybrid_Events extends Laps_Events {
 					'category' => 'theme',
 				);
 			}
+		}
 
 		return $events;
 	}

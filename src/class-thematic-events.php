@@ -2,13 +2,24 @@
 
 namespace Rarst\Laps;
 
+/**
+ * Events for Thematic Framework based themes
+ *
+ * @link http://thematictheme.com/
+ */
 class Thematic_Events extends Laps_Events {
 
+	/**
+	 * @return bool
+	 */
 	protected function is_applicable() {
 
 		return function_exists( 'thematic_init' );
 	}
 
+	/**
+	 * @return array
+	 */
 	protected function get_events() {
 
 		$events = array();

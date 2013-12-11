@@ -2,13 +2,24 @@
 
 namespace Rarst\Laps;
 
+/**
+ * Events for Genesis Framework based themes
+ *
+ * @link http://my.studiopress.com/themes/genesis/
+ */
 class Genesis_Events extends Laps_Events {
 
+	/**
+	 * @return bool
+	 */
 	protected function is_applicable() {
 
 		return function_exists( 'genesis' );
 	}
 
+	/**
+	 * @return array
+	 */
 	protected function get_events() {
 
 		$events = array();
