@@ -42,6 +42,37 @@ class Core_Events extends Laps_Events {
 			'category' => 'core',
 		);
 
+		$stops['admin_init'][- 1] = array(
+			'event'    => 'Core Admin Init',
+			'category' => 'admin',
+		);
+
+		$stops['admin_init'][ PHP_INT_MAX -1 ] = array(
+			'action'   => 'stop',
+			'event'    => 'Core Admin Init',
+			'category' => 'admin',
+		);
+
+		$stops['_admin_menu'][- 1] = array(
+			'event'    => 'Admin Menu',
+			'category' => 'admin',
+		);
+		$stops['admin_menu'][ PHP_INT_MAX -1 ] = array(
+			'action'   => 'stop',
+			'event'    => 'Admin Menu',
+			'category' => 'admin',
+		);
+
+		$stops['admin_bar_menu'][-1] = array(
+			'event'    => 'Admin Bar',
+			'category' => 'admin',
+		);
+		$stops['admin_bar_menu'][ PHP_INT_MAX -1 ] = array(
+			'action'   => 'stop',
+			'event'    => 'Admin Bar',
+			'category' => 'admin',
+		);
+
 		$stops['loop_start'][10] = array(
 			'event'    => 'Main Loop',
 			'category' => 'theme',
@@ -51,6 +82,17 @@ class Core_Events extends Laps_Events {
 			'action'   => 'stop',
 			'event'    => 'Main Loop',
 			'category' => 'theme',
+		);
+
+		$stops['admin_enqueue_scripts'][10] = array(
+			'event'    => 'Admin Print Scripts',
+			'category' => 'admin',
+		);
+
+		$stops['admin_print_scripts'][10] = array(
+			'action'   => 'stop',
+			'event'    => 'Admin Print Scripts',
+			'category' => 'admin',
 		);
 
 		return $stops;
