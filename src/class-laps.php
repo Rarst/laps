@@ -229,6 +229,8 @@ class Laps {
 			)
 		);
 
+		self::$stopwatch->stop( 'Toolbar' );
+
 		$events     = self::$stopwatch->getSectionEvents( '__root__' );
 		$start      = $timestart * 1000;
 		$end        = microtime( true ) * 1000;

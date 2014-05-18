@@ -64,12 +64,7 @@ class Core_Events extends Laps_Events {
 		);
 
 		$stops['admin_bar_menu'][-1] = array(
-			'event'    => 'Admin Bar',
-			'category' => 'core',
-		);
-		$stops['admin_bar_menu'][ PHP_INT_MAX -1 ] = array(
-			'action'   => 'stop',
-			'event'    => 'Admin Bar',
+			'event'    => 'Toolbar',
 			'category' => 'core',
 		);
 
