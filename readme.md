@@ -42,6 +42,12 @@ None... Yet.
 
 # Changelog
 
+## 1.2
+
+ - merged RP with additional core events in admin
+ - implemented (ballpark) toolbar event
+ - fixed issue with event offsets in timelines
+
 ## 1.1
 
  - added SQL timeline
