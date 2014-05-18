@@ -34,7 +34,7 @@ There are also additional optional timelines, displaying:
 
 Laps is a Composer package and can be installed in plugin directory via:
 
-    composer create-project rarst/laps --repository-url=http://rarst.net
+    composer create-project rarst/laps --no-dev
 
 # Frequently Asked Questions
 
