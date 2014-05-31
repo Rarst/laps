@@ -3,7 +3,7 @@
 	"description": "Light WordPress profiler.",
 	"keywords"   : ["wordpress", "performance"],
 	"type"       : "wordpress-plugin",
-	"homepage"   : "https://bitbucket.org/Rarst/laps",
+	"homepage"   : "https://github.com/Rarst/laps",
 	"license"    : "MIT",
 	"authors"    : [
 		{
@@ -13,8 +13,7 @@
 		}
 	],
 	"support"    : {
-		"issues": "https://bitbucket.org/Rarst/laps/issues",
-		"source": "https://bitbucket.org/Rarst/laps/src"
+		"issues": "https://github.com/Rarst/laps/issues"
 	},
 	"autoload"   : {
 		"classmap": ["src/"]
