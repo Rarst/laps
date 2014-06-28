@@ -65,4 +65,4 @@ Laps own code is licensed under MIT and it makes use of code from:
  - Composer (MIT)
  - Symfony Stopwatch (MIT)
  - Mustache.php (MIT)
- - Twitter Bootstrap (Apache License 2.0)
+ - Twitter Bootstrap (MIT)
