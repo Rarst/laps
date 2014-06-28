@@ -35,12 +35,6 @@ class RoboFile extends \Robo\Tasks {
 	 */
 	public function tooltip() {
 
-		$tooltip = 'js/tooltip.js';
-
-		$this->taskWriteToFile( $tooltip )
-			->textFromFile( 'vendor/twbs/bootstrap/js/tooltip.js' )
-			->run();
-
 		$replacements = array(
 			'+function ($) {'       => '// modified to use lapstooltip as plugin name' . "\n\n" . '+function ($) {',
 			'this.init(\'tooltip\'' => 'this.init(\'lapstooltip\'',
@@ -48,8 +42,10 @@ class RoboFile extends \Robo\Tasks {
 			'$.fn.tooltip'          => '$.fn.lapstooltip',
 		);
 
-		foreach ( $replacements as $from => $to ) {
-			$this->taskReplaceInFile( $tooltip )->from( $from )->to( $to )->run();
-		}
+		$source = strtr( file_get_contents( 'vendor/twbs/bootstrap/js/tooltip.js' ), $replacements );
+
+		$this->taskWriteToFile( 'js/tooltip.js' )
+			->text( $source )
+			->run();
 	}
 }
