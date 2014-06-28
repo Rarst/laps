@@ -22,5 +22,8 @@
 		"composer/installers": "~1.0",
 		"symfony/stopwatch"  : "~2.4",
 		"mustache/mustache"  : "~2.4"
+	},
+	"require-dev": {
+		"twbs/bootstrap": "~3.2"
 	}
 }
