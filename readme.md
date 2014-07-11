@@ -1,4 +1,4 @@
-# Description
+# Laps — light WP profiler
 
 Laps is light WordPress profiler (in a plugin), which aims to be:
 
@@ -36,11 +36,11 @@ Laps is a Composer package and can be installed in plugin directory via:
 
     composer create-project rarst/laps --no-dev
 
-# Frequently Asked Questions
-
-None... Yet.
-
 # Changelog
+
+## 1.2.1
+
+ - disabled tooltip animation to fix JS errors and UI disappearing from under cursor
 
 ## 1.2
 
