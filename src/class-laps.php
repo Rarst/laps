@@ -202,7 +202,7 @@ class Laps {
 			<script type="text/javascript">
 				jQuery(document).ready(function () {
 					jQuery(".laps-timeline .event").lapstooltip({
-						container: '#wpadminbar', placement: 'bottom', html: true
+						container: '#wpadminbar', placement: 'bottom', html: true, animation: false
 //						, trigger: 'click'
 					});
 				});
