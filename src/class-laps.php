@@ -180,8 +180,6 @@ class Laps {
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
 		add_action( 'admin_bar_menu', array( __CLASS__, 'admin_bar_menu' ), 100 );
-		add_action( 'wp_print_footer_scripts', array( __CLASS__, 'print_footer_scripts' ), 11 );
-		add_action( 'admin_print_footer_scripts', array( __CLASS__, 'print_footer_scripts' ), 11 );
 	}
 
 	static function enqueue_scripts() {
@@ -192,21 +190,6 @@ class Laps {
 		if ( is_admin_bar_showing() ) {
 			wp_enqueue_script( 'laps-tooltip' );
 			wp_enqueue_style( 'laps' );
-		}
-	}
-
-	static function print_footer_scripts() {
-
-		if ( wp_script_is( 'laps-tooltip', 'done' ) ) {
-			?>
-			<script type="text/javascript">
-				jQuery(document).ready(function () {
-					jQuery(".laps-timeline .event").lapstooltip({
-						container: '#wpadminbar', placement: 'bottom', html: true, animation: false
-//						, trigger: 'click'
-					});
-				});
-			</script><?php
 		}
 	}
 
