@@ -12,40 +12,34 @@ class RoboFile extends \Robo\Tasks {
 	 */
 	public function watch() {
 
-		$less_callback = function () {
-			$this->less();
-		};
-
 		$this->taskWatch()
-			->monitor( 'css/variables.less', $less_callback )
-			->monitor( 'css/laps.less', $less_callback )
-			->run();
+			 ->monitor( [ 'css/variables.less', 'css/laps.less' ], function () {
+				 $this->makeLess();
+			 } )
+			 ->monitor( 'js/source.js', function () {
+				 $this->makeJs();
+			 } )
+			 ->run();
 	}
 
 	/**
-	 * Compiles stylesheet from less into css.
+	 * Compiles plugin's css file from less.
 	 */
-	public function less() {
+	public function makeLess() {
 
 		$this->taskExec( 'lessc css/laps.less css/laps.css' )->run();
 	}
 
 	/**
-	 * Copies tooltip.js from Bootstrap sources and edits plugin name.
+	 * Creates plugin's script file.
 	 */
-	public function tooltip() {
+	public function makeJs() {
 
-		$replacements = array(
-			'+function ($) {'       => '// modified to use lapstooltip as plugin name' . "\n\n" . '+function ($) {',
-			'this.init(\'tooltip\'' => 'this.init(\'lapstooltip\'',
-			'bs.tooltip'            => 'bs.lapstooltip',
-			'$.fn.tooltip'          => '$.fn.lapstooltip',
-		);
-
-		$source = strtr( file_get_contents( 'vendor/twbs/bootstrap/js/tooltip.js' ), $replacements );
-
-		$this->taskWriteToFile( 'js/tooltip.js' )
-			->text( $source )
-			->run();
+		$this->taskConcat( [
+			'vendor/twbs/bootstrap/js/tooltip.js',
+			'js/source.js',
+		] )
+			 ->to( 'js/laps.js' )
+			 ->run();
 	}
 }
