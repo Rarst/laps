@@ -8,8 +8,6 @@
  * ======================================================================== */
 
 
-// modified to use lapstooltip as plugin name
-
 +function ($) {
   'use strict';
 
@@ -24,7 +22,7 @@
     this.hoverState =
     this.$element   = null
 
-    this.init('lapstooltip', element, options)
+    this.init('tooltip', element, options)
   }
 
   Tooltip.VERSION  = '3.2.0'
@@ -433,27 +431,38 @@
   function Plugin(option) {
     return this.each(function () {
       var $this   = $(this)
-      var data    = $this.data('bs.lapstooltip')
+      var data    = $this.data('bs.tooltip')
       var options = typeof option == 'object' && option
 
       if (!data && option == 'destroy') return
-      if (!data) $this.data('bs.lapstooltip', (data = new Tooltip(this, options)))
+      if (!data) $this.data('bs.tooltip', (data = new Tooltip(this, options)))
       if (typeof option == 'string') data[option]()
     })
   }
 
-  var old = $.fn.lapstooltip
+  var old = $.fn.tooltip
 
-  $.fn.lapstooltip             = Plugin
-  $.fn.lapstooltip.Constructor = Tooltip
+  $.fn.tooltip             = Plugin
+  $.fn.tooltip.Constructor = Tooltip
 
 
   // TOOLTIP NO CONFLICT
   // ===================
 
-  $.fn.lapstooltip.noConflict = function () {
-    $.fn.lapstooltip = old
+  $.fn.tooltip.noConflict = function () {
+    $.fn.tooltip = old
     return this
   }
 
 }(jQuery);
+
+jQuery.fn.lapstooltip = jQuery.fn.tooltip.noConflict();
+
+jQuery(document).ready(function () {
+	jQuery(".laps-timeline .event").lapstooltip({
+		container: '#wpadminbar',
+		placement: 'bottom',
+		html     : true,
+		animation: false
+	});
+});
