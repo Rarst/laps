@@ -1,5 +1,7 @@
 # Laps — light WordPress profiler
 
+![Laps screenshot](http://i.imgur.com/zFokmkU.png)
+
 Laps is light WordPress profiler (in a plugin), which aims to be:
 
  - always on and zero click (just hover on toolbar entry) away
@@ -25,10 +27,6 @@ There are also additional optional timelines, displaying:
 
  - SQL queries (with `SAVEQUERIES` constant enabled)
  - HTTP requests performed
-
-## Screenshot
-
-![Laps screenshot](http://i.imgur.com/zFokmkU.png)
 
 ## Installation
 
