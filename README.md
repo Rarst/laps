@@ -38,7 +38,7 @@ Laps is a Composer package and can be installed in plugin directory via:
 
 Laps own code is licensed under MIT and it makes use of code from:
 
- - Composer (MIT)
+ - Composer Installers (MIT)
  - Symfony Stopwatch (MIT)
  - Mustache.php (MIT)
  - Twitter Bootstrap (MIT)
