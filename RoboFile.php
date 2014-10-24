@@ -14,7 +14,7 @@ class RoboFile extends \Robo\Tasks {
 
 		$this->taskWatch()
 			 ->monitor( [ 'css/variables.less', 'css/laps.less' ], function () {
-				 $this->makeLess();
+				 $this->makeCss();
 			 } )
 			 ->monitor( 'js/source.js', function () {
 				 $this->makeJs();
@@ -25,7 +25,7 @@ class RoboFile extends \Robo\Tasks {
 	/**
 	 * Compiles plugin's css file from less.
 	 */
-	public function makeLess() {
+	public function makeCss() {
 
 		$this->taskExec( 'lessc css/laps.less css/laps.css' )->run();
 	}
