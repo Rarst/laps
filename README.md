@@ -18,14 +18,14 @@ Out of the box Laps supports common stage of WordPress page life cycle:
 
 And some of third party hooks conventions for themes using:
 
- - Theme Hook Alliance
- - Hybrid
- - Genesis
- - Thematic
+ - [Theme Hook Alliance](http://zamoose.github.io/themehookalliance/)
+ - [Hybrid](http://themehybrid.com/)
+ - [Genesis](http://my.studiopress.com/themes/genesis/)
+ - [Thematic](http://thematictheme.com/)
 
 There are also additional optional timelines, displaying:
 
- - SQL queries (with `SAVEQUERIES` constant enabled)
+ - SQL queries (with [`SAVEQUERIES` constant](http://codex.wordpress.org/Editing_wp-config.php#Save_queries_for_analysis) enabled)
  - HTTP requests performed
 
 ## Installation
