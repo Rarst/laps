@@ -14,9 +14,20 @@ class Core_Events extends Laps_Events {
 
 		$stops = array();
 
-		$stops['plugins_loaded'][20] = array(
+		$stops['plugins_loaded'][ - 2 ] = array(
 			'action'   => 'stop',
 			'event'    => 'Plugins Load',
+			'category' => 'plugin',
+		);
+
+		$stops['plugins_loaded'][ - 1 ] = array(
+			'event'    => 'Plugins Loaded Hook',
+			'category' => 'plugin',
+		);
+
+		$stops['plugins_loaded'][20] = array(
+			'action'   => 'stop',
+			'event'    => 'Plugins Loaded Hook',
 			'category' => 'plugin',
 		);
 
