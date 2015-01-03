@@ -72,7 +72,7 @@ class Laps {
 
 		if ( false !== $key && $key > 0 ) {
 
-			unset( $plugins[$key] );
+			unset( $plugins[ $key ] );
 			array_unshift( $plugins, $plugin );
 			$plugins = array_values( $plugins );
 		}
@@ -92,10 +92,10 @@ class Laps {
 		global $wp_filter;
 
 		$filter   = current_filter();
-		$priority = key( $wp_filter[$filter] );
+		$priority = key( $wp_filter[ $filter ] );
 
 		$event = wp_parse_args(
-			self::$events[$filter][$priority],
+			self::$events[ $filter ][ $priority ],
 			array(
 				'action'   => 'start',
 				'category' => null,
@@ -119,7 +119,7 @@ class Laps {
 		global $wpdb;
 
 		if ( empty( self::$query_starts ) && ! empty( $wpdb->queries ) ) {
-			self::$query_starts[count( $wpdb->queries )] = microtime( true ) * 1000;
+			self::$query_starts[ count( $wpdb->queries ) ] = microtime( true ) * 1000;
 		} else {
 			self::$query_starts[] = microtime( true ) * 1000;
 		}
@@ -248,7 +248,7 @@ class Laps {
 		if ( defined( 'SAVEQUERIES' ) && SAVEQUERIES ) {
 
 			foreach ( $wpdb->queries as $key => $query ) {
-				$query_start = isset( self::$query_starts[$key] ) ? self::$query_starts[$key] : $last_query_end;
+				$query_start = isset( self::$query_starts[ $key ] ) ? self::$query_starts[ $key ] : $last_query_end;
 				list( $sql, $duration, $trace ) = $query;
 				$duration *= 1000;
 				$last_query_end = $query_start + $duration;
@@ -257,11 +257,11 @@ class Laps {
 				// if query is indistinguishably close to previous then stack it
 				if ( $offset == $last_offset ) {
 					$key = count( $query_data ) - 1;
-					$query_data[$key]['sql'] .= '<br />' . $sql;
+					$query_data[ $key ]['sql'] .= '<br />' . $sql;
 
 					$last_duration += $duration;
-					$width                     = round( $last_duration / $total * 100, 2 );
-					$query_data[$key]['width'] = $width;
+					$width                       = round( $last_duration / $total * 100, 2 );
+					$query_data[ $key ]['width'] = $width;
 
 					continue;
 				}
