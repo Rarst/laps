@@ -23,11 +23,23 @@ class RoboFile extends \Robo\Tasks {
 	}
 
 	/**
+	 * Compiles all assets.
+	 */
+	public function makeAll() {
+
+		$this->makeCss();
+		$this->makeJs();
+	}
+
+	/**
 	 * Compiles plugin's css file from less.
 	 */
 	public function makeCss() {
 
-		$this->taskExec( 'lessc css/laps.less css/laps.css' )->run();
+		$this->taskExec( 'lessc css/laps.less css/laps.css --source-map=css/laps.css.map' )->run();
+
+		$this->taskMinify( 'css/laps.css' )
+			 ->run();
 	}
 
 	/**
@@ -40,6 +52,9 @@ class RoboFile extends \Robo\Tasks {
 			'js/source.js',
 		] )
 			 ->to( 'js/laps.js' )
+			 ->run();
+
+		$this->taskMinify( 'js/laps.js' )
 			 ->run();
 	}
 }
