@@ -184,8 +184,9 @@ class Laps {
 
 	static function enqueue_scripts() {
 
-		wp_register_script( 'laps', plugins_url( 'js/laps.js', __DIR__ ), array( 'jquery' ), '3.2.0', true );
-		wp_register_style( 'laps', plugins_url( 'css/laps.css', __DIR__ ) );
+		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+		wp_register_script( 'laps', plugins_url( "js/laps{$suffix}.js", __DIR__ ), array( 'jquery' ), '3.3.1', true );
+		wp_register_style( 'laps', plugins_url( "css/laps{$suffix}.css", __DIR__ ) );
 
 		if ( is_admin_bar_showing() ) {
 			wp_enqueue_script( 'laps' );
