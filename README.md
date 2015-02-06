@@ -30,7 +30,9 @@ There are also additional optional timelines, displaying:
 
 ## Installation
 
-Laps is a Composer package and can be installed in plugin directory via:
+Download plugin archive from [releases section](https://github.com/Rarst/laps/releases).
+
+Or install in plugin directory via [Composer](https://getcomposer.org/):
 
     composer create-project rarst/laps --no-dev
 
