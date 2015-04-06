@@ -162,13 +162,13 @@ class Laps {
 	}
 
 	/**
-	 * When theme is done possibly add theme-specific events.
+	 * When theme is done possibly add vendor-specific events.
 	 */
 	static function after_setup_theme() {
 
-		foreach ( array( 'THA', 'Hybrid', 'Genesis', 'Thematic' ) as $theme ) {
+		foreach ( array( 'THA', 'Hybrid', 'Genesis', 'Thematic', 'Yoast' ) as $vendor ) {
 
-			$class = "Rarst\\Laps\\{$theme}_Events";
+			$class = "Rarst\\Laps\\{$vendor}_Events";
 			/** @var Laps_Events $events */
 			$events = new $class;
 			self::add_events( $events->get() );
