@@ -1,5 +1,7 @@
 <?php
 
+require __DIR__ . '/vendor/autoload.php';
+
 /**
  * This is project's console commands configuration for Robo task runner.
  *
@@ -29,6 +31,7 @@ class RoboFile extends \Robo\Tasks {
 
 		$this->makeCss();
 		$this->makeJs();
+		$this->makeMustache();
 	}
 
 	/**
@@ -56,5 +59,21 @@ class RoboFile extends \Robo\Tasks {
 
 		$this->taskMinify( 'js/laps.js' )
 			 ->run();
+	}
+
+	/**
+	 * Compiles plugin's mustache template
+	 */
+	public function makeMustache() {
+		$dir = __DIR__ . '/views/cache';
+		$this->_cleanDir( $dir );
+
+		$mustache = new \Mustache_Engine(
+			array(
+				'loader' => new \Mustache_Loader_FilesystemLoader( __DIR__ . '/views' ),
+				'cache'  => $dir,
+			)
+		);
+		$mustache->loadTemplate( 'laps' );
 	}
 }
