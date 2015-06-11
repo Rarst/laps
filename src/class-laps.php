@@ -275,8 +275,6 @@ class Laps {
 			}
 		}
 
-//		!d( self::$query_starts, $wpdb->queries, $query_data );
-
 		$html = $mustache->render(
 			'laps',
 			array(
