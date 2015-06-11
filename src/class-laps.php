@@ -286,19 +286,15 @@ class Laps {
 			)
 		);
 
-		$wp_admin_bar->add_node(
-			array(
-				'id'    => 'laps',
-				'title' => sprintf( 'Lap: %ss', round( $total / 1000, 3 ) ),
-			)
-		);
+		$wp_admin_bar->add_node( array(
+			'id'    => 'laps',
+			'title' => sprintf( 'Lap: %ss', round( $total / 1000, 3 ) ),
+		) );
 
-		$wp_admin_bar->add_node(
-			array(
-				'id'     => 'laps_output',
-				'parent' => 'laps',
-				'meta'   => array( 'html' => $html ),
-			)
-		);
+		$wp_admin_bar->add_node( array(
+			'id'     => 'laps_output',
+			'parent' => 'laps',
+			'meta'   => array( 'html' => $html ),
+		) );
 	}
 }
