@@ -230,7 +230,7 @@ class Laps {
 			$width    = round( $duration / $total * 100, 2 );
 			$category = $event->getCategory();
 
-			if ( 'http' == $category ) {
+			if ( 'http' === $category ) {
 				$http_data[] = compact( 'name', 'offset', 'duration', 'width', 'category' );
 				continue;
 			}
@@ -256,7 +256,7 @@ class Laps {
 				$offset         = round( ( $query_start - $start ) / $total * 100, 2 );
 
 				// if query is indistinguishably close to previous then stack it
-				if ( $offset == $last_offset ) {
+				if ( $offset === $last_offset ) {
 					$key = count( $query_data ) - 1;
 					$query_data[ $key ]['sql'] .= '<br />' . $sql;
 
