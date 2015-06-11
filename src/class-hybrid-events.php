@@ -14,7 +14,7 @@ class Hybrid_Events extends Laps_Events {
 	 */
 	protected function is_applicable() {
 
-		return defined( 'HYBRID_VERSION' );
+		return defined( 'HYBRID_VERSION' ) && function_exists( 'hybrid_get_prefix' );
 	}
 
 	/**
