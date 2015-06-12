@@ -76,7 +76,21 @@ class RoboFile extends \Robo\Tasks {
 		);
 		$mustache->loadTemplate( 'laps' );
 	}
-}
+
+	/**
+	 * @return string
+	 */
+	private function versionGet() {
+
+		$content = file_get_contents( __DIR__ . '/laps.php' );
+
+		if ( false !== preg_match( '|^Version: (?P<version>.+)$|m', $content, $matches ) ) {
+			return trim( $matches['version'] );
+		}
+
+		return '';
+	}
+
 	/**
 	 * Sets the plugin version in header.
 	 *
