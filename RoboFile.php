@@ -103,4 +103,56 @@ class RoboFile extends \Robo\Tasks {
 		     ->to( 'Version: ' . $version )
 		     ->run();
 	}
+
+	/**
+	 * Creates release zip
+	 *
+	 * @param string $version
+	 */
+	public function makeRelease( $version = '' ) {
+
+		if ( empty( $version ) ) {
+			$version = $this->versionGet();
+		}
+
+		$this->taskFileSystemStack()
+		     ->mkdir( 'release' )
+		     ->run();
+
+		$this->taskCleanDir( 'release' )->run();
+
+		$this->taskExec( 'composer' )
+		     ->dir( __DIR__ . '/release' )
+		     ->arg( 'create-project rarst/laps laps ' . $version )
+		     ->arg( '--prefer-dist --no-dev' )
+		     ->run();
+
+		$this->taskExec( 'composer' )
+		     ->dir( __DIR__ . '/release/laps' )
+		     ->arg( 'dump-autoload --optimize' )
+		     ->run();
+
+		$zipFile    = "release/laps-{$version}.zip";
+		$zipArchive = new ZipArchive();
+
+		if ( ! $zipArchive->open( $zipFile, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE ) ) {
+			die( "Failed to create archive\n" );
+		}
+
+		$finder = new Symfony\Component\Finder\Finder();
+		$finder->files()->in( 'release/laps' )->ignoreDotFiles( false );
+
+		/** @var \Symfony\Component\Finder\SplFileInfo $file */
+		foreach ( $finder as $file ) {
+			$zipArchive->addFile( $file->getRealPath(), 'laps/' . $file->getRelativePathname() );
+		}
+
+		if ( ! $zipArchive->status === ZIPARCHIVE::ER_OK ) {
+			echo "Failed to write files to zip\n";
+		}
+
+		$zipArchive->close();
+
+		$this->taskDeleteDir( 'release/laps' )->run();
+	}
 }
