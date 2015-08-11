@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.1
+
+ - fixed crash on event stop without matching start
+
 ## 1.3
 
  - implemented minified assets
