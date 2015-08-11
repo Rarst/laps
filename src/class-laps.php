@@ -102,6 +102,10 @@ class Laps {
 			)
 		);
 
+		if ( 'stop' === $event['action'] && ! self::$stopwatch->isStarted( $event['event'] ) ) {
+			return $input;
+		}
+
 		self::$stopwatch->$event['action']( $event['event'], $event['category'] );
 
 		return $input;
