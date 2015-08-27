@@ -106,7 +106,7 @@ class Laps {
 			return $input;
 		}
 
-		self::$stopwatch->$event['action']( $event['event'], $event['category'] );
+		self::$stopwatch->{$event['action']}( $event['event'], $event['category'] );
 
 		return $input;
 	}
