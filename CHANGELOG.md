@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.2
+
+ - fixed dynamic method call crash on PHP 7
+ - fixed issue with slashes in generated release archives
+
 ## 1.3.1
 
  - fixed crash on event stop without matching start
