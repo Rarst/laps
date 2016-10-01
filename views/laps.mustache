@@ -1,13 +1,17 @@
 <div class="laps-timeline">
 	{{#events}}
-		<div class="event event-{{category}}" data-toggle="tooltip" title="{{name}} - {{duration}} ms - {{memory}} MB" style="width:{{width}}%; left:{{offset}}%;"></div>
+		<div class="event event-{{category}}" data-toggle="tooltip" title="{{name}} - {{duration}} ms - {{memory}} MB" style="width:{{width}}%; left:{{offset}}%;">
+            <span class="sr-only">{{name}} - {{duration}} ms - {{memory}} MB</span>
+        </div>
 	{{/events}}
 </div>
 
 {{#savequeries}}
 <div class="laps-timeline">
 	{{#queries}}
-		<div class="event event-{{category}}" title="{{sql}}" style="width:{{width}}%; left:{{offset}}%;"></div>
+		<div class="event event-{{category}}" title="{{sql}}" style="width:{{width}}%; left:{{offset}}%;">
+            <span class="sr-only">{{sql}}</span>
+        </div>
 	{{/queries}}
 </div>
 {{/savequeries}}
@@ -15,7 +19,9 @@
 {{#savehttp}}
 <div class="laps-timeline">
 	{{#http}}
-		<div class="event event-{{category}}" title="{{name}} - {{duration}} ms" style="width:{{width}}%; left:{{offset}}%;"></div>
+		<div class="event event-{{category}}" title="{{name}} - {{duration}} ms" style="width:{{width}}%; left:{{offset}}%;">
+            <span class="sr-only">{{name}} - {{duration}} ms</span>
+        </div>
 	{{/http}}
 </div>
 {{/savehttp}}
