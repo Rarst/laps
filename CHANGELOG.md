@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - updated change log format to Keep a Changelog
 
+### Removed
+- removed release Robo task
+
 ## 1.3.2 - 2015-08-27
 
 ### Fixed
