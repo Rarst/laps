@@ -36,10 +36,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
  - implemented release build command
  - added WP SEO event
  
- ### Changed
+### Changed
  - split plugins_loaded hook into separate event
  
- ### Fixed
+### Fixed
  - fixed crash with upcoming Hybrid Core v3
 
 ## 1.2.1 - 2014-07-12
