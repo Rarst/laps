@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - updated change log format to Keep a Changelog
+- updated dependencies (Stopwatch 2.8.11, Mustache 2.11.1, Bootstrap 3.3.7)
 
 ### Removed
 - removed release Robo task
