@@ -248,13 +248,19 @@ class Laps {
 		$last_query_end = 0;
 		$last_offset    = 0;
 		$last_duration  = 0;
-		$category       = 'query';
 
 		if ( defined( 'SAVEQUERIES' ) && SAVEQUERIES ) {
 
 			foreach ( $wpdb->queries as $key => $query ) {
 				$query_start = isset( self::$query_starts[ $key ] ) ? self::$query_starts[ $key ] : $last_query_end;
 				list( $sql, $duration, $trace ) = $query;
+				$sql      = trim( $sql );
+				$category = 'query-read';
+
+				if ( 0 === stripos( $sql, 'INSERT' ) || 0 === stripos( $sql, 'UPDATE' ) ) {
+					$category = 'query-write';
+				}
+
 				$duration *= 1000;
 				$last_query_end = $query_start + $duration;
 				$offset         = round( ( $query_start - $start ) / $total * 100, 2 );

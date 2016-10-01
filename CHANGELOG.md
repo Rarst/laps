@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added screen reader text to events
+- colorized writing SQL queries to warning color
 
 ### Changed
 - updated change log format to Keep a Changelog

@@ -54,8 +54,11 @@
 #wpadminbar .laps-timeline .event-core {
   background-color: #f0ad4e;
 }
-#wpadminbar .laps-timeline .event-query {
+#wpadminbar .laps-timeline .event-query-read {
   background-color: #5bc0de;
+}
+#wpadminbar .laps-timeline .event-query-write {
+  background-color: #d9534f;
 }
 #wpadminbar .laps-timeline .event-http {
   background-color: #d9534f;
