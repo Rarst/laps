@@ -1,6 +1,6 @@
 <?php
 
-class __Mustache_37c708633787b0bcaf1bd7b4adc8b13a extends Mustache_Template
+class __Mustache_5126b076b167ca66ad34149133a76911 extends Mustache_Template
 {
     private $lambdaHelper;
 
@@ -8,7 +8,7 @@ class __Mustache_37c708633787b0bcaf1bd7b4adc8b13a extends Mustache_Template
     {
         $this->lambdaHelper = new Mustache_LambdaHelper($this->mustache, $context);
         $buffer = '';
-        $newContext = array();
+        $blocksContext = array();
 
         $buffer .= $indent . '<div class="laps-timeline">
 ';
@@ -34,6 +34,8 @@ class __Mustache_37c708633787b0bcaf1bd7b4adc8b13a extends Mustache_Template
     private function section83708baddd3627fe4d26675ddf7eaeb5(Mustache_Context $context, $indent, $value)
     {
         $buffer = '';
+        $blocksContext = array();
+    
         if (!is_string($value) && is_callable($value)) {
             $source = '
 		<div class="event event-{{category}}" data-toggle="tooltip" title="{{name}} - {{duration}} ms - {{memory}} MB" style="width:{{width}}%; left:{{offset}}%;"></div>
@@ -52,22 +54,22 @@ class __Mustache_37c708633787b0bcaf1bd7b4adc8b13a extends Mustache_Template
                 $context->push($value);
                 
                 $buffer .= $indent . '		<div class="event event-';
-                $value = $this->resolveValue($context->find('category'), $context, $indent);
+                $value = $this->resolveValue($context->find('category'), $context);
                 $buffer .= htmlspecialchars($value, 2, 'UTF-8');
                 $buffer .= '" data-toggle="tooltip" title="';
-                $value = $this->resolveValue($context->find('name'), $context, $indent);
+                $value = $this->resolveValue($context->find('name'), $context);
                 $buffer .= htmlspecialchars($value, 2, 'UTF-8');
                 $buffer .= ' - ';
-                $value = $this->resolveValue($context->find('duration'), $context, $indent);
+                $value = $this->resolveValue($context->find('duration'), $context);
                 $buffer .= htmlspecialchars($value, 2, 'UTF-8');
                 $buffer .= ' ms - ';
-                $value = $this->resolveValue($context->find('memory'), $context, $indent);
+                $value = $this->resolveValue($context->find('memory'), $context);
                 $buffer .= htmlspecialchars($value, 2, 'UTF-8');
                 $buffer .= ' MB" style="width:';
-                $value = $this->resolveValue($context->find('width'), $context, $indent);
+                $value = $this->resolveValue($context->find('width'), $context);
                 $buffer .= htmlspecialchars($value, 2, 'UTF-8');
                 $buffer .= '%; left:';
-                $value = $this->resolveValue($context->find('offset'), $context, $indent);
+                $value = $this->resolveValue($context->find('offset'), $context);
                 $buffer .= htmlspecialchars($value, 2, 'UTF-8');
                 $buffer .= '%;"></div>
 ';
@@ -81,6 +83,8 @@ class __Mustache_37c708633787b0bcaf1bd7b4adc8b13a extends Mustache_Template
     private function section8dd7d0439d6fbb51dfb44aaa94780d5c(Mustache_Context $context, $indent, $value)
     {
         $buffer = '';
+        $blocksContext = array();
+    
         if (!is_string($value) && is_callable($value)) {
             $source = '
 		<div class="event event-{{category}}" title="{{sql}}" style="width:{{width}}%; left:{{offset}}%;"></div>
@@ -99,16 +103,16 @@ class __Mustache_37c708633787b0bcaf1bd7b4adc8b13a extends Mustache_Template
                 $context->push($value);
                 
                 $buffer .= $indent . '		<div class="event event-';
-                $value = $this->resolveValue($context->find('category'), $context, $indent);
+                $value = $this->resolveValue($context->find('category'), $context);
                 $buffer .= htmlspecialchars($value, 2, 'UTF-8');
                 $buffer .= '" title="';
-                $value = $this->resolveValue($context->find('sql'), $context, $indent);
+                $value = $this->resolveValue($context->find('sql'), $context);
                 $buffer .= htmlspecialchars($value, 2, 'UTF-8');
                 $buffer .= '" style="width:';
-                $value = $this->resolveValue($context->find('width'), $context, $indent);
+                $value = $this->resolveValue($context->find('width'), $context);
                 $buffer .= htmlspecialchars($value, 2, 'UTF-8');
                 $buffer .= '%; left:';
-                $value = $this->resolveValue($context->find('offset'), $context, $indent);
+                $value = $this->resolveValue($context->find('offset'), $context);
                 $buffer .= htmlspecialchars($value, 2, 'UTF-8');
                 $buffer .= '%;"></div>
 ';
@@ -122,6 +126,8 @@ class __Mustache_37c708633787b0bcaf1bd7b4adc8b13a extends Mustache_Template
     private function section9756eb1d93d100052bdb80ee49b09ad6(Mustache_Context $context, $indent, $value)
     {
         $buffer = '';
+        $blocksContext = array();
+    
         if (!is_string($value) && is_callable($value)) {
             $source = '
 <div class="laps-timeline">
@@ -160,6 +166,8 @@ class __Mustache_37c708633787b0bcaf1bd7b4adc8b13a extends Mustache_Template
     private function sectionFb9cb3f90496dc38ba05f46e0ac2ad5d(Mustache_Context $context, $indent, $value)
     {
         $buffer = '';
+        $blocksContext = array();
+    
         if (!is_string($value) && is_callable($value)) {
             $source = '
 		<div class="event event-{{category}}" title="{{name}} - {{duration}} ms" style="width:{{width}}%; left:{{offset}}%;"></div>
@@ -178,19 +186,19 @@ class __Mustache_37c708633787b0bcaf1bd7b4adc8b13a extends Mustache_Template
                 $context->push($value);
                 
                 $buffer .= $indent . '		<div class="event event-';
-                $value = $this->resolveValue($context->find('category'), $context, $indent);
+                $value = $this->resolveValue($context->find('category'), $context);
                 $buffer .= htmlspecialchars($value, 2, 'UTF-8');
                 $buffer .= '" title="';
-                $value = $this->resolveValue($context->find('name'), $context, $indent);
+                $value = $this->resolveValue($context->find('name'), $context);
                 $buffer .= htmlspecialchars($value, 2, 'UTF-8');
                 $buffer .= ' - ';
-                $value = $this->resolveValue($context->find('duration'), $context, $indent);
+                $value = $this->resolveValue($context->find('duration'), $context);
                 $buffer .= htmlspecialchars($value, 2, 'UTF-8');
                 $buffer .= ' ms" style="width:';
-                $value = $this->resolveValue($context->find('width'), $context, $indent);
+                $value = $this->resolveValue($context->find('width'), $context);
                 $buffer .= htmlspecialchars($value, 2, 'UTF-8');
                 $buffer .= '%; left:';
-                $value = $this->resolveValue($context->find('offset'), $context, $indent);
+                $value = $this->resolveValue($context->find('offset'), $context);
                 $buffer .= htmlspecialchars($value, 2, 'UTF-8');
                 $buffer .= '%;"></div>
 ';
@@ -204,6 +212,8 @@ class __Mustache_37c708633787b0bcaf1bd7b4adc8b13a extends Mustache_Template
     private function section3669ef98d4f6390c8df9645c96a328ee(Mustache_Context $context, $indent, $value)
     {
         $buffer = '';
+        $blocksContext = array();
+    
         if (!is_string($value) && is_callable($value)) {
             $source = '
 <div class="laps-timeline">
@@ -238,4 +248,5 @@ class __Mustache_37c708633787b0bcaf1bd7b4adc8b13a extends Mustache_Template
     
         return $buffer;
     }
+
 }
