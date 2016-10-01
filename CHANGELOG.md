@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+
+## 1.4 - 2016-10-01
+
 ### Added
 - added screen reader text to events
 - colorized writing SQL queries to warning color
