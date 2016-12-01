@@ -94,6 +94,10 @@ class Laps {
 		$filter   = current_filter();
 		$priority = key( $wp_filter[ $filter ] );
 
+		if ( 'callbacks' === $priority ) { // Fails on WP 4.7, see https://core.trac.wordpress.org/ticket/39007
+			return $input;
+		}
+
 		$event = wp_parse_args(
 			self::$events[ $filter ][ $priority ],
 			array(
