@@ -34,7 +34,7 @@ abstract class Laps_Events {
 	/**
 	 * Inherit with internal events compiling and return
 	 *
-	 * @return array()
+	 * @return array
 	 */
 	abstract protected function get_events();
 }
