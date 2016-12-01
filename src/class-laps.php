@@ -222,7 +222,9 @@ class Laps {
 			)
 		);
 
-		self::$stopwatch->stop( 'Toolbar' );
+		if ( self::$stopwatch->isStarted( 'Toolbar' ) ) {
+			self::$stopwatch->stop( 'Toolbar' );
+		}
 
 		$events     = self::$stopwatch->getSectionEvents( '__root__' );
 		$start      = $timestart * 1000;
