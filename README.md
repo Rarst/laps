@@ -1,4 +1,5 @@
 # Laps — light WordPress profiler
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Rarst/laps/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Rarst/laps/?branch=master)
 
 ![Laps screenshot](http://i.imgur.com/zFokmkU.png)
 
