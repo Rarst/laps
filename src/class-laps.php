@@ -17,7 +17,7 @@ class Laps {
 	/**
 	 * Start Stopwatch and timing plugin load immediately, then set up core events and needed hooks.
 	 */
-	static function on_load() {
+	public static function on_load() {
 
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			return;
@@ -45,7 +45,7 @@ class Laps {
 	 *
 	 * @param array $stops
 	 */
-	static function add_events( $stops ) {
+	public static function add_events( $stops ) {
 
 		self::$events = array_merge( self::$events, $stops );
 
@@ -65,7 +65,7 @@ class Laps {
 	 *
 	 * @return array
 	 */
-	static function pre_update_option_active_plugins( $plugins ) {
+	public static function pre_update_option_active_plugins( $plugins ) {
 
 		$plugin = plugin_basename( dirname( __DIR__ ) . '/laps.php' );
 		$key    = array_search( $plugin, $plugins );
@@ -87,7 +87,7 @@ class Laps {
 	 *
 	 * @return mixed
 	 */
-	static function tick( $input = null ) {
+	public static function tick( $input = null ) {
 
 		global $wp_filter;
 
@@ -122,7 +122,7 @@ class Laps {
 	 *
 	 * @return string
 	 */
-	static function query( $query ) {
+	public static function query( $query ) {
 
 		global $wpdb;
 
@@ -144,7 +144,7 @@ class Laps {
 	 *
 	 * @return boolean
 	 */
-	static function pre_http_request( $false, $args, $url ) {
+	public static function pre_http_request( $false, $args, $url ) {
 
 		self::$stopwatch->start( $url, 'http' );
 
@@ -162,7 +162,7 @@ class Laps {
 	 *
 	 * @return mixed
 	 */
-	static function http_api_debug( $response, $type, $class, $args, $url ) {
+	public static function http_api_debug( $response, $type, $class, $args, $url ) {
 
 		self::$stopwatch->stop( $url );
 
@@ -172,7 +172,7 @@ class Laps {
 	/**
 	 * When theme is done possibly add vendor-specific events.
 	 */
-	static function after_setup_theme() {
+	public static function after_setup_theme() {
 
 		foreach ( array( 'THA', 'Hybrid', 'Genesis', 'Thematic', 'Yoast' ) as $vendor ) {
 
@@ -183,14 +183,14 @@ class Laps {
 		}
 	}
 
-	static function init() {
+	public static function init() {
 
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
 		add_action( 'admin_bar_menu', array( __CLASS__, 'admin_bar_menu' ), 100 );
 	}
 
-	static function enqueue_scripts() {
+	public static function enqueue_scripts() {
 
 		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 		wp_register_script( 'laps', plugins_url( "js/laps{$suffix}.js", __DIR__ ), array( 'jquery' ), '3.3.1', true );
@@ -207,7 +207,7 @@ class Laps {
 	 *
 	 * @param \WP_Admin_Bar $wp_admin_bar
 	 */
-	static function admin_bar_menu( $wp_admin_bar ) {
+	public static function admin_bar_menu( $wp_admin_bar ) {
 
 		if ( ! apply_filters( 'laps_can_see', current_user_can( 'manage_options' ) ) ) {
 			return;
