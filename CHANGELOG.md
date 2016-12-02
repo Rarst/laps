@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## 1.4.2 - 2016-12-02
+
+### Fixed
+- back to fully functional on WP 4.7 beta
+
 ## 1.4.1 - 2016-12-01
 
 ### Fixed
