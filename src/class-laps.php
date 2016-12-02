@@ -91,15 +91,12 @@ class Laps {
 
 		global $wp_filter;
 
-		$filter   = current_filter();
-		$priority = key( $wp_filter[ $filter ] );
-
-		if ( 'callbacks' === $priority ) { // Fails on WP 4.7, see https://core.trac.wordpress.org/ticket/39007
-			return $input;
-		}
+		$filter_name     = current_filter();
+		$filter_instance = $wp_filter[ $filter_name ];
+		$priority        = $filter_instance instanceof \WP_Hook ? $filter_instance->current_priority() : key( $filter_instance );
 
 		$event = wp_parse_args(
-			self::$events[ $filter ][ $priority ],
+			self::$events[ $filter_name ][ $priority ],
 			array(
 				'action'   => 'start',
 				'category' => null,
