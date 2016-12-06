@@ -1,5 +1,6 @@
 # Laps — light WordPress profiler
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Rarst/laps/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Rarst/laps/?branch=master)
+[![Total Downloads](https://poser.pugx.org/rarst/laps/downloads)](https://packagist.org/packages/rarst/laps)
 
 ![Laps screenshot](http://i.imgur.com/zFokmkU.png)
 
