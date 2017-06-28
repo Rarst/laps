@@ -95,6 +95,11 @@ class Laps {
 		$filter_instance = $wp_filter[ $filter_name ];
 		$priority        = $filter_instance instanceof \WP_Hook ? $filter_instance->current_priority() : key( $filter_instance );
 
+		// See https://core.trac.wordpress.org/ticket/41185 on broken priority, but more general sanity check.
+		if ( empty( self::$events[ $filter_name ][ $priority ] ) ) {
+			return $input;
+		}
+
 		$event = wp_parse_args(
 			self::$events[ $filter_name ][ $priority ],
 			array(

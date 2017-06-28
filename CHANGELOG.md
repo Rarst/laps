@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## 1.4.3 - 2017-06-28
+
+### Fixed
+- sanity check for invalid priority returned by core
+
 ## 1.4.2 - 2016-12-02
 
 ### Fixed
