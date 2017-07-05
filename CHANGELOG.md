@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## 1.4.4 - 2017-07-05
+
+### Added
+- Robo task to update header version and tag in Git
+
+### Fixed
+- version in header
+
 ## 1.4.3 - 2017-06-28
 
 ### Fixed

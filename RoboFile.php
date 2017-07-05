@@ -78,6 +78,23 @@ class RoboFile extends \Robo\Tasks {
 	}
 
 	/**
+	 * Updates version in header and makes git version tag.
+	 *
+	 * @param string $version Version string.
+	 */
+	public function tag( $version ) {
+
+		$this->versionSet( $version );
+
+		$this->taskGitStack()
+		     ->stopOnFail()
+		     ->add( 'laps.php' )
+		     ->commit( "Updated header version to {$version}" )
+		     ->tag( $version )
+		     ->run();
+	}
+
+	/**
 	 * Sets the plugin version in header.
 	 *
 	 * @param string $version Version string.
