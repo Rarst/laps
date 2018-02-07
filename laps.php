@@ -15,4 +15,6 @@ if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 	require __DIR__ . '/vendor/autoload.php';
 }
 
-Rarst\Laps\Laps::on_load();
+$laps = new \Rarst\Laps\Laps();
+
+$laps->on_load();

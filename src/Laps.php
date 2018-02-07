@@ -10,33 +10,33 @@ use Symfony\Component\Stopwatch\Stopwatch;
 class Laps {
 
 	/**  @var Stopwatch $stopwatch */
-	public static $stopwatch;
-	public static $events = array();
-	public static $query_starts = array();
+	public $stopwatch;
+	public $events = array();
+	public $query_starts = array();
 
 	/**
 	 * Start Stopwatch and timing plugin load immediately, then set up core events and needed hooks.
 	 */
-	public static function on_load() {
+	public function on_load() {
 
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			return;
 		}
 
-		self::$stopwatch = new Stopwatch();
-		self::$stopwatch->start( 'Plugins Load', 'plugin' );
+		$this->stopwatch = new Stopwatch();
+		$this->stopwatch->start( 'Plugins Load', 'plugin' );
 		$events = new Core_Events();
-		self::add_events( $events->get() );
+		$this->add_events( $events->get() );
 
-		add_action( 'pre_update_option_active_plugins', array( __CLASS__, 'pre_update_option_active_plugins' ) );
-		add_action( 'pre_update_site_option_active_sitewide_plugins', array( __CLASS__, 'pre_update_option_active_plugins' ) );
-		add_action( 'pre_http_request', array( __CLASS__, 'pre_http_request' ), 10, 3 );
-		add_action( 'http_api_debug', array( __CLASS__, 'http_api_debug' ), 10, 5 );
-		add_action( 'after_setup_theme', array( __CLASS__, 'after_setup_theme' ), 15 );
-		add_action( 'init', array( __CLASS__, 'init' ) );
+		add_action( 'pre_update_option_active_plugins', array( $this, 'pre_update_option_active_plugins' ) );
+		add_action( 'pre_update_site_option_active_sitewide_plugins', array( $this, 'pre_update_option_active_plugins' ) );
+		add_action( 'pre_http_request', array( $this, 'pre_http_request' ), 10, 3 );
+		add_action( 'http_api_debug', array( $this, 'http_api_debug' ), 10, 5 );
+		add_action( 'after_setup_theme', array( $this, 'after_setup_theme' ), 15 );
+		add_action( 'init', array( $this, 'init' ) );
 
 		if ( defined( 'SAVEQUERIES' ) && SAVEQUERIES ) {
-			add_filter( 'query', array( __CLASS__, 'query' ), 20 );
+			add_filter( 'query', array( $this, 'query' ), 20 );
 		}
 	}
 
@@ -45,15 +45,15 @@ class Laps {
 	 *
 	 * @param array $stops
 	 */
-	public static function add_events( $stops ) {
+	public function add_events( $stops ) {
 
-		self::$events = array_merge( self::$events, $stops );
+		$this->events = array_merge( $this->events, $stops );
 
 		foreach ( $stops as $hook_name => $data ) {
 
 			foreach ( array_keys( $data ) as $priority ) {
 
-				add_action( $hook_name, array( __CLASS__, 'tick' ), $priority );
+				add_action( $hook_name, array( $this, 'tick' ), $priority );
 			}
 		}
 	}
@@ -65,7 +65,7 @@ class Laps {
 	 *
 	 * @return array
 	 */
-	public static function pre_update_option_active_plugins( $plugins ) {
+	public function pre_update_option_active_plugins( $plugins ) {
 
 		$plugin = plugin_basename( dirname( __DIR__ ) . '/laps.php' );
 		$key    = array_search( $plugin, $plugins );
@@ -87,7 +87,7 @@ class Laps {
 	 *
 	 * @return mixed
 	 */
-	public static function tick( $input = null ) {
+	public function tick( $input = null ) {
 
 		global $wp_filter;
 
@@ -96,23 +96,23 @@ class Laps {
 		$priority        = $filter_instance instanceof \WP_Hook ? $filter_instance->current_priority() : key( $filter_instance );
 
 		// See https://core.trac.wordpress.org/ticket/41185 on broken priority, but more general sanity check.
-		if ( empty( self::$events[ $filter_name ][ $priority ] ) ) {
+		if ( empty( $this->events[ $filter_name ][ $priority ] ) ) {
 			return $input;
 		}
 
 		$event = wp_parse_args(
-			self::$events[ $filter_name ][ $priority ],
+			$this->events[ $filter_name ][ $priority ],
 			array(
 				'action'   => 'start',
 				'category' => null,
 			)
 		);
 
-		if ( 'stop' === $event['action'] && ! self::$stopwatch->isStarted( $event['event'] ) ) {
+		if ( 'stop' === $event['action'] && ! $this->stopwatch->isStarted( $event['event'] ) ) {
 			return $input;
 		}
 
-		self::$stopwatch->{$event['action']}( $event['event'], $event['category'] );
+		$this->stopwatch->{$event['action']}( $event['event'], $event['category'] );
 
 		return $input;
 	}
@@ -124,14 +124,14 @@ class Laps {
 	 *
 	 * @return string
 	 */
-	public static function query( $query ) {
+	public function query( $query ) {
 
 		global $wpdb;
 
-		if ( empty( self::$query_starts ) && ! empty( $wpdb->queries ) ) {
-			self::$query_starts[ count( $wpdb->queries ) ] = microtime( true ) * 1000;
+		if ( empty( $this->query_starts ) && ! empty( $wpdb->queries ) ) {
+			$this->query_starts[ count( $wpdb->queries ) ] = microtime( true ) * 1000;
 		} else {
-			self::$query_starts[] = microtime( true ) * 1000;
+			$this->query_starts[] = microtime( true ) * 1000;
 		}
 
 		return $query;
@@ -146,9 +146,9 @@ class Laps {
 	 *
 	 * @return boolean
 	 */
-	public static function pre_http_request( $false, $args, $url ) {
+	public function pre_http_request( $false, $args, $url ) {
 
-		self::$stopwatch->start( $url, 'http' );
+		$this->stopwatch->start( $url, 'http' );
 
 		return $false;
 	}
@@ -164,9 +164,9 @@ class Laps {
 	 *
 	 * @return mixed
 	 */
-	public static function http_api_debug( $response, $type, $class, $args, $url ) {
+	public function http_api_debug( $response, $type, $class, $args, $url ) {
 
-		self::$stopwatch->stop( $url );
+		$this->stopwatch->stop( $url );
 
 		return $response;
 	}
@@ -174,25 +174,25 @@ class Laps {
 	/**
 	 * When theme is done possibly add vendor-specific events.
 	 */
-	public static function after_setup_theme() {
+	public function after_setup_theme() {
 
 		foreach ( array( 'THA', 'Hybrid', 'Genesis', 'Thematic', 'Yoast' ) as $vendor ) {
 
 			$class = "Rarst\\Laps\\{$vendor}_Events";
 			/** @var Laps_Events $events */
 			$events = new $class;
-			self::add_events( $events->get() );
+			$this->add_events( $events->get() );
 		}
 	}
 
-	public static function init() {
+	public function init() {
 
-		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
-		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
-		add_action( 'admin_bar_menu', array( __CLASS__, 'admin_bar_menu' ), 100 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'admin_bar_menu', array( $this, 'admin_bar_menu' ), 100 );
 	}
 
-	public static function enqueue_scripts() {
+	public function enqueue_scripts() {
 
 		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 		wp_register_script( 'laps', plugins_url( "js/laps{$suffix}.js", __DIR__ ), array( 'jquery' ), '3.3.1', true );
@@ -209,7 +209,7 @@ class Laps {
 	 *
 	 * @param \WP_Admin_Bar $wp_admin_bar
 	 */
-	public static function admin_bar_menu( $wp_admin_bar ) {
+	public function admin_bar_menu( $wp_admin_bar ) {
 
 		if ( ! apply_filters( 'laps_can_see', current_user_can( 'manage_options' ) ) ) {
 			return;
@@ -224,11 +224,11 @@ class Laps {
 			)
 		);
 
-		if ( self::$stopwatch->isStarted( 'Toolbar' ) ) {
-			self::$stopwatch->stop( 'Toolbar' );
+		if ( $this->stopwatch->isStarted( 'Toolbar' ) ) {
+			$this->stopwatch->stop( 'Toolbar' );
 		}
 
-		$events     = self::$stopwatch->getSectionEvents( '__root__' );
+		$events     = $this->stopwatch->getSectionEvents( '__root__' );
 		$start      = $timestart * 1000;
 		$end        = microtime( true ) * 1000;
 		$total      = $end - $start;
@@ -260,7 +260,7 @@ class Laps {
 		if ( defined( 'SAVEQUERIES' ) && SAVEQUERIES ) {
 
 			foreach ( $wpdb->queries as $key => $query ) {
-				$query_start = isset( self::$query_starts[ $key ] ) ? self::$query_starts[ $key ] : $last_query_end;
+				$query_start = isset( $this->query_starts[ $key ] ) ? $this->query_starts[ $key ] : $last_query_end;
 				list( $sql, $duration, $trace ) = $query;
 				$sql      = trim( $sql );
 				$category = 'query-read';
