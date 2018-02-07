@@ -1,5 +1,6 @@
 # Laps — light WordPress profiler
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Rarst/laps/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Rarst/laps/?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/rarst/laps/v/stable)](https://packagist.org/packages/rarst/laps)
 [![Total Downloads](https://poser.pugx.org/rarst/laps/downloads)](https://packagist.org/packages/rarst/laps)
 
 ![Laps screenshot](http://i.imgur.com/zFokmkU.png)
@@ -23,7 +24,6 @@ And some of third party hooks conventions for themes using:
  - [Theme Hook Alliance](http://zamoose.github.io/themehookalliance/)
  - [Hybrid](http://themehybrid.com/)
  - [Genesis](http://my.studiopress.com/themes/genesis/)
- - [Thematic](http://thematictheme.com/)
 
 There are also additional optional timelines, displaying:
 

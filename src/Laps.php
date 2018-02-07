@@ -176,7 +176,7 @@ class Laps {
 	 */
 	public function after_setup_theme() {
 
-		foreach ( array( 'THA', 'Hybrid', 'Genesis', 'Thematic', 'Yoast' ) as $vendor ) {
+		foreach ( [ 'THA', 'Hybrid', 'Genesis', 'Yoast' ] as $vendor ) {
 
 			$class = "Rarst\\Laps\\{$vendor}_Events";
 			/** @var Laps_Events $events */
