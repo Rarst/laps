@@ -8,7 +8,6 @@
 	"authors"    : [
 		{
 			"name"    : "Andrey Savchenko",
-			"email"   : "contact@rarst.net",
 			"homepage": "http://www.Rarst.net/"
 		}
 	],
@@ -16,7 +15,9 @@
 		"issues": "https://github.com/Rarst/laps/issues"
 	},
 	"autoload"   : {
-		"classmap": ["src/"]
+		"psr-4": {
+			"Rarst\\Laps\\" : "src/"
+		}
 	},
 	"require"    : {
 		"composer/installers": "~1.0",
