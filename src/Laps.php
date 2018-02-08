@@ -131,13 +131,6 @@ class Laps extends Container {
 
 		global $timestart;
 
-		/** @var Stopwatch $stopwatch */
-		$stopwatch = $this['stopwatch'];
-
-		if ( $stopwatch->isStarted( 'Toolbar' ) ) {
-			$stopwatch->stop( 'Toolbar' );
-		}
-
 		$events = [];
 
 		foreach ( $this->providers as $provider ) {

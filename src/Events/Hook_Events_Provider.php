@@ -101,6 +101,10 @@ class Hook_Events_Provider implements ServiceProviderInterface, Bootable_Provide
 
 	public function get_events() {
 
+		if ( $this->stopwatch->isStarted( 'Toolbar' ) ) {
+			$this->stopwatch->stop( 'Toolbar' );
+		}
+
 		$events = $this->stopwatch->getSectionEvents( '__root__' );
 
 		return array_map( [ $this, 'transform' ], array_keys( $events ), $events );
