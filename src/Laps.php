@@ -2,6 +2,7 @@
 
 namespace Rarst\Laps;
 
+use Pimple\Container;
 use Rarst\Laps\Events\Core_Events;
 use Rarst\Laps\Events\Laps_Events;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -9,12 +10,32 @@ use Symfony\Component\Stopwatch\Stopwatch;
 /**
  * Main plugin's class.
  */
-class Laps {
+class Laps extends Container {
 
-	/**  @var Stopwatch $stopwatch */
-	public $stopwatch;
 	public $events = array();
 	public $query_starts = array();
+
+	public function __construct( array $values = [] ) {
+
+		parent::__construct();
+
+		$laps = $this;
+
+		$laps['mustache'] = function () {
+			return new \Mustache_Engine( [
+				'loader' => new \Mustache_Loader_FilesystemLoader( dirname( __DIR__ ) . '/views' ),
+				'cache'  => new Mustache_Cache_FrozenCache( dirname( __DIR__ ) . '/views/cache' ),
+			] );
+		};
+
+		$laps['stopwatch'] = function () {
+			return new Stopwatch();
+		};
+
+		foreach ( $values as $key => $value ) {
+			$this->offsetSet( $key, $value );
+		}
+	}
 
 	/**
 	 * Start Stopwatch and timing plugin load immediately, then set up core events and needed hooks.
@@ -25,8 +46,7 @@ class Laps {
 			return;
 		}
 
-		$this->stopwatch = new Stopwatch();
-		$this->stopwatch->start( 'Plugins Load', 'plugin' );
+		$this['stopwatch']->start( 'Plugins Load', 'plugin' );
 		$events = new Core_Events();
 		$this->add_events( $events->get() );
 
@@ -110,11 +130,13 @@ class Laps {
 			)
 		);
 
-		if ( 'stop' === $event['action'] && ! $this->stopwatch->isStarted( $event['event'] ) ) {
+		$stopwatch = $this['stopwatch'];
+
+		if ( 'stop' === $event['action'] && ! $stopwatch->isStarted( $event['event'] ) ) {
 			return $input;
 		}
 
-		$this->stopwatch->{$event['action']}( $event['event'], $event['category'] );
+		$stopwatch->{$event['action']}( $event['event'], $event['category'] );
 
 		return $input;
 	}
@@ -150,7 +172,7 @@ class Laps {
 	 */
 	public function pre_http_request( $false, $args, $url ) {
 
-		$this->stopwatch->start( $url, 'http' );
+		$this['stopwatch']->start( $url, 'http' );
 
 		return $false;
 	}
@@ -168,7 +190,7 @@ class Laps {
 	 */
 	public function http_api_debug( $response, $type, $class, $args, $url ) {
 
-		$this->stopwatch->stop( $url );
+		$this['stopwatch']->stop( $url );
 
 		return $response;
 	}
@@ -219,18 +241,14 @@ class Laps {
 
 		global $timestart, $wpdb;
 
-		$mustache = new \Mustache_Engine(
-			array(
-				'loader' => new \Mustache_Loader_FilesystemLoader( dirname( __DIR__ ) . '/views' ),
-				'cache'  => new Mustache_Cache_FrozenCache( dirname( __DIR__ ) . '/views/cache' ),
-			)
-		);
+		/** @var Stopwatch $stopwatch */
+		$stopwatch = $this['stopwatch'];
 
-		if ( $this->stopwatch->isStarted( 'Toolbar' ) ) {
-			$this->stopwatch->stop( 'Toolbar' );
+		if ( $stopwatch->isStarted( 'Toolbar' ) ) {
+			$stopwatch->stop( 'Toolbar' );
 		}
 
-		$events     = $this->stopwatch->getSectionEvents( '__root__' );
+		$events     = $stopwatch->getSectionEvents( '__root__' );
 		$start      = $timestart * 1000;
 		$end        = microtime( true ) * 1000;
 		$total      = $end - $start;
@@ -295,16 +313,13 @@ class Laps {
 			}
 		}
 
-		$html = $mustache->render(
-			'laps',
-			array(
-				'events'      => $event_data,
-				'queries'     => $query_data,
-				'savequeries' => defined( 'SAVEQUERIES' ) && SAVEQUERIES,
-				'http'        => $http_data,
-				'savehttp'    => ! empty( $http_data ),
-			)
-		);
+		$html = $this['mustache']->render( 'laps', [
+			'events'      => $event_data,
+			'queries'     => $query_data,
+			'savequeries' => defined( 'SAVEQUERIES' ) && SAVEQUERIES,
+			'http'        => $http_data,
+			'savehttp'    => ! empty( $http_data ),
+		] );
 
 		$wp_admin_bar->add_node( array(
 			'id'    => 'laps',
