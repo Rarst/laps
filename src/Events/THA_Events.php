@@ -1,6 +1,6 @@
 <?php
 
-namespace Rarst\Laps;
+namespace Rarst\Laps\Events;
 
 /**
  * Events for Theme Hook Alliance

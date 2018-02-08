@@ -1,6 +1,6 @@
 <?php
 
-namespace Rarst\Laps;
+namespace Rarst\Laps\Events;
 
 /**
  * Main set of events for WordPress core

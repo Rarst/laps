@@ -1,6 +1,6 @@
 <?php
 
-namespace Rarst\Laps;
+namespace Rarst\Laps\Events;
 
 /**
  * Events for Hybrid Core based themes

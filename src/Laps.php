@@ -2,6 +2,8 @@
 
 namespace Rarst\Laps;
 
+use Rarst\Laps\Events\Core_Events;
+use Rarst\Laps\Events\Laps_Events;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 /**
@@ -178,7 +180,7 @@ class Laps {
 
 		foreach ( [ 'THA', 'Hybrid', 'Genesis', 'Yoast' ] as $vendor ) {
 
-			$class = "Rarst\\Laps\\{$vendor}_Events";
+			$class = "Rarst\\Laps\\Events\\{$vendor}_Events";
 			/** @var Laps_Events $events */
 			$events = new $class;
 			$this->add_events( $events->get() );
