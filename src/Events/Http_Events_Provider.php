@@ -7,6 +7,7 @@ use Pimple\ServiceProviderInterface;
 use Rarst\Laps\Bootable_Provider_Interface;
 use Rarst\Laps\Laps;
 use Symfony\Component\Stopwatch\Stopwatch;
+use Symfony\Component\Stopwatch\StopwatchEvent;
 
 class Http_Events_Provider implements ServiceProviderInterface, Bootable_Provider_Interface, Events_Provider_Interface {
 
@@ -61,6 +62,23 @@ class Http_Events_Provider implements ServiceProviderInterface, Bootable_Provide
 
 	public function get_events() {
 
-		return $this->stopwatch->getSectionEvents( '__root__' );
+		$events = $this->stopwatch->getSectionEvents( '__root__' );
+
+		return array_map( [ $this, 'transform' ], array_keys( $events ), $events );
+	}
+
+	protected function transform( $name, StopwatchEvent $event ) {
+
+		$duration = $event->getDuration();
+		$memory   = $event->getMemory() / 1024 / 1024;
+
+		return [
+			'name'        => $name,
+			'description' => $name,
+			'origin'      => $event->getOrigin(),
+			'duration'    => $duration,
+			'memory'      => $memory,
+			'category'    => $event->getCategory(),
+		];
 	}
 }

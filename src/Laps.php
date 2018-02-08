@@ -176,19 +176,20 @@ class Laps extends Container {
 		$event_data = array();
 		$http_data  = array();
 
-		foreach ( $events as $name => $event ) {
+		foreach ( $events as $event ) {
 
-			$offset   = round( ( $event->getOrigin() - $start ) / $total * 100, 2 );
-			$duration = $event->getDuration();
+			$name     = $event['name'];
+			$offset   = round( ( $event['origin'] - $start ) / $total * 100, 2 );
+			$duration = $event['duration'];
 			$width    = round( $duration / $total * 100, 2 );
-			$category = $event->getCategory();
+			$category = $event['category'];
 
 			if ( 'http' === $category ) {
 				$http_data[] = compact( 'name', 'offset', 'duration', 'width', 'category' );
 				continue;
 			}
 
-			$memory = $event->getMemory() / 1024 / 1024;
+			$memory = $event['memory'];
 
 			$event_data[] = compact( 'name', 'offset', 'duration', 'width', 'category', 'memory' );
 		}
