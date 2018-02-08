@@ -3,10 +3,9 @@
 namespace Rarst\Laps;
 
 use Pimple\Container;
-use Rarst\Laps\Events\Core_Events;
-use Rarst\Laps\Events\Laps_Events;
 use Pimple\ServiceProviderInterface;
 use Rarst\Laps\Events\Events_Provider_Interface;
+use Rarst\Laps\Events\Hook_Events_Provider;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 /**
@@ -14,7 +13,6 @@ use Symfony\Component\Stopwatch\Stopwatch;
  */
 class Laps extends Container {
 
-	public $events = array();
 	public $query_starts = array();
 
 	protected $providers = [];
@@ -35,6 +33,8 @@ class Laps extends Container {
 		$laps['stopwatch'] = function () {
 			return new Stopwatch();
 		};
+
+		$laps->register( new Hook_Events_Provider() );
 
 		foreach ( $values as $key => $value ) {
 			$this->offsetSet( $key, $value );
@@ -60,8 +60,6 @@ class Laps extends Container {
 		}
 
 		$this['stopwatch']->start( 'Plugins Load', 'plugin' );
-		$events = new Core_Events();
-		$this->add_events( $events->get() );
 
 		foreach ( $this->providers as $provider ) {
 
@@ -74,29 +72,10 @@ class Laps extends Container {
 		add_action( 'pre_update_site_option_active_sitewide_plugins', array( $this, 'pre_update_option_active_plugins' ) );
 		add_action( 'pre_http_request', array( $this, 'pre_http_request' ), 10, 3 );
 		add_action( 'http_api_debug', array( $this, 'http_api_debug' ), 10, 5 );
-		add_action( 'after_setup_theme', array( $this, 'after_setup_theme' ), 15 );
 		add_action( 'init', array( $this, 'init' ) );
 
 		if ( defined( 'SAVEQUERIES' ) && SAVEQUERIES ) {
 			add_filter( 'query', array( $this, 'query' ), 20 );
-		}
-	}
-
-	/**
-	 * Hook events by name and priority from array.
-	 *
-	 * @param array $stops
-	 */
-	public function add_events( $stops ) {
-
-		$this->events = array_merge( $this->events, $stops );
-
-		foreach ( $stops as $hook_name => $data ) {
-
-			foreach ( array_keys( $data ) as $priority ) {
-
-				add_action( $hook_name, array( $this, 'tick' ), $priority );
-			}
 		}
 	}
 
@@ -120,45 +99,6 @@ class Laps extends Container {
 		}
 
 		return $plugins;
-	}
-
-	/**
-	 * Mark action for the event on Stopwatch.
-	 *
-	 * @param mixed $input pass through if added to filter
-	 *
-	 * @return mixed
-	 */
-	public function tick( $input = null ) {
-
-		global $wp_filter;
-
-		$filter_name     = current_filter();
-		$filter_instance = $wp_filter[ $filter_name ];
-		$priority        = $filter_instance instanceof \WP_Hook ? $filter_instance->current_priority() : key( $filter_instance );
-
-		// See https://core.trac.wordpress.org/ticket/41185 on broken priority, but more general sanity check.
-		if ( empty( $this->events[ $filter_name ][ $priority ] ) ) {
-			return $input;
-		}
-
-		$event = wp_parse_args(
-			$this->events[ $filter_name ][ $priority ],
-			array(
-				'action'   => 'start',
-				'category' => null,
-			)
-		);
-
-		$stopwatch = $this['stopwatch'];
-
-		if ( 'stop' === $event['action'] && ! $stopwatch->isStarted( $event['event'] ) ) {
-			return $input;
-		}
-
-		$stopwatch->{$event['action']}( $event['event'], $event['category'] );
-
-		return $input;
 	}
 
 	/**
@@ -213,20 +153,6 @@ class Laps extends Container {
 		$this['stopwatch']->stop( $url );
 
 		return $response;
-	}
-
-	/**
-	 * When theme is done possibly add vendor-specific events.
-	 */
-	public function after_setup_theme() {
-
-		foreach ( [ 'THA', 'Hybrid', 'Genesis', 'Yoast' ] as $vendor ) {
-
-			$class = "Rarst\\Laps\\Events\\{$vendor}_Events";
-			/** @var Laps_Events $events */
-			$events = new $class;
-			$this->add_events( $events->get() );
-		}
 	}
 
 	public function init() {
