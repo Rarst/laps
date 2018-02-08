@@ -5,6 +5,8 @@ namespace Rarst\Laps;
 use Pimple\Container;
 use Rarst\Laps\Events\Core_Events;
 use Rarst\Laps\Events\Laps_Events;
+use Pimple\ServiceProviderInterface;
+use Rarst\Laps\Events\Events_Provider_Interface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 /**
@@ -14,6 +16,8 @@ class Laps extends Container {
 
 	public $events = array();
 	public $query_starts = array();
+
+	protected $providers = [];
 
 	public function __construct( array $values = [] ) {
 
@@ -37,6 +41,15 @@ class Laps extends Container {
 		}
 	}
 
+	public function register( ServiceProviderInterface $provider, array $values = [] ) {
+
+		$this->providers[] = $provider;
+
+		parent::register( $provider, $values );
+
+		return $this;
+	}
+
 	/**
 	 * Start Stopwatch and timing plugin load immediately, then set up core events and needed hooks.
 	 */
@@ -49,6 +62,13 @@ class Laps extends Container {
 		$this['stopwatch']->start( 'Plugins Load', 'plugin' );
 		$events = new Core_Events();
 		$this->add_events( $events->get() );
+
+		foreach ( $this->providers as $provider ) {
+
+			if ( $provider instanceof Bootable_Provider_Interface ) {
+				$provider->boot( $this );
+			}
+		}
 
 		add_action( 'pre_update_option_active_plugins', array( $this, 'pre_update_option_active_plugins' ) );
 		add_action( 'pre_update_site_option_active_sitewide_plugins', array( $this, 'pre_update_option_active_plugins' ) );
@@ -248,7 +268,16 @@ class Laps extends Container {
 			$stopwatch->stop( 'Toolbar' );
 		}
 
-		$events     = $stopwatch->getSectionEvents( '__root__' );
+		$events = [];
+
+		foreach ( $this->providers as $provider ) {
+
+			if ( $provider instanceof Events_Provider_Interface ) {
+				$events[] = $provider->get_events();
+			}
+		}
+
+		$events     = array_merge(...$events);
 		$start      = $timestart * 1000;
 		$end        = microtime( true ) * 1000;
 		$total      = $end - $start;
