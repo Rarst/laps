@@ -6,6 +6,7 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Rarst\Laps\Events\Events_Provider_Interface;
 use Rarst\Laps\Events\Hook_Events_Provider;
+use Rarst\Laps\Events\Http_Events_Provider;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 /**
@@ -35,6 +36,7 @@ class Laps extends Container {
 		};
 
 		$laps->register( new Hook_Events_Provider() );
+		$laps->register( new Http_Events_Provider() );
 
 		foreach ( $values as $key => $value ) {
 			$this->offsetSet( $key, $value );
@@ -70,8 +72,6 @@ class Laps extends Container {
 
 		add_action( 'pre_update_option_active_plugins', array( $this, 'pre_update_option_active_plugins' ) );
 		add_action( 'pre_update_site_option_active_sitewide_plugins', array( $this, 'pre_update_option_active_plugins' ) );
-		add_action( 'pre_http_request', array( $this, 'pre_http_request' ), 10, 3 );
-		add_action( 'http_api_debug', array( $this, 'http_api_debug' ), 10, 5 );
 		add_action( 'init', array( $this, 'init' ) );
 
 		if ( defined( 'SAVEQUERIES' ) && SAVEQUERIES ) {
@@ -119,40 +119,6 @@ class Laps extends Container {
 		}
 
 		return $query;
-	}
-
-	/**
-	 * Capture start time of HTTP request
-	 *
-	 * @param boolean $false
-	 * @param array   $args
-	 * @param string  $url
-	 *
-	 * @return boolean
-	 */
-	public function pre_http_request( $false, $args, $url ) {
-
-		$this['stopwatch']->start( $url, 'http' );
-
-		return $false;
-	}
-
-	/**
-	 * Capture end time of HTTP request
-	 *
-	 * @param array|\WP_Error $response
-	 * @param string          $type
-	 * @param object          $class
-	 * @param array           $args
-	 * @param string          $url
-	 *
-	 * @return mixed
-	 */
-	public function http_api_debug( $response, $type, $class, $args, $url ) {
-
-		$this['stopwatch']->stop( $url );
-
-		return $response;
 	}
 
 	public function init() {
