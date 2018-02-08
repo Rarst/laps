@@ -31,9 +31,9 @@ class Laps extends Container {
 			] );
 		};
 
-		$laps['stopwatch'] = function () {
+		$laps['stopwatch'] = $laps->factory( function () {
 			return new Stopwatch();
-		};
+		} );
 
 		$laps->register( new Hook_Events_Provider() );
 		$laps->register( new Http_Events_Provider() );

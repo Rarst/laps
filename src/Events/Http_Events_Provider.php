@@ -8,7 +8,7 @@ use Rarst\Laps\Bootable_Provider_Interface;
 use Rarst\Laps\Laps;
 use Symfony\Component\Stopwatch\Stopwatch;
 
-class Http_Events_Provider implements ServiceProviderInterface, Bootable_Provider_Interface {
+class Http_Events_Provider implements ServiceProviderInterface, Bootable_Provider_Interface, Events_Provider_Interface {
 
 	/** @var Stopwatch $stopwatch */
 	protected $stopwatch;
@@ -57,5 +57,10 @@ class Http_Events_Provider implements ServiceProviderInterface, Bootable_Provide
 		$this->stopwatch->stop( $url );
 
 		return $response;
+	}
+
+	public function get_events() {
+
+		return $this->stopwatch->getSectionEvents( '__root__' );
 	}
 }
