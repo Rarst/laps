@@ -169,7 +169,9 @@ class Laps extends Container {
 			[ 'events' => $event_data ],
 			[ 'events' => $query_data ],
 			[ 'events' => $http_data ],
-		] );
+		], function ( $data ) {
+			return ! empty( $data['events'] );
+		} );
 
 		$wp_admin_bar->add_node( [
 			'id'    => 'laps',
