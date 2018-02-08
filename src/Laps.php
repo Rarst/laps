@@ -7,6 +7,7 @@ use Pimple\ServiceProviderInterface;
 use Rarst\Laps\Events\Events_Provider_Interface;
 use Rarst\Laps\Events\Hook_Events_Provider;
 use Rarst\Laps\Events\Http_Events_Provider;
+use Rarst\Laps\Events\Sql_Events_Provider;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 /**
@@ -37,6 +38,7 @@ class Laps extends Container {
 
 		$laps->register( new Hook_Events_Provider() );
 		$laps->register( new Http_Events_Provider() );
+		$laps->register( new Sql_Events_Provider() );
 
 		foreach ( $values as $key => $value ) {
 			$this->offsetSet( $key, $value );
@@ -73,10 +75,6 @@ class Laps extends Container {
 		add_action( 'pre_update_option_active_plugins', array( $this, 'pre_update_option_active_plugins' ) );
 		add_action( 'pre_update_site_option_active_sitewide_plugins', array( $this, 'pre_update_option_active_plugins' ) );
 		add_action( 'init', array( $this, 'init' ) );
-
-		if ( defined( 'SAVEQUERIES' ) && SAVEQUERIES ) {
-			add_filter( 'query', array( $this, 'query' ), 20 );
-		}
 	}
 
 	/**
@@ -99,26 +97,6 @@ class Laps extends Container {
 		}
 
 		return $plugins;
-	}
-
-	/**
-	 * Capture SQL queries start times
-	 *
-	 * @param string $query
-	 *
-	 * @return string
-	 */
-	public function query( $query ) {
-
-		global $wpdb;
-
-		if ( empty( $this->query_starts ) && ! empty( $wpdb->queries ) ) {
-			$this->query_starts[ count( $wpdb->queries ) ] = microtime( true ) * 1000;
-		} else {
-			$this->query_starts[] = microtime( true ) * 1000;
-		}
-
-		return $query;
 	}
 
 	public function init() {
@@ -151,7 +129,7 @@ class Laps extends Container {
 			return;
 		}
 
-		global $timestart, $wpdb;
+		global $timestart;
 
 		/** @var Stopwatch $stopwatch */
 		$stopwatch = $this['stopwatch'];
@@ -169,89 +147,48 @@ class Laps extends Container {
 			}
 		}
 
-		$events     = array_merge(...$events);
+		$events     = array_merge( ...$events );
 		$start      = $timestart * 1000;
 		$end        = microtime( true ) * 1000;
 		$total      = $end - $start;
-		$event_data = array();
-		$http_data  = array();
+		$event_data = [];
+		$http_data  = [];
+		$query_data = [];
 
 		foreach ( $events as $event ) {
 
-			$name     = $event['name'];
-			$offset   = round( ( $event['origin'] - $start ) / $total * 100, 2 );
-			$duration = $event['duration'];
-			$width    = round( $duration / $total * 100, 2 );
-			$category = $event['category'];
+			$event['offset']      = round( ( $event['origin'] - $start ) / $total * 100, 2 );
+			$event['width']       = round( $event['duration'] / $total * 100, 2 );
 
-			if ( 'http' === $category ) {
-				$http_data[] = compact( 'name', 'offset', 'duration', 'width', 'category' );
-				continue;
+			switch ($event['category']) {
+				case 'http':
+					$http_data[] = $event;
+					continue 2;
+
+				case 'query-read':
+				case 'query-write':
+					$query_data[] = $event;
+					continue 2;
 			}
 
-			$memory = $event['memory'];
-
-			$event_data[] = compact( 'name', 'offset', 'duration', 'width', 'category', 'memory' );
+			$event_data[] = $event;
 		}
 
-		$query_data     = array();
-		$last_query_end = 0;
-		$last_offset    = 0;
-		$last_duration  = 0;
-
-		if ( defined( 'SAVEQUERIES' ) && SAVEQUERIES ) {
-
-			foreach ( $wpdb->queries as $key => $query ) {
-				$query_start = isset( $this->query_starts[ $key ] ) ? $this->query_starts[ $key ] : $last_query_end;
-				list( $sql, $duration, $trace ) = $query;
-				$sql      = trim( $sql );
-				$category = 'query-read';
-
-				if ( 0 === stripos( $sql, 'INSERT' ) || 0 === stripos( $sql, 'UPDATE' ) ) {
-					$category = 'query-write';
-				}
-
-				$duration *= 1000;
-				$last_query_end = $query_start + $duration;
-				$offset         = round( ( $query_start - $start ) / $total * 100, 2 );
-
-				// if query is indistinguishably close to previous then stack it
-				if ( $offset === $last_offset ) {
-					$key = count( $query_data ) - 1;
-					$query_data[ $key ]['sql'] .= '<br />' . $sql;
-
-					$last_duration += $duration;
-					$width                       = round( $last_duration / $total * 100, 2 );
-					$query_data[ $key ]['width'] = $width;
-
-					continue;
-				}
-
-				$width         = round( $duration / $total * 100, 2 );
-				$last_offset   = $offset;
-				$last_duration = $duration;
-
-				$query_data[] = compact( 'sql', 'duration', 'offset', 'width', 'category' );
-			}
-		}
-
-		$html = $this['mustache']->render( 'laps', [
-			'events'      => $event_data,
-			'queries'     => $query_data,
-			'savequeries' => defined( 'SAVEQUERIES' ) && SAVEQUERIES,
-			'http'        => $http_data,
-			'savehttp'    => ! empty( $http_data ),
+		$timelines = array_filter( [
+			[ 'events' => $event_data ],
+			[ 'events' => $query_data ],
+			[ 'events' => $http_data ],
 		] );
 
-		$wp_admin_bar->add_node( array(
+		$wp_admin_bar->add_node( [
 			'id'    => 'laps',
 			'title' => sprintf( 'Lap: %ss', round( $total / 1000, 3 ) ),
-		) );
+		] );
 
-		$wp_admin_bar->add_node( array(
+		$wp_admin_bar->add_node( [
 			'id'     => 'laps_output',
 			'parent' => 'laps',
-			'meta'   => array( 'html' => $html ),
-		) );
+			'meta'   => [ 'html' => $this['mustache']->render( 'laps', [ 'timelines' => $timelines ] ) ],
+		] );
 	}
 }
