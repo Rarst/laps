@@ -63,8 +63,6 @@ class Laps extends Container {
 			return;
 		}
 
-		$this['stopwatch']->start( 'Plugins Load', 'plugin' );
-
 		foreach ( $this->providers as $provider ) {
 
 			if ( $provider instanceof Bootable_Provider_Interface ) {

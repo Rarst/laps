@@ -24,6 +24,8 @@ class Hook_Events_Provider implements ServiceProviderInterface, Bootable_Provide
 
 		$this->stopwatch = $laps['stopwatch'];
 
+		$this->stopwatch->start( 'Plugins Load', 'plugin' );
+
 		$events = new Core_Events();
 		$this->add_events( $events->get() );
 
