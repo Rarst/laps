@@ -7,6 +7,7 @@ use Pimple\ServiceProviderInterface;
 use Rarst\Laps\Events\Events_Provider_Interface;
 use Rarst\Laps\Events\Hook_Events_Provider;
 use Rarst\Laps\Events\Http_Events_Provider;
+use Rarst\Laps\Events\Recursive_Event_Iterator;
 use Rarst\Laps\Events\Sql_Events_Provider;
 use Symfony\Component\Stopwatch\Stopwatch;
 
@@ -143,35 +144,22 @@ class Laps extends Container {
 		$end        = microtime( true ) * 1000;
 		$total      = $end - $start;
 		$event_data = [];
-		$http_data  = [];
-		$query_data = [];
 
 		foreach ( $events as $event ) {
 
-			$event['offset']      = round( ( $event['origin'] - $start ) / $total * 100, 2 );
-			$event['width']       = round( $event['duration'] / $total * 100, 2 );
-
-			switch ($event['category']) {
-				case 'http':
-					$http_data[] = $event;
-					continue 2;
-
-				case 'query-read':
-				case 'query-write':
-					$query_data[] = $event;
-					continue 2;
-			}
-
-			$event_data[] = $event;
+			$event['offset'] = round( ( $event['origin'] - $start ) / $total * 100, 2 );
+			$event['width']  = round( $event['duration'] / $total * 100, 2 );
+			$event_data[]    = $event;
 		}
 
-		$timelines = array_filter( [
-			[ 'events' => $event_data ],
-			[ 'events' => $query_data ],
-			[ 'events' => $http_data ],
-		], function ( $data ) {
-			return ! empty( $data['events'] );
-		} );
+		$iterator  = new Recursive_Event_Iterator( $event_data );
+		$timelines = [ [ 'events' => $iterator ] ];
+
+		while ( $iterator->hasChildren() ) {
+			$children    = $iterator->getChildren();
+			$timelines[] = [ 'events' => $children ];
+			$iterator    = $children;
+		}
 
 		$wp_admin_bar->add_node( [
 			'id'    => 'laps',
