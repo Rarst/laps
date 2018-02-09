@@ -143,22 +143,10 @@ class Laps extends Container {
 		$start      = $timestart * 1000;
 		$end        = microtime( true ) * 1000;
 		$total      = $end - $start;
-		$event_data = [];
 
-		foreach ( $events as $event ) {
-
-			$event['offset'] = round( ( $event['origin'] - $start ) / $total * 100, 2 );
-			$event['width']  = round( $event['duration'] / $total * 100, 2 );
-			$event_data[]    = $event;
-		}
-
-		$iterator  = new Recursive_Event_Iterator( $event_data );
-		$timelines = [ [ 'events' => $iterator ] ];
-
-		while ( $iterator->hasChildren() ) {
-			$children    = $iterator->getChildren();
-			$timelines[] = [ 'events' => $children ];
-			$iterator    = $children;
+		foreach ( $events as $key => $event ) {
+			$events[ $key ]['offset'] = round( ( $event['origin'] - $start ) / $total * 100, 2 );
+			$events[ $key ]['width']  = round( $event['duration'] / $total * 100, 2 );
 		}
 
 		$wp_admin_bar->add_node( [
@@ -169,7 +157,11 @@ class Laps extends Container {
 		$wp_admin_bar->add_node( [
 			'id'     => 'laps_output',
 			'parent' => 'laps',
-			'meta'   => [ 'html' => $this['mustache']->render( 'laps', [ 'timelines' => $timelines ] ) ],
+			'meta'   => [
+				'html' => $this['mustache']->render( 'laps', [
+					'timelines' => new Timeline_Iterator( new Recursive_Event_Iterator( $events ) ),
+				] ),
+			],
 		] );
 	}
 }

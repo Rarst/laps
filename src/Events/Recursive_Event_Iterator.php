@@ -2,7 +2,7 @@
 
 namespace Rarst\Laps\Events;
 
-class Recursive_Event_Iterator extends \RecursiveArrayIterator {
+class Recursive_Event_Iterator extends \ArrayIterator implements \RecursiveIterator {
 
 	protected $children = [];
 
