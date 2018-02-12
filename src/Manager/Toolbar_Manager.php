@@ -5,7 +5,7 @@ namespace Rarst\Laps\Manager;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Rarst\Laps\Bootable_Provider_Interface;
-use Rarst\Laps\Events\Recursive_Event_Iterator;
+use Rarst\Laps\Record\Recursive_Record_Iterator;
 use Rarst\Laps\Laps;
 use Rarst\Laps\Timeline_Iterator;
 
@@ -58,7 +58,7 @@ class Toolbar_Manager implements ServiceProviderInterface, Bootable_Provider_Int
 			'parent' => 'laps',
 			'meta'   => [
 				'html' => $this->laps['mustache']->render( 'laps', [
-					'timelines' => new Timeline_Iterator( new Recursive_Event_Iterator( $records ) ),
+					'timelines' => new Timeline_Iterator( new Recursive_Record_Iterator( $records ) ),
 				] ),
 			],
 		] );

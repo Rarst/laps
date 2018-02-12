@@ -2,17 +2,17 @@
 
 namespace Rarst\Laps;
 
-use Rarst\Laps\Events\Recursive_Event_Iterator;
+use Rarst\Laps\Record\Recursive_Record_Iterator;
 
 class Timeline_Iterator implements \Iterator {
 
-	/** @var Recursive_Event_Iterator */
+	/** @var Recursive_Record_Iterator */
 	protected $iterator;
 
-	/** @var Recursive_Event_Iterator */
+	/** @var Recursive_Record_Iterator */
 	protected $current;
 
-	public function __construct( Recursive_Event_Iterator $iterator ) {
+	public function __construct( Recursive_Record_Iterator $iterator ) {
 		$this->iterator = $iterator;
 	}
 

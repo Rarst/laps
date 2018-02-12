@@ -4,10 +4,10 @@ namespace Rarst\Laps;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Rarst\Laps\Events\Events_Provider_Interface;
-use Rarst\Laps\Events\Hook_Events_Provider;
-use Rarst\Laps\Events\Http_Events_Provider;
-use Rarst\Laps\Events\Sql_Events_Provider;
+use Rarst\Laps\Record\Record_Collector_Interface;
+use Rarst\Laps\Record\Hook_Record_Collector;
+use Rarst\Laps\Record\Http_Record_Collector;
+use Rarst\Laps\Record\Sql_Record_Collector;
 use Rarst\Laps\Manager\Asset_Manager;
 use Rarst\Laps\Manager\Load_Order_Manager;
 use Rarst\Laps\Manager\Toolbar_Manager;
@@ -42,8 +42,8 @@ class Laps extends Container {
 			$records = [];
 
 			foreach ( $this->providers as $provider ) {
-				if ( $provider instanceof Events_Provider_Interface ) {
-					$records[] = $provider->get_events();
+				if ( $provider instanceof Record_Collector_Interface ) {
+					$records[] = $provider->get_records();
 				}
 			}
 
@@ -54,9 +54,9 @@ class Laps extends Container {
 		$laps->register( new Asset_Manager() );
 		$laps->register( new Toolbar_Manager() );
 
-		$laps->register( new Hook_Events_Provider() );
-		$laps->register( new Http_Events_Provider() );
-		$laps->register( new Sql_Events_Provider() );
+		$laps->register( new Hook_Record_Collector() );
+		$laps->register( new Http_Record_Collector() );
+		$laps->register( new Sql_Record_Collector() );
 
 		foreach ( $values as $key => $value ) {
 			$this->offsetSet( $key, $value );

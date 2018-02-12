@@ -1,15 +1,17 @@
 <?php
 
-namespace Rarst\Laps\Events;
+namespace Rarst\Laps\Record;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Rarst\Laps\Bootable_Provider_Interface;
+use Rarst\Laps\Events\Core_Events;
+use Rarst\Laps\Events\Laps_Events;
 use Rarst\Laps\Laps;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Stopwatch\StopwatchEvent;
 
-class Hook_Events_Provider implements ServiceProviderInterface, Bootable_Provider_Interface, Events_Provider_Interface {
+class Hook_Record_Collector implements ServiceProviderInterface, Bootable_Provider_Interface, Record_Collector_Interface {
 
 	/** @var Stopwatch $stopwatch */
 	protected $stopwatch;
@@ -101,7 +103,7 @@ class Hook_Events_Provider implements ServiceProviderInterface, Bootable_Provide
 		return $input;
 	}
 
-	public function get_events() {
+	public function get_records() {
 
 		if ( $this->stopwatch->isStarted( 'Toolbar' ) ) {
 			$this->stopwatch->stop( 'Toolbar' );

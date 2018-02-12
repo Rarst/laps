@@ -1,6 +1,6 @@
 <?php
 
-namespace Rarst\Laps\Events;
+namespace Rarst\Laps\Record;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
@@ -9,7 +9,7 @@ use Rarst\Laps\Laps;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Stopwatch\StopwatchEvent;
 
-class Http_Events_Provider implements ServiceProviderInterface, Bootable_Provider_Interface, Events_Provider_Interface {
+class Http_Record_Collector implements ServiceProviderInterface, Bootable_Provider_Interface, Record_Collector_Interface {
 
 	/** @var Stopwatch $stopwatch */
 	protected $stopwatch;
@@ -60,7 +60,7 @@ class Http_Events_Provider implements ServiceProviderInterface, Bootable_Provide
 		return $response;
 	}
 
-	public function get_events() {
+	public function get_records() {
 
 		$events = $this->stopwatch->getSectionEvents( '__root__' );
 
