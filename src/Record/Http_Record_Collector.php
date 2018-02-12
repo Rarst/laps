@@ -69,16 +69,6 @@ class Http_Record_Collector implements ServiceProviderInterface, Bootable_Provid
 
 	protected function transform( $name, StopwatchEvent $event ) {
 
-		$duration = $event->getDuration();
-		$memory   = $event->getMemory() / 1024 / 1024;
-
-		return [
-			'name'        => $name,
-			'description' => $name,
-			'origin'      => $event->getOrigin(),
-			'duration'    => $duration,
-			'memory'      => $memory,
-			'category'    => $event->getCategory(),
-		];
+		return new Stopwatch_Record( $name, $event );
 	}
 }

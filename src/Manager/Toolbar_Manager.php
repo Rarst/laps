@@ -38,15 +38,9 @@ class Toolbar_Manager implements ServiceProviderInterface, Bootable_Provider_Int
 
 		global $timestart;
 
-		$records = $this->laps['records'];
-		$start   = $timestart * 1000;
-		$end     = microtime( true ) * 1000;
-		$total   = $end - $start;
-
-		foreach ( $records as $key => $event ) {
-			$records[ $key ]['offset'] = round( ( $event['origin'] - $start ) / $total * 100, 2 );
-			$records[ $key ]['width']  = round( $event['duration'] / $total * 100, 2 );
-		}
+		$start = $timestart * 1000;
+		$end   = microtime( true ) * 1000;
+		$total = $end - $start;
 
 		$wp_admin_bar->add_node( [
 			'id'    => 'laps',
@@ -58,7 +52,7 @@ class Toolbar_Manager implements ServiceProviderInterface, Bootable_Provider_Int
 			'parent' => 'laps',
 			'meta'   => [
 				'html' => $this->laps['mustache']->render( 'laps', [
-					'timelines' => new Timeline_Iterator( new Recursive_Record_Iterator( $records ) ),
+					'timelines' => new Timeline_Iterator( new Recursive_Record_Iterator( $this->laps['records'] ) ),
 				] ),
 			],
 		] );

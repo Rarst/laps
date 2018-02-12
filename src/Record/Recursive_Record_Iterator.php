@@ -6,32 +6,39 @@ class Recursive_Record_Iterator extends \ArrayIterator implements \RecursiveIter
 
 	protected $children = [];
 
+	/**
+	 * @param Record_Interface[] $records
+	 * @param int                $flags
+	 */
 	public function __construct( array $records, $flags = 0 ) {
 
 		usort( $records, [ $this, 'sort_origin' ] );
 		$end = 0;
 
-		foreach ( $records as $key => $event ) {
+		foreach ( $records as $key => $record ) {
 
-			if ( $event['origin'] < $end ) {
+			if ( $record->get_origin() < $end ) {
 				unset( $records[ $key ] );
-				$this->children[] = $event;
+				$this->children[] = $record;
 				continue;
 			}
 
-			$end = $event['origin'] + $event['duration'];
+			$end = $record->get_origin() + $record->get_duration();
 		}
 
 		parent::__construct( $records, $flags );
 	}
 
-	protected function sort_origin( $record_a, $record_b ) {
+	protected function sort_origin( Record_Interface $record_a, Record_Interface $record_b ) {
 
-		if ( $record_a['origin'] === $record_b['origin'] ) {
+		$origin_a = $record_a->get_origin();
+		$origin_b = $record_b->get_origin();
+
+		if ( $origin_a === $origin_b ) {
 			return 0;
 		}
 
-		return ( $record_a['origin'] < $record_b['origin'] ) ? - 1 : 1;
+		return ( $origin_a < $origin_b ) ? - 1 : 1;
 	}
 
 	public function hasChildren() {

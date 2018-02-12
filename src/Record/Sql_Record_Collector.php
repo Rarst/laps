@@ -62,14 +62,10 @@ class Sql_Record_Collector implements ServiceProviderInterface, Bootable_Provide
 				$category = 'query-write';
 			}
 
-			$duration       *= 1000;
+			$duration      *= 1000;
 			$last_query_end = $query_start + $duration;
 
-			$name        = $sql;
-			$description = $name;
-			$origin      = $query_start;
-
-			$query_data[] = compact( 'name', 'description', 'origin', 'duration', 'category' );
+			$query_data[] = new Sql_Record( $sql, $query_start, $duration, $category );
 		}
 
 		return $query_data;
