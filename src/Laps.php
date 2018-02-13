@@ -5,6 +5,7 @@ namespace Rarst\Laps;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Rarst\Laps\Provider\Bootable_Provider_Interface;
+use Rarst\Laps\Provider\Hook_Event_Provider;
 use Rarst\Laps\Provider\Manager_Provider;
 use Rarst\Laps\Provider\Record_Provider;
 
@@ -29,6 +30,7 @@ class Laps extends Container {
 		};
 
 		$laps->register( new Manager_Provider() );
+		$laps->register( new Hook_Event_Provider() );
 		$laps->register( new Record_Provider() );
 
 		foreach ( $values as $key => $value ) {

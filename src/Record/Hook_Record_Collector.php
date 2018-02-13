@@ -2,26 +2,31 @@
 
 namespace Rarst\Laps\Record;
 
-use Rarst\Laps\Events\Core_Events;
+use Rarst\Laps\Event\Hook_Event_Config_Interface;
 use Rarst\Laps\Events\Laps_Events;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Stopwatch\StopwatchEvent;
 
 class Hook_Record_Collector implements Record_Collector_Interface {
 
+	/** @var Hook_Event_Config_Interface[] $event_configs  */
+	protected $event_configs = [];
+
 	/** @var Stopwatch $stopwatch */
 	protected $stopwatch;
 
 	protected $events = [];
 
-	public function __construct( Stopwatch $stopwatch ) {
+	public function __construct( array $event_configs, Stopwatch $stopwatch ) {
 
 		$this->stopwatch = $stopwatch;
 
 		$this->stopwatch->start( 'Plugins Load', 'plugin' );
 
-		$events = new Core_Events();
-		$this->add_events( $events->get() );
+		$this->add_events( $event_configs['core']->get_events() );
+
+		unset( $event_configs['core'] );
+		$this->event_configs = $event_configs;
 
 		add_action( 'after_setup_theme', [ $this, 'after_setup_theme' ], 15 );
 	}
@@ -49,12 +54,8 @@ class Hook_Record_Collector implements Record_Collector_Interface {
 	 */
 	public function after_setup_theme() {
 
-		foreach ( [ 'THA', 'Hybrid', 'Genesis', 'Yoast' ] as $vendor ) {
-
-			$class = "Rarst\\Laps\\Events\\{$vendor}_Events";
-			/** @var Laps_Events $events */
-			$events = new $class;
-			$this->add_events( $events->get() );
+		foreach ( $this->event_configs as $config ) {
+			$this->add_events( $config->get_events() );
 		}
 	}
 
