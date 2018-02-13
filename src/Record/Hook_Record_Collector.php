@@ -2,29 +2,21 @@
 
 namespace Rarst\Laps\Record;
 
-use Pimple\Container;
-use Pimple\ServiceProviderInterface;
-use Rarst\Laps\Bootable_Provider_Interface;
 use Rarst\Laps\Events\Core_Events;
 use Rarst\Laps\Events\Laps_Events;
-use Rarst\Laps\Laps;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Stopwatch\StopwatchEvent;
 
-class Hook_Record_Collector implements ServiceProviderInterface, Bootable_Provider_Interface, Record_Collector_Interface {
+class Hook_Record_Collector implements Record_Collector_Interface {
 
 	/** @var Stopwatch $stopwatch */
 	protected $stopwatch;
 
 	protected $events = [];
 
-	public function register( Container $pimple ) {
+	public function __construct( Stopwatch $stopwatch ) {
 
-	}
-
-	public function boot( Laps $laps ) {
-
-		$this->stopwatch = $laps['stopwatch'];
+		$this->stopwatch = $stopwatch;
 
 		$this->stopwatch->start( 'Plugins Load', 'plugin' );
 

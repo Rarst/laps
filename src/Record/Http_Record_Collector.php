@@ -2,25 +2,17 @@
 
 namespace Rarst\Laps\Record;
 
-use Pimple\Container;
-use Pimple\ServiceProviderInterface;
-use Rarst\Laps\Bootable_Provider_Interface;
-use Rarst\Laps\Laps;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Stopwatch\StopwatchEvent;
 
-class Http_Record_Collector implements ServiceProviderInterface, Bootable_Provider_Interface, Record_Collector_Interface {
+class Http_Record_Collector implements Record_Collector_Interface {
 
 	/** @var Stopwatch $stopwatch */
 	protected $stopwatch;
 
-	public function register( Container $pimple ) {
+	public function __construct( Stopwatch $stopwatch ) {
 
-	}
-
-	public function boot( Laps $laps ) {
-
-		$this->stopwatch = $laps['stopwatch'];
+		$this->stopwatch = $stopwatch;
 
 		add_action( 'pre_http_request', [ $this, 'pre_http_request' ], 10, 3 );
 		add_action( 'http_api_debug', [ $this, 'http_api_debug' ], 10, 5 );

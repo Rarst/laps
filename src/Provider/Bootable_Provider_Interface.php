@@ -1,6 +1,6 @@
 <?php
 
-namespace Rarst\Laps;
+namespace Rarst\Laps\Provider;
 
 use Rarst\Laps\Laps;
 

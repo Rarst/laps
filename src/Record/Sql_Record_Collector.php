@@ -2,20 +2,11 @@
 
 namespace Rarst\Laps\Record;
 
-use Pimple\Container;
-use Pimple\ServiceProviderInterface;
-use Rarst\Laps\Bootable_Provider_Interface;
-use Rarst\Laps\Laps;
-
-class Sql_Record_Collector implements ServiceProviderInterface, Bootable_Provider_Interface, Record_Collector_Interface {
+class Sql_Record_Collector implements Record_Collector_Interface {
 
 	protected $query_starts = [];
 
-	public function register( Container $pimple ) {
-
-	}
-
-	public function boot( Laps $laps ) {
+	public function __construct() {
 
 		if ( $this->is_savequeries() ) {
 			add_filter( 'query', [ $this, 'query' ], 20 );

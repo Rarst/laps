@@ -2,21 +2,12 @@
 
 namespace Rarst\Laps\Manager;
 
-use Pimple\Container;
-use Pimple\ServiceProviderInterface;
-use Rarst\Laps\Bootable_Provider_Interface;
-use Rarst\Laps\Laps;
-
 /**
- * Reorders
+ * Reorders plugin load to put Laps first and time this core boot stage.
  */
-class Load_Order_Manager implements ServiceProviderInterface, Bootable_Provider_Interface {
+class Load_Order_Manager {
 
-	public function register( Container $pimple ) {
-
-	}
-
-	public function boot( Laps $laps ) {
+	public function __construct() {
 
 		add_action( 'pre_update_option_active_plugins', [ $this, 'pre_update_option_active_plugins' ] );
 		add_action( 'pre_update_site_option_active_sitewide_plugins', [ $this, 'pre_update_option_active_plugins' ] );

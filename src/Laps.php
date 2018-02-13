@@ -4,14 +4,9 @@ namespace Rarst\Laps;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Rarst\Laps\Record\Record_Collector_Interface;
-use Rarst\Laps\Record\Hook_Record_Collector;
-use Rarst\Laps\Record\Http_Record_Collector;
-use Rarst\Laps\Record\Sql_Record_Collector;
-use Rarst\Laps\Manager\Asset_Manager;
-use Rarst\Laps\Manager\Load_Order_Manager;
-use Rarst\Laps\Manager\Toolbar_Manager;
-use Symfony\Component\Stopwatch\Stopwatch;
+use Rarst\Laps\Provider\Bootable_Provider_Interface;
+use Rarst\Laps\Provider\Manager_Provider;
+use Rarst\Laps\Provider\Record_Provider;
 
 /**
  * Main plugin's class.
@@ -33,30 +28,8 @@ class Laps extends Container {
 			] );
 		};
 
-		$laps['stopwatch'] = $laps->factory( function () {
-			return new Stopwatch();
-		} );
-
-		$laps['records'] = function() {
-
-			$records = [];
-
-			foreach ( $this->providers as $provider ) {
-				if ( $provider instanceof Record_Collector_Interface ) {
-					$records[] = $provider->get_records();
-				}
-			}
-
-			return array_merge( ...$records );
-		};
-
-		$laps->register( new Load_Order_Manager() );
-		$laps->register( new Asset_Manager() );
-		$laps->register( new Toolbar_Manager() );
-
-		$laps->register( new Hook_Record_Collector() );
-		$laps->register( new Http_Record_Collector() );
-		$laps->register( new Sql_Record_Collector() );
+		$laps->register( new Manager_Provider() );
+		$laps->register( new Record_Provider() );
 
 		foreach ( $values as $key => $value ) {
 			$this->offsetSet( $key, $value );

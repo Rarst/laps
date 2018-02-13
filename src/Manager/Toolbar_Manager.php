@@ -2,23 +2,16 @@
 
 namespace Rarst\Laps\Manager;
 
-use Pimple\Container;
-use Pimple\ServiceProviderInterface;
-use Rarst\Laps\Bootable_Provider_Interface;
 use Rarst\Laps\Record\Recursive_Record_Iterator;
 use Rarst\Laps\Laps;
 use Rarst\Laps\Timeline_Iterator;
 
-class Toolbar_Manager implements ServiceProviderInterface, Bootable_Provider_Interface {
+class Toolbar_Manager {
 
 	/** @var Laps $laps */
 	protected $laps;
 
-	public function register( Container $pimple ) {
-
-	}
-
-	public function boot( Laps $laps ) {
+	public function __construct( Laps $laps ) {
 
 		$this->laps = $laps;
 

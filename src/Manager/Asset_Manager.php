@@ -2,18 +2,10 @@
 
 namespace Rarst\Laps\Manager;
 
-use Pimple\Container;
-use Pimple\ServiceProviderInterface;
-use Rarst\Laps\Bootable_Provider_Interface;
-use Rarst\Laps\Laps;
+class Asset_Manager {
 
-class Asset_Manager implements ServiceProviderInterface, Bootable_Provider_Interface {
+	public function __construct() {
 
-	public function register( Container $pimple ) {
-
-	}
-
-	public function boot( Laps $laps ) {
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 	}
