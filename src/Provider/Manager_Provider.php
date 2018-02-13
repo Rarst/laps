@@ -4,7 +4,7 @@ namespace Rarst\Laps\Provider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Rarst\Laps\Laps;
+use Rarst\Laps\Plugin;
 use Rarst\Laps\Manager\Asset_Manager;
 use Rarst\Laps\Manager\Load_Order_Manager;
 use Rarst\Laps\Manager\Toolbar_Manager;
@@ -13,7 +13,7 @@ class Manager_Provider implements ServiceProviderInterface, Bootable_Provider_In
 
 	public function register( Container $pimple ) {
 
-		$pimple['managers'] = function ( Laps $laps ) {
+		$pimple['managers'] = function ( Plugin $laps ) {
 			return [
 				new Load_Order_Manager(),
 				new Asset_Manager(),
@@ -22,7 +22,7 @@ class Manager_Provider implements ServiceProviderInterface, Bootable_Provider_In
 		};
 	}
 
-	public function boot( Laps $laps ) {
+	public function boot( Plugin $laps ) {
 		$laps['managers'];
 	}
 }

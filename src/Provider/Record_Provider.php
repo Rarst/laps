@@ -4,7 +4,7 @@ namespace Rarst\Laps\Provider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Rarst\Laps\Laps;
+use Rarst\Laps\Plugin;
 use Rarst\Laps\Record\Hook_Record_Collector;
 use Rarst\Laps\Record\Http_Record_Collector;
 use Rarst\Laps\Record\Record_Collector_Interface;
@@ -19,7 +19,7 @@ class Record_Provider implements ServiceProviderInterface, Bootable_Provider_Int
 			return new Stopwatch();
 		} );
 
-		$pimple['collectors'] = function ( Laps $laps ) {
+		$pimple['collectors'] = function ( Plugin $laps ) {
 			return [
 				'hook' => new Hook_Record_Collector( $laps['hook.events'], $laps['stopwatch'] ),
 				'http' => new Http_Record_Collector( $laps['stopwatch'] ),
@@ -27,7 +27,7 @@ class Record_Provider implements ServiceProviderInterface, Bootable_Provider_Int
 			];
 		};
 
-		$pimple['records'] = function ( Laps $laps ) {
+		$pimple['records'] = function ( Plugin $laps ) {
 
 			$records = [];
 
@@ -40,7 +40,7 @@ class Record_Provider implements ServiceProviderInterface, Bootable_Provider_Int
 		};
 	}
 
-	public function boot( Laps $laps ) {
+	public function boot( Plugin $laps ) {
 		$laps['collectors'];
 	}
 }

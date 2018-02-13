@@ -3,15 +3,15 @@
 namespace Rarst\Laps\Manager;
 
 use Rarst\Laps\Record\Recursive_Record_Iterator;
-use Rarst\Laps\Laps;
+use Rarst\Laps\Plugin;
 use Rarst\Laps\Record\Timeline_Iterator;
 
 class Toolbar_Manager {
 
-	/** @var Laps $laps */
+	/** @var Plugin $laps */
 	protected $laps;
 
-	public function __construct( Laps $laps ) {
+	public function __construct( Plugin $laps ) {
 
 		$this->laps = $laps;
 

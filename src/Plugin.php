@@ -12,7 +12,7 @@ use Rarst\Laps\Provider\Record_Provider;
 /**
  * Main plugin's class.
  */
-class Laps extends Container {
+class Plugin extends Container {
 
 	protected $providers = [];
 
@@ -50,7 +50,7 @@ class Laps extends Container {
 	/**
 	 * Start Stopwatch and timing plugin load immediately, then set up core events and needed hooks.
 	 */
-	public function on_load() {
+	public function run() {
 
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			return;

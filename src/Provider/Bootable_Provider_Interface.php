@@ -2,9 +2,9 @@
 
 namespace Rarst\Laps\Provider;
 
-use Rarst\Laps\Laps;
+use Rarst\Laps\Plugin;
 
 interface Bootable_Provider_Interface {
 
-	public function boot( Laps $laps );
+	public function boot( Plugin $laps );
 }
