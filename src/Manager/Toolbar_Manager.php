@@ -4,7 +4,7 @@ namespace Rarst\Laps\Manager;
 
 use Rarst\Laps\Record\Recursive_Record_Iterator;
 use Rarst\Laps\Laps;
-use Rarst\Laps\Timeline_Iterator;
+use Rarst\Laps\Record\Timeline_Iterator;
 
 class Toolbar_Manager {
 

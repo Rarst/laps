@@ -1,9 +1,6 @@
 <?php
 
-namespace Rarst\Laps;
-
-use Rarst\Laps\Record\Record_Interface;
-use Rarst\Laps\Record\Recursive_Record_Iterator;
+namespace Rarst\Laps\Record;
 
 class Timeline_Iterator implements \Iterator {
 
