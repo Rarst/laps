@@ -3,7 +3,6 @@
 namespace Rarst\Laps\Record;
 
 use Rarst\Laps\Event\Hook_Event_Config_Interface;
-use Rarst\Laps\Events\Laps_Events;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Stopwatch\StopwatchEvent;
 
@@ -79,13 +78,10 @@ class Hook_Record_Collector implements Record_Collector_Interface {
 			return $input;
 		}
 
-		$event = wp_parse_args(
-			$this->events[ $filter_name ][ $priority ],
-			[
-				'action'   => 'start',
-				'category' => null,
-			]
-		);
+		$event = wp_parse_args( $this->events[ $filter_name ][ $priority ], [
+			'action'   => 'start',
+			'category' => null,
+		] );
 
 		if ( 'stop' === $event['action'] && ! $this->stopwatch->isStarted( $event['event'] ) ) {
 			return $input;
