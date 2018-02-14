@@ -20,7 +20,6 @@ class Hybrid_Events implements Hook_Event_Config_Interface {
 			return $events;
 		}
 
-
 		$prefix = hybrid_get_prefix();
 
 		$events["{$prefix}_before_header"][10] = [

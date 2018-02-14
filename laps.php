@@ -1,4 +1,5 @@
 <?php
+
 /*
 Plugin Name: Laps
 Plugin URI: https://github.com/Rarst/laps

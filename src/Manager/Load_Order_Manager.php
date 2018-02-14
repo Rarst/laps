@@ -7,6 +7,9 @@ namespace Rarst\Laps\Manager;
  */
 class Load_Order_Manager {
 
+	/**
+	 * Sets up the hooks.
+	 */
 	public function __construct() {
 
 		add_action( 'pre_update_option_active_plugins', [ $this, 'pre_update_option_active_plugins' ] );
@@ -16,7 +19,7 @@ class Load_Order_Manager {
 	/**
 	 * Reorder active plugins so Laps is first and starts timing load early.
 	 *
-	 * @param array $plugins
+	 * @param array $plugins Filtered array of active plugins’ basenames.
 	 *
 	 * @return array
 	 */

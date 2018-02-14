@@ -9,8 +9,8 @@ class Mustache_Cache_FrozenCache extends \Mustache_Cache_FilesystemCache {
 	/**
 	 * Cache and load a compiled Mustache_Template class.
 	 *
-	 * @param string $key
-	 * @param string $value
+	 * @param string $key   Key.
+	 * @param string $value Value.
 	 *
 	 * @return void
 	 */

@@ -14,8 +14,12 @@ use Rarst\Laps\Provider\Record_Provider;
  */
 class Plugin extends Container {
 
+	/** @var array $providers */
 	protected $providers = [];
 
+	/**
+	 * @param array $values Configuration values to apply.
+	 */
 	public function __construct( array $values = [] ) {
 
 		parent::__construct();
@@ -38,6 +42,12 @@ class Plugin extends Container {
 		}
 	}
 
+	/**
+	 * @param ServiceProviderInterface $provider Provider.
+	 * @param array                    $values   Optional configuration.
+	 *
+	 * @return $this|static
+	 */
 	public function register( ServiceProviderInterface $provider, array $values = [] ) {
 
 		$this->providers[] = $provider;

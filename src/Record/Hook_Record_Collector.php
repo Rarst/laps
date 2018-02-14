@@ -6,6 +6,9 @@ use Rarst\Laps\Event\Hook_Event_Config_Interface;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Stopwatch\StopwatchEvent;
 
+/**
+ * Processes events based on hooked starts and stops.
+ */
 class Hook_Record_Collector implements Record_Collector_Interface {
 
 	/** @var Hook_Event_Config_Interface[] $event_configs  */
@@ -14,8 +17,13 @@ class Hook_Record_Collector implements Record_Collector_Interface {
 	/** @var Stopwatch $stopwatch */
 	protected $stopwatch;
 
+	/** @var array $events */
 	protected $events = [];
 
+	/**
+	 * @param array     $event_configs Starts and stops configuration.
+	 * @param Stopwatch $stopwatch     Stopwatch instance.
+	 */
 	public function __construct( array $event_configs, Stopwatch $stopwatch ) {
 
 		$this->stopwatch = $stopwatch;
@@ -33,7 +41,7 @@ class Hook_Record_Collector implements Record_Collector_Interface {
 	/**
 	 * Hook events by name and priority from array.
 	 *
-	 * @param array $stops
+	 * @param array $stops Starts and stops to hook.
 	 */
 	public function add_events( $stops ) {
 
@@ -61,7 +69,7 @@ class Hook_Record_Collector implements Record_Collector_Interface {
 	/**
 	 * Mark action for the event on Stopwatch.
 	 *
-	 * @param mixed $input pass through if added to filter
+	 * @param mixed $input Pass through if added to filter.
 	 *
 	 * @return mixed
 	 */
@@ -92,6 +100,9 @@ class Hook_Record_Collector implements Record_Collector_Interface {
 		return $input;
 	}
 
+	/**
+	 * @return Stopwatch_Record[]
+	 */
 	public function get_records() {
 
 		if ( $this->stopwatch->isStarted( 'Toolbar' ) ) {
@@ -109,8 +120,14 @@ class Hook_Record_Collector implements Record_Collector_Interface {
 		return array_map( [ $this, 'transform' ], array_keys( $events ), $events );
 	}
 
+	/**
+	 * @param string         $name  Event name.
+	 * @param StopwatchEvent $event Stopwatch event instance.
+	 *
+	 * @return Stopwatch_Record
+	 */
 	protected function transform( $name, StopwatchEvent $event ) {
 
-		return new Stopwatch_Record($name, $event );
+		return new Stopwatch_Record( $name, $event );
 	}
 }

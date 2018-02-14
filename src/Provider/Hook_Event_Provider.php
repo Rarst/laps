@@ -10,8 +10,14 @@ use Rarst\Laps\Event\Hybrid_Events;
 use Rarst\Laps\Event\THA_Events;
 use Rarst\Laps\Event\Yoast_Events;
 
+/**
+ * Registers hook event configuration for bundled vendor events.
+ */
 class Hook_Event_Provider implements ServiceProviderInterface {
 
+	/**
+	 * @param Container $pimple Container instance.
+	 */
 	public function register( Container $pimple ) {
 
 		$pimple['hook.events'] = function () {

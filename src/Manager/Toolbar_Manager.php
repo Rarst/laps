@@ -6,11 +6,17 @@ use Rarst\Laps\Record\Recursive_Record_Iterator;
 use Rarst\Laps\Plugin;
 use Rarst\Laps\Record\Timeline_Iterator;
 
+/**
+ * Implements toolbar menu and visualization.
+ */
 class Toolbar_Manager {
 
 	/** @var Plugin $laps */
 	protected $laps;
 
+	/**
+	 * @param Plugin $laps Container instance.
+	 */
 	public function __construct( Plugin $laps ) {
 
 		$this->laps = $laps;
@@ -21,7 +27,7 @@ class Toolbar_Manager {
 	/**
 	 * Render interface and add to the toolbar.
 	 *
-	 * @param \WP_Admin_Bar $wp_admin_bar
+	 * @param \WP_Admin_Bar $wp_admin_bar WordPress core toolbar object.
 	 */
 	public function admin_bar_menu( $wp_admin_bar ) {
 

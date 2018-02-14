@@ -20,7 +20,6 @@ class Genesis_Events implements Hook_Event_Config_Interface {
 			return $events;
 		}
 
-
 		$events['genesis_before_header'][10] = [
 			'event'    => 'Header',
 			'category' => 'theme',

@@ -67,7 +67,6 @@ class RoboFile extends \Robo\Tasks {
 	public function makeMustache() {
 		$dir = __DIR__ . '/views/cache';
 		$this->_cleanDir( $dir );
-
 		$mustache = new \Mustache_Engine(
 			array(
 				'loader' => new \Mustache_Loader_FilesystemLoader( __DIR__ . '/views' ),

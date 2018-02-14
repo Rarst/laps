@@ -2,6 +2,9 @@
 
 namespace Rarst\Laps\Record;
 
+/**
+ * SQL record of a query event.
+ */
 class Sql_Record implements Record_Interface {
 
 	/** @var string $sql */
@@ -17,10 +20,10 @@ class Sql_Record implements Record_Interface {
 	protected $category;
 
 	/**
-	 * @param string $sql
-	 * @param float  $origin
-	 * @param int    $duration
-	 * @param string $category
+	 * @param string $sql      SQL query.
+	 * @param float  $origin   Start time.
+	 * @param int    $duration Query duration.
+	 * @param string $category Query type.
 	 */
 	public function __construct( $sql, $origin, $duration, $category = 'query-read' ) {
 		$this->sql      = $sql;

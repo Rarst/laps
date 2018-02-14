@@ -2,10 +2,17 @@
 
 namespace Rarst\Laps\Record;
 
+/**
+ * Processes SQL events from data logged by wpdb.
+ */
 class Sql_Record_Collector implements Record_Collector_Interface {
 
+	/** @var array $query_starts Log of query start times. */
 	protected $query_starts = [];
 
+	/**
+	 * Sets up the query start time log.
+	 */
 	public function __construct() {
 
 		if ( $this->is_savequeries() ) {
@@ -16,7 +23,7 @@ class Sql_Record_Collector implements Record_Collector_Interface {
 	/**
 	 * Capture SQL queries start times
 	 *
-	 * @param string $query
+	 * @param string $query SQL query.
 	 *
 	 * @return string
 	 */
@@ -33,6 +40,9 @@ class Sql_Record_Collector implements Record_Collector_Interface {
 		return $query;
 	}
 
+	/**
+	 * @return Sql_Record[]
+	 */
 	public function get_records() {
 
 		if ( ! $this->is_savequeries() ) {
@@ -62,6 +72,9 @@ class Sql_Record_Collector implements Record_Collector_Interface {
 		return $query_data;
 	}
 
+	/**
+	 * @return bool
+	 */
 	protected function is_savequeries() {
 
 		return defined( 'SAVEQUERIES' ) && SAVEQUERIES;

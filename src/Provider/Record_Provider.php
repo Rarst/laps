@@ -11,8 +11,14 @@ use Rarst\Laps\Record\Record_Collector_Interface;
 use Rarst\Laps\Record\Sql_Record_Collector;
 use Symfony\Component\Stopwatch\Stopwatch;
 
+/**
+ * Registers record collectors (responsible to gather and compile event data) and their dependencies.
+ */
 class Record_Provider implements ServiceProviderInterface, Bootable_Provider_Interface {
 
+	/**
+	 * @param Container $pimple Container instance.
+	 */
 	public function register( Container $pimple ) {
 
 		$pimple['stopwatch'] = $pimple->factory( function () {
@@ -40,6 +46,9 @@ class Record_Provider implements ServiceProviderInterface, Bootable_Provider_Int
 		};
 	}
 
+	/**
+	 * @param Plugin $laps Container instance.
+	 */
 	public function boot( Plugin $laps ) {
 		$laps['collectors'];
 	}

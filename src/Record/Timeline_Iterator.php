@@ -2,6 +2,9 @@
 
 namespace Rarst\Laps\Record;
 
+/**
+ * Processes records into sets for display by template.
+ */
 class Timeline_Iterator implements \Iterator {
 
 	/** @var float $origin Start point for the timeline. */
@@ -16,6 +19,9 @@ class Timeline_Iterator implements \Iterator {
 	/** @var Recursive_Record_Iterator */
 	protected $current;
 
+	/**
+	 * @param Recursive_Record_Iterator $iterator Record iterator.
+	 */
 	public function __construct( Recursive_Record_Iterator $iterator ) {
 
 		global $timestart;
@@ -38,23 +44,40 @@ class Timeline_Iterator implements \Iterator {
 		return $data;
 	}
 
+	/**
+	 * Sets current context to the next set of nested records.
+	 */
 	public function next() {
 		$this->current = $this->current->getChildren();
 	}
 
+	/**
+	 * @return void
+	 */
 	public function key() {
 
 	}
 
+	/**
+	 * @return bool If current set contains records.
+	 */
 	public function valid() {
 		return (bool) count( $this->current );
 	}
 
+	/**
+	 * Rewind to a topmost record set.
+	 */
 	public function rewind() {
 		$this->total   = microtime( true ) * 1000 - $this->origin;
 		$this->current = $this->iterator;
 	}
 
+	/**
+	 * @param Record_Interface $record Record instance.
+	 *
+	 * @return array Record data for display by the template.
+	 */
 	protected function prepare( Record_Interface $record ) {
 
 		$data = [

@@ -4,6 +4,9 @@ namespace Rarst\Laps\Record;
 
 use Symfony\Component\Stopwatch\StopwatchEvent;
 
+/**
+ * Record wrapper for an event recorded with Stopwatch.
+ */
 class Stopwatch_Record implements Record_Interface {
 
 	/** @var string $name */
