@@ -19,6 +19,11 @@
 			"Rarst\\Laps\\" : "src/"
 		}
 	},
+	"autoload-dev": {
+		"psr-4": {
+			"Rarst\\Laps\\Tests\\": "tests/"
+		}
+	},
 	"require"    : {
 		"composer/installers": "~1.0",
 		"symfony/stopwatch"  : "^3.4.4",
@@ -26,6 +31,7 @@
 		"pimple/pimple"      : "^3.2.3"
 	},
 	"require-dev": {
-		"twbs/bootstrap": "~3.2"
+		"twbs/bootstrap": "~3.2",
+		"brain/monkey"  : "^2.2"
 	}
 }
