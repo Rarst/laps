@@ -1,12 +1,21 @@
 <?php
 
-namespace Rarst\Laps\Tests;
+namespace Rarst\Laps\Tests\Manager;
 
 use Brain\Monkey\Functions;
 use Rarst\Laps\Manager\Asset_Manager;
+use Rarst\Laps\Tests\LapsTestCase;
 
+/**
+ * @coversDefaultClass Rarst\Laps\Manager\Asset_Manager
+ */
 class Asset_ManagerTest extends LapsTestCase {
 
+	/**
+	 * @covers ::__construct
+	 *
+	 * @return Asset_Manager
+	 */
 	public function test__construct() {
 
 		$manager = new Asset_Manager();
@@ -17,8 +26,8 @@ class Asset_ManagerTest extends LapsTestCase {
 		return $manager;
 	}
 
-
 	/**
+	 * @covers ::enqueue_scripts
 	 * @depends test__construct
 	 */
 	public function testEnqueue_scripts( Asset_Manager $manager ) {
