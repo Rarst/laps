@@ -3,22 +3,18 @@
 namespace Rarst\Laps\Record;
 
 use Symfony\Component\Stopwatch\Stopwatch;
-use Symfony\Component\Stopwatch\StopwatchEvent;
 
 /**
  * Captures time of network requests made with HTTP API.
  */
-class Http_Record_Collector implements Record_Collector_Interface {
-
-	/** @var Stopwatch $stopwatch */
-	protected $stopwatch;
+class Http_Record_Collector extends Stopwatch_Record_Collector {
 
 	/**
 	 * @param Stopwatch $stopwatch Stopwatch instance.
 	 */
 	public function __construct( Stopwatch $stopwatch ) {
 
-		$this->stopwatch = $stopwatch;
+		parent::__construct( $stopwatch );
 
 		add_action( 'pre_http_request', [ $this, 'pre_http_request' ], 10, 3 );
 		add_action( 'http_api_debug', [ $this, 'http_api_debug' ], 10, 5 );
@@ -35,7 +31,7 @@ class Http_Record_Collector implements Record_Collector_Interface {
 	 */
 	public function pre_http_request( $false, $args, $url ) {
 
-		$this->stopwatch->start( $url, 'http' );
+		$this->start( $url, 'http' );
 
 		return $false;
 	}
@@ -55,29 +51,8 @@ class Http_Record_Collector implements Record_Collector_Interface {
 	 */
 	public function http_api_debug( $response, $type, $class, $args, $url ) {
 
-		$this->stopwatch->stop( $url );
+		$this->stop( $url );
 
 		return $response;
-	}
-
-	/**
-	 * @return Stopwatch_Record[]
-	 */
-	public function get_records() {
-
-		$events = $this->stopwatch->getSectionEvents( '__root__' );
-
-		return array_map( [ $this, 'transform' ], array_keys( $events ), $events );
-	}
-
-	/**
-	 * @param string         $name  Event name.
-	 * @param StopwatchEvent $event Stopwatch event instance.
-	 *
-	 * @return Stopwatch_Record
-	 */
-	protected function transform( $name, StopwatchEvent $event ) {
-
-		return new Stopwatch_Record( $name, $event );
 	}
 }

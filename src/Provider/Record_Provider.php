@@ -27,7 +27,7 @@ class Record_Provider implements ServiceProviderInterface, Bootable_Provider_Int
 
 		$pimple['collectors'] = function ( Plugin $laps ) {
 			return [
-				'hook' => new Hook_Record_Collector( $laps['hook.events'], $laps['stopwatch'] ),
+				'hook' => new Hook_Record_Collector( $laps['stopwatch'], $laps['hook.events'] ),
 				'http' => new Http_Record_Collector( $laps['stopwatch'] ),
 				'sql'  => new Sql_Record_Collector(),
 			];
