@@ -52,6 +52,8 @@ class Timeline_Iterator implements \Iterator {
 	}
 
 	/**
+	 * @codeCoverageIgnore
+	 *
 	 * @return void
 	 */
 	public function key() {
