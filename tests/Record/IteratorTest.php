@@ -1,9 +1,10 @@
 <?php
 
+namespace Rarst\Laps\Tests\Record;
+
 use Rarst\Laps\Record\Recursive_Record_Iterator;
 use Rarst\Laps\Record\Timeline_Iterator;
 use Rarst\Laps\Tests\LapsTestCase;
-use Rarst\Laps\Tests\Record\StubRecord;
 
 class IteratorTest extends LapsTestCase {
 
