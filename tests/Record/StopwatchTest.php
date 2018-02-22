@@ -19,6 +19,7 @@ class StopwatchTest extends LapsTestCase {
 
 		$collector->start( 'Event', 'info' );
 		$collector->start( 'Not stopped', 'info' );
+		usleep( 1000 );
 		$event = $collector->stop( 'Event' );
 
 		$this->assertFalse( $collector->stop( 'Not event' ) );
@@ -45,7 +46,7 @@ class StopwatchTest extends LapsTestCase {
 		$this->assertEquals( 'Event', $record->get_name() );
 		$this->assertEquals( 'info', $record->get_category() );
 		$this->assertEquals( $event->getOrigin() / 1000, $record->get_origin() );
-		$this->assertEquals( $event->getDuration(), $record->get_duration() );
+		$this->assertEquals( $event->getDuration() / 1000, $record->get_duration() );
 		$this->assertContains( 'Event', $record->get_description() );
 	}
 }
