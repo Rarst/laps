@@ -21,13 +21,17 @@ class Recursive_Record_Iterator extends \ArrayIterator implements \RecursiveIter
 
 		foreach ( $records as $key => $record ) {
 
-			if ( $record->get_origin() < $end ) {
+			$origin   = $record->get_origin();
+			$overlaps = $origin < $end; // Float comparison alarm.
+			$borders  = abs( $origin - $end ) < 0.0001; // If effectively equal.
+
+			if ( $overlaps && ! $borders ) {
 				unset( $records[ $key ] );
 				$this->children[] = $record;
 				continue;
 			}
 
-			$end = $record->get_origin() + $record->get_duration();
+			$end = $origin + $record->get_duration();
 		}
 
 		parent::__construct( $records, $flags );
