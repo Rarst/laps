@@ -9,7 +9,7 @@ use Rarst\Laps\Tests\LapsTestCase;
 /**
  * @coversDefaultClass Rarst\Laps\Manager\Load_Order_Manager
  */
-class Load_Order_ManagerTest extends LapsTestCase {
+class LoadOrderTest extends LapsTestCase {
 
 	/**
 	 * @covers ::__construct

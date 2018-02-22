@@ -9,7 +9,7 @@ use Rarst\Laps\Tests\LapsTestCase;
 /**
  * @coversDefaultClass Rarst\Laps\Manager\Asset_Manager
  */
-class Asset_ManagerTest extends LapsTestCase {
+class AssetTest extends LapsTestCase {
 
 	/**
 	 * @covers ::__construct

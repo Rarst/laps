@@ -10,7 +10,7 @@ use Rarst\Laps\Tests\LapsTestCase;
 /**
  * @coversDefaultClass Rarst\Laps\Manager\Toolbar_Manager
  */
-class Toolbar_ManagerTest extends LapsTestCase {
+class ToolbarTest extends LapsTestCase {
 
 	/**
 	 * @covers ::__construct
