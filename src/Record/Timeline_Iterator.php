@@ -26,7 +26,7 @@ class Timeline_Iterator implements \Iterator {
 
 		global $timestart;
 
-		$this->origin   = $timestart * 1000;
+		$this->origin   = $timestart;
 		$this->iterator = $iterator;
 	}
 
@@ -71,7 +71,7 @@ class Timeline_Iterator implements \Iterator {
 	 * Rewind to a topmost record set.
 	 */
 	public function rewind() {
-		$this->total   = microtime( true ) * 1000 - $this->origin;
+		$this->total   = microtime( true ) - $this->origin;
 		$this->current = $this->iterator;
 	}
 

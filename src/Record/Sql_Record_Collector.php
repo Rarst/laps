@@ -32,9 +32,9 @@ class Sql_Record_Collector implements Record_Collector_Interface {
 		global $wpdb;
 
 		if ( empty( $this->query_starts ) && ! empty( $wpdb->queries ) ) {
-			$this->query_starts[ count( $wpdb->queries ) ] = microtime( true ) * 1000;
+			$this->query_starts[ count( $wpdb->queries ) ] = microtime( true );
 		} else {
-			$this->query_starts[] = microtime( true ) * 1000;
+			$this->query_starts[] = microtime( true );
 		}
 
 		return $query;
@@ -63,7 +63,6 @@ class Sql_Record_Collector implements Record_Collector_Interface {
 				$category = 'query-write';
 			}
 
-			$duration      *= 1000;
 			$last_query_end = $query_start + $duration;
 
 			$query_data[] = new Sql_Record( $sql, $query_start, $duration, $category );

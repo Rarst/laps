@@ -22,7 +22,7 @@ class Record_Provider implements ServiceProviderInterface, Bootable_Provider_Int
 	public function register( Container $pimple ) {
 
 		$pimple['stopwatch'] = $pimple->factory( function () {
-			return new Stopwatch();
+			return new Stopwatch( true );
 		} );
 
 		$pimple['collectors'] = function ( Plugin $laps ) {

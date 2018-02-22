@@ -23,7 +23,7 @@ interface Record_Interface {
 	public function get_origin();
 
 	/**
-	 * @return int Record duration in milliseconds.
+	 * @return float Record duration in seconds.
 	 */
 	public function get_duration();
 

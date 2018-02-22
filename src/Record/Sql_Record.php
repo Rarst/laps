@@ -43,7 +43,8 @@ class Sql_Record implements Record_Interface {
 	 * @return string
 	 */
 	public function get_description() {
-		$duration = round( $this->duration );
+
+		$duration = round( $this->duration * 1000 ); // s to ms.
 
 		return "{$this->sql} – {$duration} ms";
 	}
@@ -56,7 +57,7 @@ class Sql_Record implements Record_Interface {
 	}
 
 	/**
-	 * @return int Record duration in milliseconds.
+	 * @return float Record duration in seconds.
 	 */
 	public function get_duration() {
 		return $this->duration;

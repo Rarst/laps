@@ -37,7 +37,7 @@ class SqlTest extends LapsTestCase {
 		$this->assertEquals( $query, $record->get_name() );
 		$this->assertContains( $query, $record->get_description() );
 		$this->assertInternalType( 'float', $record->get_origin() );
-		$this->assertEquals( $duration * 1000, $record->get_duration() );
+		$this->assertEquals( $duration, $record->get_duration() );
 		$this->assertEquals( 'query-read', $record->get_category() );
 	}
 }

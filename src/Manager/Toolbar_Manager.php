@@ -37,13 +37,9 @@ class Toolbar_Manager {
 
 		global $timestart;
 
-		$start = $timestart * 1000;
-		$end   = microtime( true ) * 1000;
-		$total = $end - $start;
-
 		$wp_admin_bar->add_node( [
 			'id'    => 'laps',
-			'title' => sprintf( 'Lap: %ss', round( $total / 1000, 3 ) ),
+			'title' => sprintf( 'Lap: %ss', round( microtime( true ) - $timestart, 3 ) ),
 		] );
 
 		$wp_admin_bar->add_node( [

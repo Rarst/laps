@@ -36,7 +36,7 @@ class Stopwatch_Record implements Record_Interface {
 	 */
 	public function get_description() {
 
-		$duration = $this->stopwatch_event->getDuration();
+		$duration = round( $this->stopwatch_event->getDuration() );
 		$memory   = $this->stopwatch_event->getMemory() / 1024 / 1024;
 
 		return "{$this->name} – {$duration} ms – {$memory} MB";
@@ -46,14 +46,14 @@ class Stopwatch_Record implements Record_Interface {
 	 * @return float Timestamp of record start.
 	 */
 	public function get_origin() {
-		return $this->stopwatch_event->getOrigin();
+		return $this->stopwatch_event->getOrigin() / 1000; // ms to s.
 	}
 
 	/**
-	 * @return int Record duration in milliseconds.
+	 * @return float Record duration in seconds.
 	 */
 	public function get_duration() {
-		return $this->stopwatch_event->getDuration();
+		return $this->stopwatch_event->getDuration() / 1000; // ms to s.
 	}
 
 	/**
