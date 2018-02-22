@@ -44,7 +44,7 @@ class StopwatchTest extends LapsTestCase {
 
 		$this->assertEquals( 'Event', $record->get_name() );
 		$this->assertEquals( 'info', $record->get_category() );
-		$this->assertEquals( $event->getOrigin(), $record->get_origin() );
+		$this->assertEquals( $event->getOrigin() / 1000, $record->get_origin() );
 		$this->assertEquals( $event->getDuration(), $record->get_duration() );
 		$this->assertContains( 'Event', $record->get_description() );
 	}
