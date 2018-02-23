@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ae3ee3a571959800e23b0be51d700c2c",
+    "content-hash": "b88211148a5c0893e190e574ac18bd30",
     "packages": [
         {
             "name": "composer/installers",
@@ -324,16 +324,16 @@
     "packages-dev": [
         {
             "name": "antecedent/patchwork",
-            "version": "2.1.7",
+            "version": "2.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antecedent/patchwork.git",
-                "reference": "00eb113c84fac5446a7d3d1c389aa91fb3da7222"
+                "reference": "3bb81ace3914c220aa273d1c0603d5e1b454c0d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antecedent/patchwork/zipball/00eb113c84fac5446a7d3d1c389aa91fb3da7222",
-                "reference": "00eb113c84fac5446a7d3d1c389aa91fb3da7222",
+                "url": "https://api.github.com/repos/antecedent/patchwork/zipball/3bb81ace3914c220aa273d1c0603d5e1b454c0d7",
+                "reference": "3bb81ace3914c220aa273d1c0603d5e1b454c0d7",
                 "shasum": ""
             },
             "require": {
@@ -361,7 +361,7 @@
                 "runkit",
                 "testing"
             ],
-            "time": "2017-12-21T20:03:40+00:00"
+            "time": "2018-02-19T18:52:50+00:00"
         },
         {
             "name": "brain/monkey",
@@ -628,6 +628,8 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": ">=5.6"
+    },
     "platform-dev": []
 }
