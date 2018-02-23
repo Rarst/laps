@@ -3,15 +3,21 @@
 namespace Rarst\Laps\Tests\Record;
 
 use Rarst\Laps\Record\Recursive_Record_Iterator;
+use Rarst\Laps\Record\Record;
 use Rarst\Laps\Record\Timeline_Iterator;
 use Rarst\Laps\Tests\LapsTestCase;
 
 class IteratorTest extends LapsTestCase {
 
+	/**
+	 * @covers \Rarst\Laps\Record\Recursive_Record_Iterator
+	 *
+	 * @return Recursive_Record_Iterator
+	 */
 	public function testRecord() {
 
-		$record_a = new StubRecord( 'Parent', 0, 100 );
-		$record_b = new StubRecord( 'Child', 50, 100 );
+		$record_a = new Record( 'Parent', 0, 100 );
+		$record_b = new Record( 'Child', 50, 100 );
 
 		$records = [ $record_b, $record_a ];
 
@@ -35,6 +41,8 @@ class IteratorTest extends LapsTestCase {
 	}
 
 	/**
+	 * @covers \Rarst\Laps\Record\Timeline_Iterator
+	 *
 	 * @depends testRecord
 	 */
 	public function testTimeline( Recursive_Record_Iterator $iterator ) {

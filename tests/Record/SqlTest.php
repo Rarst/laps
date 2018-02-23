@@ -2,12 +2,15 @@
 
 namespace Rarst\Laps\Tests\Record;
 
-use Rarst\Laps\Record\Sql_Record;
+use Rarst\Laps\Record\Record;
 use Rarst\Laps\Record\Sql_Record_Collector;
 use Rarst\Laps\Tests\LapsTestCase;
 
 class SqlTest extends LapsTestCase {
 
+	/**
+	 * @covers \Rarst\Laps\Record\Sql_Record_Collector
+	 */
 	public function testCollector() {
 
 		define( 'SAVEQUERIES', true );
@@ -33,7 +36,7 @@ class SqlTest extends LapsTestCase {
 
 		$record = $records[0];
 
-		$this->assertInstanceOf( Sql_Record::class, $record );
+		$this->assertInstanceOf( Record::class, $record );
 		$this->assertEquals( $query, $record->get_name() );
 		$this->assertContains( $query, $record->get_description() );
 		$this->assertInternalType( 'float', $record->get_origin() );

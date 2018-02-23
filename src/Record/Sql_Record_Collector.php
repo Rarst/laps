@@ -41,7 +41,7 @@ class Sql_Record_Collector implements Record_Collector_Interface {
 	}
 
 	/**
-	 * @return Sql_Record[]
+	 * @return Record[]
 	 */
 	public function get_records() {
 
@@ -54,6 +54,7 @@ class Sql_Record_Collector implements Record_Collector_Interface {
 		$query_data     = [];
 		$last_query_end = 0;
 
+		// TODO process call trace from the data.
 		foreach ( $wpdb->queries as $key => list( $sql, $duration ) ) {
 			$query_start = isset( $this->query_starts[ $key ] ) ? $this->query_starts[ $key ] : $last_query_end;
 			$sql         = trim( $sql );
@@ -65,7 +66,7 @@ class Sql_Record_Collector implements Record_Collector_Interface {
 
 			$last_query_end = $query_start + $duration;
 
-			$query_data[] = new Sql_Record( $sql, $query_start, $duration, $category );
+			$query_data[] = new Record( $sql, $query_start, $duration, '', $category );
 		}
 
 		return $query_data;
