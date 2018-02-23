@@ -32,6 +32,7 @@
 	},
 	"require-dev": {
 		"twbs/bootstrap": "~3.2",
-		"brain/monkey"  : "^2.2"
+		"brain/monkey"  : "^2.2",
+		"pds/skeleton": "^1.0"
 	}
 }

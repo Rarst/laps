@@ -4,6 +4,7 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/Rarst/laps/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Rarst/laps/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/rarst/laps/v/stable)](https://packagist.org/packages/rarst/laps)
 [![Total Downloads](https://poser.pugx.org/rarst/laps/downloads)](https://packagist.org/packages/rarst/laps)
+[![PDS Skeleton](https://img.shields.io/badge/pds-skeleton-blue.svg)](https://github.com/php-pds/skeleton)
 
 ![Laps screenshot](http://i.imgur.com/zFokmkU.png)
 

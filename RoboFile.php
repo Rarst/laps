@@ -15,10 +15,10 @@ class RoboFile extends \Robo\Tasks {
 	public function watch() {
 
 		$this->taskWatch()
-			 ->monitor( [ 'css/variables.less', 'css/laps.less' ], function () {
+			 ->monitor( [ 'public/css/variables.less', 'public/css/laps.less' ], function () {
 				 $this->makeCss();
 			 } )
-			 ->monitor( 'js/source.js', function () {
+			 ->monitor( 'public/js/source.js', function () {
 				 $this->makeJs();
 			 } )
 			 ->run();
@@ -39,9 +39,9 @@ class RoboFile extends \Robo\Tasks {
 	 */
 	public function makeCss() {
 
-		$this->taskExec( 'lessc css/laps.less css/laps.css --source-map=css/laps.css.map' )->run();
+		$this->taskExec( 'lessc public/css/laps.less public/css/laps.css --source-map=public/css/laps.css.map' )->run();
 
-		$this->taskMinify( 'css/laps.css' )
+		$this->taskMinify( 'public/css/laps.css' )
 			 ->run();
 	}
 
@@ -52,12 +52,12 @@ class RoboFile extends \Robo\Tasks {
 
 		$this->taskConcat( [
 			'vendor/twbs/bootstrap/js/tooltip.js',
-			'js/source.js',
+			'public/js/source.js',
 		] )
-			 ->to( 'js/laps.js' )
+			 ->to( 'public/js/laps.js' )
 			 ->run();
 
-		$this->taskMinify( 'js/laps.js' )
+		$this->taskMinify( 'public/js/laps.js' )
 			 ->run();
 	}
 
@@ -65,11 +65,11 @@ class RoboFile extends \Robo\Tasks {
 	 * Compiles plugin's mustache template
 	 */
 	public function makeMustache() {
-		$dir = __DIR__ . '/views/cache';
+		$dir = __DIR__ . '/src/mustache/cache';
 		$this->_cleanDir( $dir );
 		$mustache = new \Mustache_Engine(
 			array(
-				'loader' => new \Mustache_Loader_FilesystemLoader( __DIR__ . '/views' ),
+				'loader' => new \Mustache_Loader_FilesystemLoader( __DIR__ . '/src/mustache' ),
 				'cache'  => $dir,
 			)
 		);

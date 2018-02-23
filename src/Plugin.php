@@ -28,8 +28,8 @@ class Plugin extends Container {
 
 		$laps['mustache'] = function () {
 			return new \Mustache_Engine( [
-				'loader' => new \Mustache_Loader_FilesystemLoader( dirname( __DIR__ ) . '/views' ),
-				'cache'  => new Mustache_Cache_FrozenCache( dirname( __DIR__ ) . '/views/cache' ),
+				'loader' => new \Mustache_Loader_FilesystemLoader( dirname( __DIR__ ) . '/src/mustache' ),
+				'cache'  => new Mustache_Cache_FrozenCache( dirname( __DIR__ ) . '/src/mustache/cache' ),
 			] );
 		};
 
