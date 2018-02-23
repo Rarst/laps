@@ -58,10 +58,10 @@ class Sql_Record_Collector implements Record_Collector_Interface {
 		foreach ( $wpdb->queries as $key => list( $sql, $duration ) ) {
 			$query_start = isset( $this->query_starts[ $key ] ) ? $this->query_starts[ $key ] : $last_query_end;
 			$sql         = trim( $sql );
-			$category    = 'query-read';
+			$category    = 'sql-read';
 
 			if ( 0 === stripos( $sql, 'INSERT' ) || 0 === stripos( $sql, 'UPDATE' ) ) {
-				$category = 'query-write';
+				$category = 'sql-write';
 			}
 
 			$last_query_end = $query_start + $duration;
