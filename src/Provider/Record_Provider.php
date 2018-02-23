@@ -5,6 +5,7 @@ namespace Rarst\Laps\Provider;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Rarst\Laps\Plugin;
+use Rarst\Laps\Record\Core_Load_Collector;
 use Rarst\Laps\Record\Hook_Record_Collector;
 use Rarst\Laps\Record\Http_Record_Collector;
 use Rarst\Laps\Record\Record_Collector_Interface;
@@ -27,6 +28,7 @@ class Record_Provider implements ServiceProviderInterface, Bootable_Provider_Int
 
 		$pimple['collectors'] = function ( Plugin $laps ) {
 			return [
+				'core' => new Core_Load_Collector(),
 				'hook' => new Hook_Record_Collector( $laps['stopwatch'], $laps['hook.events'] ),
 				'http' => new Http_Record_Collector( $laps['stopwatch'] ),
 				'sql'  => new Sql_Record_Collector(),

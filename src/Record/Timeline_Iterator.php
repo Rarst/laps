@@ -24,9 +24,7 @@ class Timeline_Iterator implements \Iterator {
 	 */
 	public function __construct( Recursive_Record_Iterator $iterator ) {
 
-		global $timestart;
-
-		$this->origin   = $timestart;
+		$this->origin   = $_SERVER['REQUEST_TIME_FLOAT'];
 		$this->iterator = $iterator;
 	}
 
