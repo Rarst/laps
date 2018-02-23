@@ -2,10 +2,10 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Rarst/laps/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Rarst/laps/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/Rarst/laps/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Rarst/laps/build-status/master)
 [![Code Coverage](https://scrutinizer-ci.com/g/Rarst/laps/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Rarst/laps/?branch=master)
-[![Total Downloads](https://img.shields.io/packagist/dt/rarst/laps.svg?style=flat-square)](https://packagist.org/packages/rarst/laps)
-[![Latest Stable Version](https://img.shields.io/packagist/v/rarst/laps.svg?style=flat-square&label=version)](https://packagist.org/packages/rarst/laps)
-[![PHP from Packagist](https://img.shields.io/packagist/php-v/rarst/laps.svg?style=flat-square)](https://packagist.org/packages/rarst/laps)
-[![PDS Skeleton](https://img.shields.io/badge/pds-skeleton-blue.svg?style=flat-square)](https://github.com/php-pds/skeleton)
+[![Total Downloads](https://img.shields.io/packagist/dt/rarst/laps.svg)](https://packagist.org/packages/rarst/laps)
+[![Latest Stable Version](https://img.shields.io/packagist/v/rarst/laps.svg?label=version)](https://packagist.org/packages/rarst/laps)
+[![PHP from Packagist](https://img.shields.io/packagist/php-v/rarst/laps.svg)](https://packagist.org/packages/rarst/laps)
+[![PDS Skeleton](https://img.shields.io/badge/pds-skeleton-blue.svg)](https://github.com/php-pds/skeleton)
 
 ![Laps screenshot](http://i.imgur.com/zFokmkU.png)
 
