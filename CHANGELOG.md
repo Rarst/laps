@@ -6,6 +6,28 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## 2.0 - 2018-02-26
+
+### Added
+- unified processing of events from arbitrary sources
+- unit tests
+- tracking PHP and WP core load times
+
+### Changed
+- minimum PHP version requirement to >=5.6
+- class files names to PSR–4
+- main class into concrete instance and Pimple container
+- timeline to unified processing with as necessary nesting
+- directory structure to PDS skeleton
+- baseline timings to float in seconds (from milliseconds)
+- color scheme
+
+### Removed
+- Thematic hook events
+
+### Fixed
+- handling or not properly started/stopped hook events
+
 ## 1.4.4 - 2017-07-05
 
 ### Added

@@ -7,46 +7,36 @@
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/rarst/laps.svg)](https://packagist.org/packages/rarst/laps)
 [![PDS Skeleton](https://img.shields.io/badge/pds-skeleton-blue.svg)](https://github.com/php-pds/skeleton)
 
-![Laps screenshot](http://i.imgur.com/zFokmkU.png)
+_Make a site, make it fast._
 
-Laps is light WordPress profiler (in a plugin), which aims to be:
+![Laps v2 screenshot](https://i.imgur.com/6n36KPE.png)
 
- - always on and zero click (just hover on toolbar entry) away
- - quick indicator of what hogs page in general or right now
+Laps is a plugin that **shows performance information** about WordPress page load.
 
-It is no match or replacement for *real* profiler, but is friendly and cute.
+It provides a visual summary in toolbar that is quick and easy to inspect.
 
-Out of the box Laps supports common stage of WordPress page life cycle:
-
- - plugins load
- - themes load
- - core init
- - main loop
-
-And some of third party hooks conventions for themes using:
-
- - [Theme Hook Alliance](http://zamoose.github.io/themehookalliance/)
- - [Hybrid](http://themehybrid.com/)
- - [Genesis](http://my.studiopress.com/themes/genesis/)
-
-There are also additional optional timelines, displaying:
-
- - SQL queries (with [`SAVEQUERIES` constant](http://codex.wordpress.org/Editing_wp-config.php#Save_queries_for_analysis) enabled)
- - HTTP requests performed
+Laps tracks many events, such as:
+- PHP, core, plugins, and themes load
+- database queries (with [`SAVEQUERIES` constant](http://codex.wordpress.org/Editing_wp-config.php#Save_queries_for_analysis) enabled)
+- network requests to other sites
+- main posts loop
+- events for supported theme frameworks: 
+  - [Theme Hook Alliance](http://zamoose.github.io/themehookalliance/)
+  - [Hybrid](http://themehybrid.com/)
+  - [Genesis](http://my.studiopress.com/themes/genesis/)
+- events for supported plugins:
+  - [Yoast SEO](https://wordpress.org/plugins/wordpress-seo/) 
 
 ## Installation
 
-Download plugin archive from [releases section](https://github.com/Rarst/laps/releases).
+Require with [Composer](https://getcomposer.org/):
 
-Or install in plugin directory via [Composer](https://getcomposer.org/):
+```bash
+composer require rarst/laps
+```
 
-    composer create-project rarst/laps --no-dev
+Or download plugin archive from [releases section](https://github.com/Rarst/laps/releases).
 
-## License Info
+## License
 
-Laps own code is licensed under MIT and it makes use of code from:
-
- - Composer Installers (MIT)
- - Symfony Stopwatch (MIT)
- - Mustache.php (MIT)
- - Twitter Bootstrap (MIT)
+MIT
