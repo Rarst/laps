@@ -21,7 +21,7 @@ class Toolbar_Manager {
 
 		$this->laps = $laps;
 
-		add_action( 'admin_bar_menu', [ $this, 'admin_bar_menu' ], 100 );
+		add_action( 'admin_bar_menu', [ $this, 'admin_bar_menu' ], 1000 );
 	}
 
 	/**
@@ -45,7 +45,7 @@ class Toolbar_Manager {
 		$wp_admin_bar->add_node( [
 			'id'     => 'laps_output',
 			'parent' => 'laps',
-			'meta'   => [
+			'meta'   => [ // TODO consider doing render lazily, but might not be worth the effort.
 				'html' => $this->laps['mustache']->render( 'laps', [
 					'timelines' => new Timeline_Iterator( new Recursive_Record_Iterator( $this->laps['records'] ) ),
 				] ),
