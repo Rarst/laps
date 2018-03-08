@@ -16,7 +16,7 @@ class Sql_Record_Collector implements Record_Collector_Interface {
 	public function __construct() {
 
 		if ( $this->is_savequeries() ) {
-			add_filter( 'query', [ $this, 'query' ], 20 );
+			add_filter( 'query', [ $this, 'query' ], 20 ); // TODO refactor when core provides time start data in 5.0.
 		}
 	}
 
@@ -51,25 +51,7 @@ class Sql_Record_Collector implements Record_Collector_Interface {
 
 		global $wpdb;
 
-		$query_data     = [];
-		$last_query_end = 0;
-
-		// TODO process call trace from the data.
-		foreach ( $wpdb->queries as $key => list( $sql, $duration ) ) {
-			$query_start = isset( $this->query_starts[ $key ] ) ? $this->query_starts[ $key ] : $last_query_end;
-			$sql         = trim( $sql );
-			$category    = 'sql-read';
-
-			if ( 0 === stripos( $sql, 'INSERT' ) || 0 === stripos( $sql, 'UPDATE' ) ) {
-				$category = 'sql-write';
-			}
-
-			$last_query_end = $query_start + $duration;
-
-			$query_data[] = new Record( $sql, $query_start, $duration, '', $category );
-		}
-
-		return $query_data;
+		return array_map( [ $this, 'transform' ], array_keys( $wpdb->queries ), $wpdb->queries );
 	}
 
 	/**
@@ -78,5 +60,30 @@ class Sql_Record_Collector implements Record_Collector_Interface {
 	protected function is_savequeries() {
 
 		return defined( 'SAVEQUERIES' ) && SAVEQUERIES;
+	}
+
+	/**
+	 * Transform query data, captured by core, into a Record.
+	 *
+	 * @param int   $key        Query key in captured data.
+	 * @param array $query_data Array of captured query data.
+	 *
+	 * @return Record
+	 */
+	protected function transform( $key, $query_data ) {
+
+		static $last_query_end = 0;
+
+		list( $sql, $duration, $caller ) = $query_data;
+
+		$query_start = isset( $this->query_starts[ $key ] ) ? $this->query_starts[ $key ] : $last_query_end;
+		$sql         = trim( $sql );
+		$category    = 'sql-read';
+		if ( 0 === stripos( $sql, 'INSERT' ) || 0 === stripos( $sql, 'UPDATE' ) ) {
+			$category = 'sql-write';
+		}
+		$last_query_end = $query_start + $duration;
+
+		return new Record( $sql, $query_start, $duration, '', $category );
 	}
 }
