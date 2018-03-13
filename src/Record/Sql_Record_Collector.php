@@ -2,6 +2,8 @@
 
 namespace Rarst\Laps\Record;
 
+use Rarst\Laps\Formatter\Backtrace_Formatter;
+
 /**
  * Processes SQL events from data logged by wpdb.
  */
@@ -10,10 +12,15 @@ class Sql_Record_Collector implements Record_Collector_Interface {
 	/** @var array $query_starts Log of query start times. */
 	protected $query_starts = [];
 
+	/** @var Backtrace_Formatter $formatter */
+	protected $formatter;
+
 	/**
 	 * Sets up the query start time log.
 	 */
 	public function __construct() {
+
+		$this->formatter = new Backtrace_Formatter();
 
 		if ( $this->is_savequeries() ) {
 			add_filter( 'query', [ $this, 'query' ], 20 ); // TODO refactor when core provides time start data in 5.0.
@@ -84,6 +91,10 @@ class Sql_Record_Collector implements Record_Collector_Interface {
 		}
 		$last_query_end = $query_start + $duration;
 
-		return new Record( $sql, $query_start, $duration, '', $category );
+		$desc_duration = round( $duration * 1000 );
+		$backtrace     = $this->formatter->format( $caller );
+		$description   = $sql . ' – ' . $desc_duration . 'ms<br />' . implode( ' → ', $backtrace );
+
+		return new Record( $sql, $query_start, $duration, $description, $category );
 	}
 }
