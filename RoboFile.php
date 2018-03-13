@@ -30,7 +30,7 @@ class RoboFile extends \Robo\Tasks {
 	public function makeAll() {
 
 		$this->makeCss();
-		$this->makeJs();
+		//$this->makeJs();
 		$this->makeMustache();
 	}
 
@@ -48,18 +48,18 @@ class RoboFile extends \Robo\Tasks {
 	/**
 	 * Creates plugin's script file.
 	 */
-	public function makeJs() {
+	// public function makeJs() {
 
-		$this->taskConcat( [
-			'vendor/twbs/bootstrap/js/tooltip.js',
-			'public/js/source.js',
-		] )
-			 ->to( 'public/js/laps.js' )
-			 ->run();
+	// 	$this->taskConcat( [
+	// 		'vendor/twbs/bootstrap/js/tooltip.js',
+	// 		'public/js/source.js',
+	// 	] )
+	// 		 ->to( 'public/js/laps.js' )
+	// 		 ->run();
 
-		$this->taskMinify( 'public/js/laps.js' )
-			 ->run();
-	}
+	// 	$this->taskMinify( 'public/js/laps.js' )
+	// 		 ->run();
+	// }
 
 	/**
 	 * Compiles plugin's mustache template
