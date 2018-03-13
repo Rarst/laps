@@ -37,12 +37,32 @@
 		.progress;
 		margin:   6px 0;
 		position: relative;
+		overflow:visible;
 
 		.event {
 			.progress-bar;
 			position:    absolute; // disable stacking at start
 			border-left: 1px solid @timeline-bg;
 			min-width:   2px;
+		}
+
+		.event[title]:hover::after {
+			content: attr(title);
+			position:absolute;
+			display:block;
+			width: auto;
+			height: auto;
+			top: calc( 100% + 8px );
+			padding: 5px 10px;
+			left: 50%;
+			min-width:200px;
+			max-width:500px;
+			line-height: 1.5;
+			border-radius: 5px;
+			background: #444;
+			transform: translateX(-50%);
+			white-space: normal;
+			z-index: 1;
 		}
 
 		.event-php {
@@ -70,17 +90,6 @@
 		.sr-only {
 			.sr-only;
 		}
-	}
-
-	@import "../../vendor/twbs/bootstrap/less/tooltip.less";
-
-	.tooltip.in {
-		.opacity(1);
-	}
-
-	.tooltip-inner {
-		line-height: 20px;
-		text-align:  left;
 	}
 }
 
