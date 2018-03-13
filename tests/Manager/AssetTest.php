@@ -32,7 +32,6 @@ class AssetTest extends LapsTestCase {
 	 */
 	public function testEnqueue_scripts( Asset_Manager $manager ) {
 
-		Functions\expect( 'wp_register_script' )->once();
 		Functions\expect( 'wp_register_style' )->once();
 		Functions\expect( 'plugins_url' )->zeroOrMoreTimes();
 		Functions\expect( 'is_admin_bar_showing' )->once()->andReturn( true );
