@@ -2,6 +2,7 @@
 
 namespace Rarst\Laps\Tests;
 
+use Brain\Monkey\Functions;
 use Pimple\ServiceProviderInterface;
 use Rarst\Laps\Provider\Bootable_Provider_Interface;
 
@@ -23,6 +24,12 @@ class PluginTest extends LapsTestCase {
 		$service->expects( $this->once() )
 		        ->method( 'boot' )
 		        ->with( $container );
+
+		if ( ! defined( 'ABSPATH' ) ) {
+			define( 'ABSPATH', '/wp' );
+			define( 'WP_CONTENT_DIR', '/wp-content/' );
+		}
+		Functions\expect( 'wp_normalize_path' )->zeroOrMoreTimes()->andReturnFirstArg();
 
 		$container->run();
 	}

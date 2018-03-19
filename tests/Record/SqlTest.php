@@ -2,6 +2,7 @@
 
 namespace Rarst\Laps\Tests\Record;
 
+use Brain\Monkey\Functions;
 use Rarst\Laps\Record\Record;
 use Rarst\Laps\Record\Sql_Record_Collector;
 use Rarst\Laps\Tests\LapsTestCase;
@@ -15,6 +16,12 @@ class SqlTest extends LapsTestCase {
 
 		define( 'SAVEQUERIES', true );
 
+		if ( ! defined( 'ABSPATH' ) ) {
+			define( 'ABSPATH', '/wp' );
+			define( 'WP_CONTENT_DIR', '/wp-content/' );
+		}
+		Functions\expect( 'wp_normalize_path' )->zeroOrMoreTimes()->andReturnFirstArg();
+
 		$collector = new Sql_Record_Collector();
 
 		$this->assertTrue( has_filter( 'query', [ $collector, 'query' ] ) );
@@ -27,7 +34,7 @@ class SqlTest extends LapsTestCase {
 
 		$wpdb            = new \stdClass();
 		$duration        = 100;
-		$wpdb->queries[] = [ $query, $duration ];
+		$wpdb->queries[] = [ $query, $duration, 'foo(), bar()' ];
 
 		$records = $collector->get_records();
 

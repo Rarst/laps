@@ -2,6 +2,7 @@
 
 namespace Rarst\Laps\Tests\Provider;
 
+use Brain\Monkey\Functions;
 use Pimple\Exception\FrozenServiceException;
 use Rarst\Laps\Plugin;
 use Rarst\Laps\Provider\Record_Provider;
@@ -23,6 +24,12 @@ class RecordTest extends LapsTestCase {
 		$stopwatch_b = $container['stopwatch'];
 
 		$this->assertNotSame( $stopwatch_a, $stopwatch_b );
+
+		if ( ! defined( 'ABSPATH' ) ) {
+			define( 'ABSPATH', '/wp' );
+			define( 'WP_CONTENT_DIR', '/wp-content/' );
+		}
+		Functions\expect( 'wp_normalize_path' )->zeroOrMoreTimes()->andReturnFirstArg();
 
 		$this->assertArrayHasKey( 'records', $container );
 
