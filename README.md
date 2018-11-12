@@ -6,6 +6,7 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/rarst/laps.svg?label=version)](https://packagist.org/packages/rarst/laps)
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/rarst/laps.svg)](https://packagist.org/packages/rarst/laps)
 [![PDS Skeleton](https://img.shields.io/badge/pds-skeleton-blue.svg)](https://github.com/php-pds/skeleton)
+[![Download Laps](https://img.shields.io/badge/dynamic/json.svg?label=download&url=https://api.github.com/repos/rarst/laps/releases/latest&query=$.assets%5B0%5D.name)](https://www.rarst.net/download/laps)
 
 _Make a site, make it fast._
 
@@ -16,26 +17,15 @@ Laps is a plugin that **shows performance information** about WordPress page loa
 It provides a visual summary in toolbar that is quick and easy to inspect.
 
 Laps tracks many events, such as:
-- PHP, core, plugins, and themes load
+- PHP, core, plugins, and themes load, main posts loop
 - database queries (with [`SAVEQUERIES` constant](http://codex.wordpress.org/Editing_wp-config.php#Save_queries_for_analysis) enabled)
-- network requests to other sites
-- main posts loop
-- events for supported theme frameworks: 
-  - [Theme Hook Alliance](http://zamoose.github.io/themehookalliance/)
-  - [Hybrid](http://themehybrid.com/)
-  - [Genesis](http://my.studiopress.com/themes/genesis/)
-- events for supported plugins:
-  - [Yoast SEO](https://wordpress.org/plugins/wordpress-seo/) 
+- network requests to other sites 
 
 ## Installation
 
-Require with [Composer](https://getcomposer.org/):
-
-```bash
-composer require rarst/laps
-```
-
-Or download plugin archive from [releases section](https://github.com/Rarst/laps/releases).
+| [Composer](https://getcomposer.org/) (recommended) | Release archive |  
+| -------------------------------------------------- | -------- |  
+| `composer require rarst/laps` | [![Download Laps](https://img.shields.io/badge/dynamic/json.svg?label=download&url=https%3A%2F%2Fapi.github.com%2Frepos%2Frarst%2Flaps%2Freleases%2Flatest&query=%24.assets[0].name&style=for-the-badge)](https://www.rarst.net/download/laps) |  
 
 ## License
 
