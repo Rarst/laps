@@ -29,8 +29,8 @@ class Backtrace_Formatter {
 	public function __construct() {
 
 		$this->truncate_paths = [
-			wp_normalize_path( realpath( WP_CONTENT_DIR ) ),
-			wp_normalize_path( realpath( ABSPATH ) ),
+			wp_normalize_path( WP_CONTENT_DIR ),
+			wp_normalize_path( ABSPATH ),
 			'wp-admin/',
 			'themes/',
 			'plugins/',
@@ -83,7 +83,11 @@ class Backtrace_Formatter {
 
 			$path = substr( $item, strpos( $item, '(\'' ) + 2, - 2 );
 			$path = wp_normalize_path( $path );
-			$path = ltrim( str_replace( $this->truncate_paths, '', $path ), '/' );
+			$path = str_replace( $this->truncate_paths, '', $path );
+			if ( ':' === $path[1] ) {
+				$path = substr( $path, 2 );
+			}
+			$path = ltrim( $path, '/' );
 
 			return $path;
 		}

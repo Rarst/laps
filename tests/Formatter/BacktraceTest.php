@@ -44,7 +44,7 @@ class BacktraceTest extends LapsTestCase {
 			'template-loader.php',
 			'WP_Hook->do_action',
 			'foo',
-			"include('/wp/path.php')",
+			"include('C:/wp/path.php')",
 		];
 
 		$backtrace = implode( ', ', $backtrace );
