@@ -93,7 +93,7 @@ class Sql_Record_Collector implements Record_Collector_Interface {
 
 		$desc_duration = round( $duration * 1000 );
 		$backtrace     = $this->formatter->format( $caller );
-		$description   = $sql . ' – ' . $desc_duration . 'ms<br />' . implode( ' → ', $backtrace );
+		$description   = $sql . ' – ' . $desc_duration . 'ms<hr />' . implode( ' → ', $backtrace );
 
 		return new Record( $sql, $query_start, $duration, $description, $category );
 	}
