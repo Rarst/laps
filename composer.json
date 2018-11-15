@@ -35,5 +35,24 @@
 		"twbs/bootstrap": "~3.2",
 		"brain/monkey"  : "^2.2",
 		"pds/skeleton": "^1.0"
+	},
+	"extra"      : {
+		"light-ignore-plugin": {
+			"mustache/mustache": [
+				"test"
+			],
+			"pimple/pimple"    : [
+				"ext",
+				"src/Pimple/Tests"
+			],
+			"symfony/stopwatch": [
+				"Tests"
+			],
+			"twbs/bootstrap"   : [
+				"docs",
+				"grunt",
+				"js/tests"
+			]
+		}
 	}
 }
