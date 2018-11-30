@@ -21,7 +21,7 @@ class Hook_Event_Provider implements ServiceProviderInterface {
 	 */
 	public function register( Container $pimple ): void {
 
-		$pimple['hook.events'] = function () {
+		$pimple['hook.events'] = function (): array {
 			return [
 				'core'    => new Core_Events(),
 				'genesis' => new Genesis_Events(),

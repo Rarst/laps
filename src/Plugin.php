@@ -27,7 +27,7 @@ class Plugin extends Container {
 
 		$laps = $this;
 
-		$laps['mustache'] = function () {
+		$laps['mustache'] = function (): \Mustache_Engine {
 			return new \Mustache_Engine( [
 				'loader' => new \Mustache_Loader_FilesystemLoader( dirname( __DIR__ ) . '/src/mustache' ),
 				'cache'  => new Mustache_Cache_FrozenCache( dirname( __DIR__ ) . '/src/mustache/cache' ),

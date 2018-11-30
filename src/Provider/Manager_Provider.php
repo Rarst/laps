@@ -20,7 +20,7 @@ class Manager_Provider implements ServiceProviderInterface, Bootable_Provider_In
 	 */
 	public function register( Container $pimple ): void {
 
-		$pimple['managers'] = function ( Plugin $laps ) {
+		$pimple['managers'] = function ( Plugin $laps ): array {
 			return [
 				new Load_Order_Manager(),
 				new Asset_Manager(),
