@@ -1,4 +1,6 @@
 <?php
+declare( strict_types=1 );
+
 namespace Rarst\Laps;
 
 /**
@@ -14,7 +16,7 @@ class Mustache_Cache_FrozenCache extends \Mustache_Cache_FilesystemCache {
 	 *
 	 * @return void
 	 */
-	public function cache( $key, $value ) {
+	public function cache( $key, $value ): void {
 
 		$this->log(
 			\Mustache_Logger::WARNING,

@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 
 namespace Rarst\Laps\Provider;
 
@@ -18,7 +19,7 @@ class Hook_Event_Provider implements ServiceProviderInterface {
 	/**
 	 * @param Container $pimple Container instance.
 	 */
-	public function register( Container $pimple ) {
+	public function register( Container $pimple ): void {
 
 		$pimple['hook.events'] = function () {
 			return [

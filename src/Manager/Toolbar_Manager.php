@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 
 namespace Rarst\Laps\Manager;
 
@@ -29,7 +30,7 @@ class Toolbar_Manager {
 	 *
 	 * @param \WP_Admin_Bar $wp_admin_bar WordPress core toolbar object.
 	 */
-	public function admin_bar_menu( $wp_admin_bar ) {
+	public function admin_bar_menu( \WP_Admin_Bar $wp_admin_bar ): void {
 
 		if ( ! apply_filters( 'laps_can_see', current_user_can( 'manage_options' ) ) ) {
 			return;

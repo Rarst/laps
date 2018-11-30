@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 
 namespace Rarst\Laps\Record;
 
@@ -20,11 +21,11 @@ class Core_Load_Collector implements Record_Collector_Interface {
 	/**
 	 * @return Record_Interface[]
 	 */
-	public function get_records() {
+	public function get_records(): array {
 
 		global $timestart;
 
-		$request_time = $_SERVER['REQUEST_TIME_FLOAT'];
+		$request_time = filter_var( $_SERVER['REQUEST_TIME_FLOAT'], FILTER_VALIDATE_FLOAT );
 
 		return [
 			new Record( 'PHP Load', $request_time, $timestart - $request_time, '', 'php' ),

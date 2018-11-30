@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 
 namespace Rarst\Laps;
 
@@ -48,7 +49,7 @@ class Plugin extends Container {
 	 *
 	 * @return $this|static
 	 */
-	public function register( ServiceProviderInterface $provider, array $values = [] ) {
+	public function register( ServiceProviderInterface $provider, array $values = [] ): self {
 
 		$this->providers[] = $provider;
 
@@ -60,9 +61,9 @@ class Plugin extends Container {
 	/**
 	 * Start Stopwatch and timing plugin load immediately, then set up core events and needed hooks.
 	 */
-	public function run() {
+	public function run(): void {
 
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+		if ( \defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			return;
 		}
 

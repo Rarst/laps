@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 
 namespace Rarst\Laps\Provider;
 
@@ -20,7 +21,7 @@ class Record_Provider implements ServiceProviderInterface, Bootable_Provider_Int
 	/**
 	 * @param Container $pimple Container instance.
 	 */
-	public function register( Container $pimple ) {
+	public function register( Container $pimple ): void {
 
 		$pimple['stopwatch'] = $pimple->factory( function () {
 			return new Stopwatch( true );
@@ -51,7 +52,7 @@ class Record_Provider implements ServiceProviderInterface, Bootable_Provider_Int
 	/**
 	 * @param Plugin $laps Container instance.
 	 */
-	public function boot( Plugin $laps ) {
+	public function boot( Plugin $laps ): void {
 		$laps['collectors'];
 	}
 }

@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 
 namespace Rarst\Laps\Formatter;
 
@@ -42,9 +43,9 @@ class Backtrace_Formatter {
 	 *
 	 * @return array
 	 */
-	public function format( $backtrace ) {
+	public function format( $backtrace ): array {
 
-		if ( is_string( $backtrace ) ) {
+		if ( \is_string( $backtrace ) ) {
 			$backtrace = explode( ', ', $backtrace );
 		}
 
@@ -61,7 +62,7 @@ class Backtrace_Formatter {
 	 *
 	 * @return bool Keep or drop.
 	 */
-	protected function filter( $item ) {
+	protected function filter( string $item ): bool {
 
 		foreach ( self::$skip as $match ) {
 			if ( false !== strpos( $item, $match ) ) {
@@ -77,7 +78,7 @@ class Backtrace_Formatter {
 	 *
 	 * @return string
 	 */
-	protected function shorten_include( $item ) {
+	protected function shorten_include( string $item ): string {
 
 		if ( 0 === strpos( $item, 'include' ) || 0 === strpos( $item, 'require' ) ) {
 

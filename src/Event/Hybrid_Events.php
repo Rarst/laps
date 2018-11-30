@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 
 namespace Rarst\Laps\Event;
 
@@ -12,11 +13,11 @@ class Hybrid_Events implements Hook_Event_Config_Interface {
 	/**
 	 * @return array
 	 */
-	public function get_events() {
+	public function get_events(): array {
 
 		$events = [];
 
-		if ( ! function_exists( 'hybrid_get_prefix' ) ) {
+		if ( ! \function_exists( 'hybrid_get_prefix' ) ) {
 			return $events;
 		}
 

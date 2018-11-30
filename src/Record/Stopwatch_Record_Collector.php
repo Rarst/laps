@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 
 namespace Rarst\Laps\Record;
 
@@ -26,7 +27,7 @@ class Stopwatch_Record_Collector implements Record_Collector_Interface {
 	 *
 	 * @return StopwatchEvent
 	 */
-	public function start( $name, $category = null ) {
+	public function start( $name, $category = null ): StopwatchEvent {
 		return $this->stopwatch->start( $name, $category );
 	}
 
@@ -47,7 +48,7 @@ class Stopwatch_Record_Collector implements Record_Collector_Interface {
 	/**
 	 * @return Stopwatch_Record[]
 	 */
-	public function get_records() {
+	public function get_records(): array {
 
 		$events = $this->stopwatch->getSectionEvents( '__root__' );
 
@@ -66,7 +67,7 @@ class Stopwatch_Record_Collector implements Record_Collector_Interface {
 	 *
 	 * @return Stopwatch_Record
 	 */
-	protected function transform( $name, StopwatchEvent $event ) {
+	protected function transform( string $name, StopwatchEvent $event ): Stopwatch_Record {
 
 		return new Stopwatch_Record( $name, $event );
 	}

@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 
 namespace Rarst\Laps\Record;
 
@@ -10,25 +11,25 @@ interface Record_Interface {
 	/**
 	 * @return string
 	 */
-	public function get_name();
+	public function get_name(): string;
 
 	/**
 	 * @return string
 	 */
-	public function get_description();
+	public function get_description(): string;
 
 	/**
 	 * @return float Timestamp of record start.
 	 */
-	public function get_origin();
+	public function get_origin(): float;
 
 	/**
 	 * @return float Record duration in seconds.
 	 */
-	public function get_duration();
+	public function get_duration(): float;
 
 	/**
 	 * @return string
 	 */
-	public function get_category();
+	public function get_category(): string;
 }

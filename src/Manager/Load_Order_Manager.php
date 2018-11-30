@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 
 namespace Rarst\Laps\Manager;
 
@@ -23,9 +24,9 @@ class Load_Order_Manager {
 	 *
 	 * @return array
 	 */
-	public function pre_update_option_active_plugins( $plugins ) {
+	public function pre_update_option_active_plugins( array $plugins ): array {
 
-		$plugin = plugin_basename( dirname( dirname( __DIR__ ) ) . '/laps.php' );
+		$plugin = plugin_basename( \dirname( __DIR__, 2 ) . '/laps.php' );
 		$key    = array_search( $plugin, $plugins, true );
 
 		if ( false !== $key && $key > 0 ) {

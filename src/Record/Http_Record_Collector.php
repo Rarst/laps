@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 
 namespace Rarst\Laps\Record;
 
@@ -29,7 +30,7 @@ class Http_Record_Collector extends Stopwatch_Record_Collector {
 	 *
 	 * @return boolean
 	 */
-	public function pre_http_request( $false, $args, $url ) {
+	public function pre_http_request( bool $false, array $args, string $url ): bool {
 
 		$this->start( $url, 'http' );
 
@@ -49,7 +50,7 @@ class Http_Record_Collector extends Stopwatch_Record_Collector {
 	 *
 	 * @noinspection MoreThanThreeArgumentsInspection
 	 */
-	public function http_api_debug( $response, $type, $class, $args, $url ) {
+	public function http_api_debug( $response, string $type, $class, array $args, string $url ) {
 
 		$this->stop( $url );
 

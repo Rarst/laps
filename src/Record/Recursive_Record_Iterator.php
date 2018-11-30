@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 
 namespace Rarst\Laps\Record;
 
@@ -14,7 +15,7 @@ class Recursive_Record_Iterator extends \ArrayIterator implements \RecursiveIter
 	 * @param Record_Interface[] $records Records to process.
 	 * @param int                $flags   Configuration flags.
 	 */
-	public function __construct( array $records, $flags = 0 ) {
+	public function __construct( array $records, int $flags = 0 ) {
 
 		usort( $records, [ $this, 'sort_origin' ] );
 		$end = 0;
@@ -43,7 +44,7 @@ class Recursive_Record_Iterator extends \ArrayIterator implements \RecursiveIter
 	 *
 	 * @return int
 	 */
-	protected function sort_origin( Record_Interface $record_a, Record_Interface $record_b ) {
+	protected function sort_origin( Record_Interface $record_a, Record_Interface $record_b ): int {
 
 		$origin_a = $record_a->get_origin();
 		$origin_b = $record_b->get_origin();
@@ -58,7 +59,7 @@ class Recursive_Record_Iterator extends \ArrayIterator implements \RecursiveIter
 	/**
 	 * @return bool
 	 */
-	public function hasChildren() {
+	public function hasChildren(): bool {
 
 		return ! empty( $this->children );
 	}

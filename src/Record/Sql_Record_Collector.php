@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 
 namespace Rarst\Laps\Record;
 
@@ -34,7 +35,7 @@ class Sql_Record_Collector implements Record_Collector_Interface {
 	 *
 	 * @return string
 	 */
-	public function query( $query ) {
+	public function query( $query ): string {
 
 		global $wpdb;
 
@@ -50,7 +51,7 @@ class Sql_Record_Collector implements Record_Collector_Interface {
 	/**
 	 * @return Record[]
 	 */
-	public function get_records() {
+	public function get_records(): array {
 
 		if ( ! $this->is_savequeries() ) {
 			return [];
@@ -64,9 +65,9 @@ class Sql_Record_Collector implements Record_Collector_Interface {
 	/**
 	 * @return bool
 	 */
-	protected function is_savequeries() {
+	protected function is_savequeries(): bool {
 
-		return defined( 'SAVEQUERIES' ) && SAVEQUERIES;
+		return \defined( 'SAVEQUERIES' ) && SAVEQUERIES;
 	}
 
 	/**
@@ -77,13 +78,13 @@ class Sql_Record_Collector implements Record_Collector_Interface {
 	 *
 	 * @return Record
 	 */
-	protected function transform( $key, $query_data ) {
+	protected function transform( int $key, array $query_data ): Record {
 
 		static $last_query_end = 0;
 
-		list( $sql, $duration, $caller ) = $query_data;
+		[ $sql, $duration, $caller ] = $query_data;
 
-		$query_start = isset( $this->query_starts[ $key ] ) ? $this->query_starts[ $key ] : $last_query_end;
+		$query_start = $this->query_starts[ $key ] ?? $last_query_end;
 		$sql         = trim( $sql );
 		$category    = 'sql-read';
 		if ( 0 === stripos( $sql, 'INSERT' ) || 0 === stripos( $sql, 'UPDATE' ) ) {

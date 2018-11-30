@@ -10,6 +10,9 @@ class CoreTest extends LapsTestCase {
 
 	public function testCollector() {
 
+		global $timestart;
+		$timestart = microtime( true );;
+
 		$collector = new Core_Load_Collector();
 
 		$records = $collector->get_records();

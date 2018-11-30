@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 
 namespace Rarst\Laps\Manager;
 
@@ -19,9 +20,9 @@ class Asset_Manager {
 	/**
 	 * Registers assets and queues as necessary.
 	 */
-	public function enqueue_scripts() {
+	public function enqueue_scripts(): void {
 
-		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+		$suffix = ( \defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 		wp_register_script( 'laps', plugins_url( "public/js/laps{$suffix}.js", dirname( __DIR__ ) ), [ 'jquery' ], '3.3.1', true );
 		wp_register_style( 'laps', plugins_url( "public/css/laps{$suffix}.css", dirname( __DIR__ ) ) );
 

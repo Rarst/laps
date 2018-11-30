@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 
 namespace Rarst\Laps\Record;
 
@@ -24,14 +25,14 @@ class Timeline_Iterator implements \Iterator {
 	 */
 	public function __construct( Recursive_Record_Iterator $iterator ) {
 
-		$this->origin   = $_SERVER['REQUEST_TIME_FLOAT'];
+		$this->origin   = filter_var( $_SERVER['REQUEST_TIME_FLOAT'], FILTER_VALIDATE_FLOAT );
 		$this->iterator = $iterator;
 	}
 
 	/**
 	 * @return array
 	 */
-	public function current() {
+	public function current(): array {
 
 		$data = [];
 
@@ -45,7 +46,7 @@ class Timeline_Iterator implements \Iterator {
 	/**
 	 * Sets current context to the next set of nested records.
 	 */
-	public function next() {
+	public function next(): void {
 		$this->current = $this->current->getChildren();
 	}
 
@@ -54,21 +55,21 @@ class Timeline_Iterator implements \Iterator {
 	 *
 	 * @return void
 	 */
-	public function key() {
+	public function key(): void {
 
 	}
 
 	/**
 	 * @return bool If current set contains records.
 	 */
-	public function valid() {
+	public function valid(): bool {
 		return (bool) count( $this->current );
 	}
 
 	/**
 	 * Rewind to a topmost record set.
 	 */
-	public function rewind() {
+	public function rewind(): void {
 		$this->total   = microtime( true ) - $this->origin;
 		$this->current = $this->iterator;
 	}
@@ -78,7 +79,7 @@ class Timeline_Iterator implements \Iterator {
 	 *
 	 * @return array Record data for display by the template.
 	 */
-	protected function prepare( Record_Interface $record ) {
+	protected function prepare( Record_Interface $record ): array {
 
 		$data = [
 			'description' => $record->get_description(),

@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 
 namespace Rarst\Laps\Provider;
 
@@ -17,7 +18,7 @@ class Manager_Provider implements ServiceProviderInterface, Bootable_Provider_In
 	/**
 	 * @param Container $pimple Container instance.
 	 */
-	public function register( Container $pimple ) {
+	public function register( Container $pimple ): void {
 
 		$pimple['managers'] = function ( Plugin $laps ) {
 			return [
@@ -31,7 +32,7 @@ class Manager_Provider implements ServiceProviderInterface, Bootable_Provider_In
 	/**
 	 * @param Plugin $laps Container instance.
 	 */
-	public function boot( Plugin $laps ) {
+	public function boot( Plugin $laps ): void {
 		$laps['managers'];
 	}
 }

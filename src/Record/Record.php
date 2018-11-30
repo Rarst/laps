@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 
 namespace Rarst\Laps\Record;
 
@@ -29,7 +30,7 @@ class Record implements Record_Interface {
 	 * @param string $description Optional description.
 	 * @param string $category    Optional category.
 	 */
-	public function __construct( $name, $origin, $duration, $description = '', $category = '' ) {
+	public function __construct( string $name, float $origin, float $duration, string $description = '', string $category = '' ) {
 		$this->name        = $name;
 		$this->origin      = $origin;
 		$this->duration    = $duration;
@@ -40,14 +41,14 @@ class Record implements Record_Interface {
 	/**
 	 * @return string
 	 */
-	public function get_name() {
+	public function get_name(): string {
 		return $this->name;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function get_description() {
+	public function get_description(): string {
 
 		if ( empty( $this->description ) ) {
 			$duration = round( $this->get_duration() * 1000 );
@@ -61,21 +62,21 @@ class Record implements Record_Interface {
 	/**
 	 * @return float
 	 */
-	public function get_origin() {
+	public function get_origin(): float {
 		return $this->origin;
 	}
 
 	/**
 	 * @return float
 	 */
-	public function get_duration() {
+	public function get_duration(): float {
 		return $this->duration;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function get_category() {
+	public function get_category(): string {
 		return $this->category;
 	}
 }

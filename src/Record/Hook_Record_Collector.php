@@ -1,4 +1,5 @@
 <?php
+declare( strict_types=1 );
 
 namespace Rarst\Laps\Record;
 
@@ -37,7 +38,7 @@ class Hook_Record_Collector extends Stopwatch_Record_Collector {
 	 *
 	 * @param array $stops Starts and stops to hook.
 	 */
-	public function add_events( $stops ) {
+	public function add_events( array $stops ): void {
 
 		$this->events = array_merge( $this->events, $stops );
 
@@ -51,7 +52,7 @@ class Hook_Record_Collector extends Stopwatch_Record_Collector {
 	/**
 	 * When theme is done possibly add vendor-specific events.
 	 */
-	public function after_setup_theme() {
+	public function after_setup_theme(): void {
 
 		foreach ( $this->event_configs as $config ) {
 			$this->add_events( $config->get_events() );
@@ -78,7 +79,7 @@ class Hook_Record_Collector extends Stopwatch_Record_Collector {
 			return $input;
 		}
 
-		$event = wp_parse_args( $this->events[ $filter_name ][ $priority ], [
+		$event = \wp_parse_args( $this->events[ $filter_name ][ $priority ], [
 			'action'   => 'start',
 			'category' => null,
 		] );
@@ -95,7 +96,7 @@ class Hook_Record_Collector extends Stopwatch_Record_Collector {
 	/**
 	 * @return Stopwatch_Record[]
 	 */
-	public function get_records() {
+	public function get_records(): array {
 
 		$this->stopwatch->stop( 'Toolbar' );
 
