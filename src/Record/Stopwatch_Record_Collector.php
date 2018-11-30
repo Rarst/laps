@@ -52,6 +52,7 @@ class Stopwatch_Record_Collector implements Record_Collector_Interface {
 
 		$events = $this->stopwatch->getSectionEvents( '__root__' );
 
+		/** @var string $name */
 		foreach ( array_keys( $events ) as $name ) {
 			if ( $this->stopwatch->isStarted( $name ) ) {
 				unset( $events[ $name ] );

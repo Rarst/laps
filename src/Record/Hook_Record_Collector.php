@@ -18,8 +18,8 @@ class Hook_Record_Collector extends Stopwatch_Record_Collector {
 	protected $events = [];
 
 	/**
-	 * @param Stopwatch $stopwatch     Stopwatch instance.
-	 * @param array     $event_configs Starts and stops configuration.
+	 * @param Stopwatch                     $stopwatch     Stopwatch instance.
+	 * @param Hook_Event_Config_Interface[] $event_configs Starts and stops configuration.
 	 */
 	public function __construct( Stopwatch $stopwatch, array $event_configs ) {
 
@@ -42,7 +42,12 @@ class Hook_Record_Collector extends Stopwatch_Record_Collector {
 
 		$this->events = array_merge( $this->events, $stops );
 
+		/**
+		 * @var string $hook_name
+		 * @var array  $data
+		 */
 		foreach ( $stops as $hook_name => $data ) {
+			/** @var int $priority */
 			foreach ( array_keys( $data ) as $priority ) {
 				add_action( $hook_name, [ $this, 'tick' ], $priority );
 			}
@@ -70,8 +75,14 @@ class Hook_Record_Collector extends Stopwatch_Record_Collector {
 
 		global $wp_filter;
 
+		/** @var string $filter_name */
 		$filter_name     = current_filter();
+		/**
+		 * @var \WP_Hook|array $filter_instance
+		 * @var array<string,\WP_hook|array> $wp_filter
+		 */
 		$filter_instance = $wp_filter[ $filter_name ];
+		/** @var int $priority */
 		$priority        = $filter_instance instanceof \WP_Hook ? $filter_instance->current_priority() : key( $filter_instance );
 
 		// See https://core.trac.wordpress.org/ticket/41185 on broken priority, but more general sanity check.

@@ -27,6 +27,10 @@ class Core_Load_Collector implements Record_Collector_Interface {
 
 		$request_time = filter_var( $_SERVER['REQUEST_TIME_FLOAT'], FILTER_VALIDATE_FLOAT );
 
+		/**
+		 * @var float $request_time
+		 * @var float $timestart
+		 */
 		return [
 			new Record( 'PHP Load', $request_time, $timestart - $request_time, '', 'php' ),
 			// TODO This includes network plugins on multisite, need conditional label if Laps is network–activated.

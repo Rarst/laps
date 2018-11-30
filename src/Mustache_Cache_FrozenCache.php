@@ -15,6 +15,8 @@ class Mustache_Cache_FrozenCache extends \Mustache_Cache_FilesystemCache {
 	 * @param string $value Value.
 	 *
 	 * @return void
+	 *
+	 * @psalm-suppress InvalidScalarArgument
 	 */
 	public function cache( $key, $value ): void {
 

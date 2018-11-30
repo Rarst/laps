@@ -21,6 +21,7 @@ class Hybrid_Events implements Hook_Event_Config_Interface {
 			return $events;
 		}
 
+		/** @var string $prefix */
 		$prefix = hybrid_get_prefix();
 
 		$events["{$prefix}_before_header"][10] = [
@@ -34,9 +35,11 @@ class Hybrid_Events implements Hook_Event_Config_Interface {
 			'category' => 'theme',
 		];
 
+		/** @var array $sidebars */
 		$sidebars = get_theme_support( 'hybrid-core-sidebars' );
 
 		if ( ! empty( $sidebars[0] ) ) {
+			/** @var string $sidebar */
 			foreach ( $sidebars[0] as $sidebar ) {
 
 				$events["{$prefix}_before_{$sidebar}"][10] = [

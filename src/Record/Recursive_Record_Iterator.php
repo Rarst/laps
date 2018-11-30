@@ -8,7 +8,7 @@ namespace Rarst\Laps\Record;
  */
 class Recursive_Record_Iterator extends \ArrayIterator implements \RecursiveIterator {
 
-	/** @var array $children */
+	/** @var Record_Interface[] $children */
 	protected $children = [];
 
 	/**

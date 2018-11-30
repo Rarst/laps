@@ -34,12 +34,15 @@ class Sql_Record_Collector implements Record_Collector_Interface {
 	 * @param string $query SQL query.
 	 *
 	 * @return string
+	 *
+	 * @psalm-suppress MixedPropertyFetch
 	 */
 	public function query( $query ): string {
 
 		global $wpdb;
 
 		if ( empty( $this->query_starts ) && ! empty( $wpdb->queries ) ) {
+			/** @var array $wpdb->queries */
 			$this->query_starts[ count( $wpdb->queries ) ] = microtime( true );
 		} else {
 			$this->query_starts[] = microtime( true );
@@ -59,6 +62,7 @@ class Sql_Record_Collector implements Record_Collector_Interface {
 
 		global $wpdb;
 
+		/** @var array $wpdb->queries */
 		return array_map( [ $this, 'transform' ], array_keys( $wpdb->queries ), $wpdb->queries );
 	}
 
@@ -75,6 +79,7 @@ class Sql_Record_Collector implements Record_Collector_Interface {
 	 *
 	 * @param int   $key        Query key in captured data.
 	 * @param array $query_data Array of captured query data.
+	 * @psalm-param array{0: string, 1: float, 2: string} $query_data
 	 *
 	 * @return Record
 	 */
@@ -84,6 +89,7 @@ class Sql_Record_Collector implements Record_Collector_Interface {
 
 		[ $sql, $duration, $caller ] = $query_data;
 
+		/** @var float $query_start */
 		$query_start = $this->query_starts[ $key ] ?? $last_query_end;
 		$sql         = trim( $sql );
 		$category    = 'sql-read';

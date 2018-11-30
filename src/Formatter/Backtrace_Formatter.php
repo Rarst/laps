@@ -8,7 +8,7 @@ namespace Rarst\Laps\Formatter;
  */
 class Backtrace_Formatter {
 
-	/** @var array $skip String matches to omit. */
+	/** @var string[] $skip String matches to omit. */
 	protected static $skip = [
 		'wp-blog-header.php',
 		'wp-load.php',
@@ -74,9 +74,13 @@ class Backtrace_Formatter {
 	}
 
 	/**
+	 *
 	 * @param string $item Backtrace item.
 	 *
 	 * @return string
+	 *
+	 * @psalm-suppress PossiblyFalseOperand
+	 * @psalm-suppress MixedInferredReturnType
 	 */
 	protected function shorten_include( string $item ): string {
 

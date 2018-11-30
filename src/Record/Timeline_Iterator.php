@@ -5,6 +5,8 @@ namespace Rarst\Laps\Record;
 
 /**
  * Processes records into sets for display by template.
+ *
+ * @psalm-suppress PropertyNotSetInConstructor
  */
 class Timeline_Iterator implements \Iterator {
 
@@ -22,6 +24,8 @@ class Timeline_Iterator implements \Iterator {
 
 	/**
 	 * @param Recursive_Record_Iterator $iterator Record iterator.
+	 *
+	 * @psalm-suppress PossiblyFalsePropertyAssignmentValue
 	 */
 	public function __construct( Recursive_Record_Iterator $iterator ) {
 
@@ -36,6 +40,7 @@ class Timeline_Iterator implements \Iterator {
 
 		$data = [];
 
+		/** @var Record $record */
 		foreach ( $this->current as $record ) {
 			$data[] = $this->prepare( $record );
 		}

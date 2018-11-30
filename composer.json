@@ -54,5 +54,8 @@
 				"js/tests"
 			]
 		}
+	},
+	"scripts": {
+		"psalm": "psalm --config=config/psalm.xml"
 	}
 }

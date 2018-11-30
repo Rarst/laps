@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<psalm
+        totallyTyped="true"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://getpsalm.org/schema/config"
+        xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="src"/>
+        <ignoreFiles>
+            <directory name="vendor"/>
+            <directory name="src/mustache/cache"/>
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+        <LessSpecificReturnType errorLevel="info"/>
+        <UndefinedFunction errorLevel="suppress"/>
+        <UndefinedClass>
+            <errorLevel type="suppress">
+                <referencedClass name="WP_Admin_Bar"/>
+                <referencedClass name="WP_Error"/>
+                <referencedClass name="WP_Hook"/>
+            </errorLevel>
+        </UndefinedClass>
+        <MixedArgument>
+            <errorLevel type="suppress">
+                <file name="src/Provider/Record_Provider.php" />
+            </errorLevel>
+        </MixedArgument>
+    </issueHandlers>
+</psalm>
