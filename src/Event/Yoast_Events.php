@@ -13,23 +13,8 @@ class Yoast_Events implements Hook_Event_Config_Interface {
 	 */
 	public function get_events(): array {
 
-		$stops = [];
-
-		if ( ! class_exists( 'WPSEO_Frontend' ) ) {
-			return $stops;
-		}
-
-		$stops['wpseo_head'][1] = [
-			'event'    => 'WP SEO head hook',
-			'category' => 'plugin',
-		];
-
-		$stops['wpseo_head'][100] = [
-			'action'   => 'stop',
-			'event'    => 'WP SEO head hook',
-			'category' => 'plugin',
-		];
-
-		return $stops;
+		return class_exists( 'WPSEO_Frontend' ) ? [
+			[ 'WP SEO head hook', 'plugin', 'wpseo_head' ],
+		] : [];
 	}
 }

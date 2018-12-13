@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Added
+- call backtraces to SQL records
+- new format of hook events
+
+### Changed
+- required PHP version to 7.1
+
+### Deprecated
+- old format of hook events
+
 ## 2.0 - 2018-02-26
 
 ### Added

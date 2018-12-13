@@ -43,14 +43,62 @@ class Hook_Record_Collector extends Stopwatch_Record_Collector {
 		$this->events = array_merge( $this->events, $stops );
 
 		/**
-		 * @var string $hook_name
-		 * @var array  $data
+		 * @var int|string $key
+		 * @var array      $data
 		 */
-		foreach ( $stops as $hook_name => $data ) {
+		foreach ( $stops as $key => $data ) {
+
+			if ( is_int( $key ) ) {
+				/** @var array{0:string} $data */
+				$this->add_event( ...$data );
+				continue;
+			}
+
 			/** @var int $priority */
 			foreach ( array_keys( $data ) as $priority ) {
-				add_action( $hook_name, [ $this, 'tick' ], $priority );
+				add_action( $key, [ $this, 'tick' ], $priority );
 			}
+		}
+	}
+
+	/**
+	 * Add a start/stop pair of hook event.
+	 *
+	 * @param string      $event          Hook event name.
+	 * @param string      $category       Hook event category.
+	 * @param string|null $start          Start hook name. Pass null to ignore.
+	 * @param string|null $stop           Stop hook name (defaults to start name).
+	 * @param int         $start_priority Start hook priority (defaults to -1).
+	 * @param int         $stop_priority  Stop hook priority (defaults to max int).
+	 */
+	private function add_event(
+		string $event,
+		string $category,
+		?string $start = null,
+		?string $stop = null,
+		int $start_priority = - 1,
+		int $stop_priority = PHP_INT_MAX
+	): void {
+		if ( null === $stop ) {
+			$stop = $start;
+		}
+
+		$collector = $this;
+
+		if ( null !== $start ) {
+			add_action( $start, function ( $input = null ) use ( $collector, $event, $category ) {
+				$collector->start( $event, $category );
+
+				return $input;
+			}, $start_priority );
+		}
+
+		if ( null !== $stop ) {
+			add_action( $stop, function ( $input = null ) use ( $collector, $event ) {
+				$collector->stop( $event );
+
+				return $input;
+			}, $stop_priority );
 		}
 	}
 
@@ -66,6 +114,9 @@ class Hook_Record_Collector extends Stopwatch_Record_Collector {
 
 	/**
 	 * Mark action for the event on Stopwatch.
+	 *
+	 * @deprecated 3.0:4.0 Deprecated in favor of the new format.
+	 * @codeCoverageIgnore
 	 *
 	 * @param mixed $input Pass through if added to filter.
 	 *
@@ -109,7 +160,7 @@ class Hook_Record_Collector extends Stopwatch_Record_Collector {
 	 */
 	public function get_records(): array {
 
-		$this->stopwatch->stop( 'Toolbar' );
+		$this->stop( 'Toolbar' );
 
 		return parent::get_records();
 	}

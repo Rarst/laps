@@ -24,15 +24,8 @@ class Hybrid_Events implements Hook_Event_Config_Interface {
 		/** @var string $prefix */
 		$prefix = hybrid_get_prefix();
 
-		$events["{$prefix}_before_header"][10] = [
-			'event'    => 'Header',
-			'category' => 'theme',
-		];
-
-		$events["{$prefix}_after_header"][10] = [
-			'action'   => 'stop',
-			'event'    => 'Header',
-			'category' => 'theme',
+		$events = [
+			[ 'Header', 'theme', "{$prefix}_before_header", "{$prefix}_after_header" ],
 		];
 
 		/** @var array $sidebars */
@@ -41,16 +34,11 @@ class Hybrid_Events implements Hook_Event_Config_Interface {
 		if ( ! empty( $sidebars[0] ) ) {
 			/** @var string $sidebar */
 			foreach ( $sidebars[0] as $sidebar ) {
-
-				$events["{$prefix}_before_{$sidebar}"][10] = [
-					'event'    => "Sidebar ({$sidebar})",
-					'category' => 'theme',
-				];
-
-				$events["{$prefix}_after_{$sidebar}"][10] = [
-					'action'   => 'stop',
-					'event'    => "Sidebar ({$sidebar})",
-					'category' => 'theme',
+				$events[] = [
+					"Sidebar ({$sidebar})",
+					'theme',
+					"{$prefix}_before_{$sidebar}",
+					"{$prefix}_after_{$sidebar}",
 				];
 			}
 		}

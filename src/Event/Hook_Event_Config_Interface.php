@@ -9,7 +9,9 @@ namespace Rarst\Laps\Event;
 interface Hook_Event_Config_Interface {
 
 	/**
-	 * @return array
+	 * @see Hook_Record_Collector::add_event()
+	 *
+	 * @return array[]
 	 */
 	public function get_events(): array;
 }
