@@ -83,29 +83,27 @@ class Hook_Record_Collector extends Stopwatch_Record_Collector {
 			$stop = $start;
 		}
 
-		$collector = $this;
-
 		if ( '' !== $start ) {
-			add_action( $start, function ( $input = null ) use ( $collector, $event, $category ) {
+			add_action( $start, function ( $input = null ) use ( $event, $category ) {
 
 				if ( 'Sidebar' === $event ) {
 					$event = $input;
 				}
 
-				$collector->start( $event, $category );
+				$this->start( $event, $category );
 
 				return $input;
 			}, $start_priority );
 		}
 
 		if ( '' !== $stop ) {
-			add_action( $stop, function ( $input = null ) use ( $collector, $event ) {
+			add_action( $stop, function ( $input = null ) use ( $event ) {
 
 				if ( 'Sidebar' === $event ) {
 					$event = $input;
 				}
 
-				$collector->stop( $event );
+				$this->stop( $event );
 
 				return $input;
 			}, $stop_priority );
