@@ -87,6 +87,11 @@ class Hook_Record_Collector extends Stopwatch_Record_Collector {
 
 		if ( '' !== $start ) {
 			add_action( $start, function ( $input = null ) use ( $collector, $event, $category ) {
+
+				if ( 'Sidebar' === $event ) {
+					$event = $input;
+				}
+
 				$collector->start( $event, $category );
 
 				return $input;
@@ -95,6 +100,11 @@ class Hook_Record_Collector extends Stopwatch_Record_Collector {
 
 		if ( '' !== $stop ) {
 			add_action( $stop, function ( $input = null ) use ( $collector, $event ) {
+
+				if ( 'Sidebar' === $event ) {
+					$event = $input;
+				}
+
 				$collector->stop( $event );
 
 				return $input;
@@ -161,6 +171,7 @@ class Hook_Record_Collector extends Stopwatch_Record_Collector {
 	public function get_records(): array {
 
 		$this->stop( 'Toolbar' );
+		$this->stop( 'Footer Hook' );
 
 		return parent::get_records();
 	}
