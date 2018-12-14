@@ -66,15 +66,15 @@ class Hook_Record_Collector extends Stopwatch_Record_Collector {
 	 *
 	 * @param string      $event          Hook event name.
 	 * @param string      $category       Hook event category.
-	 * @param string|null $start          Start hook name. Pass null to ignore.
-	 * @param string|null $stop           Stop hook name (defaults to start name).
+	 * @param string      $start          Start hook name. Pass empty string to ignore.
+	 * @param string|null $stop           Stop hook name (defaults to start name). Pass empty string to ignore.
 	 * @param int         $start_priority Start hook priority (defaults to -1).
 	 * @param int         $stop_priority  Stop hook priority (defaults to max int).
 	 */
 	private function add_event(
 		string $event,
 		string $category,
-		?string $start = null,
+		string $start,
 		?string $stop = null,
 		int $start_priority = - 1,
 		int $stop_priority = PHP_INT_MAX
@@ -85,7 +85,7 @@ class Hook_Record_Collector extends Stopwatch_Record_Collector {
 
 		$collector = $this;
 
-		if ( null !== $start ) {
+		if ( '' !== $start ) {
 			add_action( $start, function ( $input = null ) use ( $collector, $event, $category ) {
 				$collector->start( $event, $category );
 
@@ -93,7 +93,7 @@ class Hook_Record_Collector extends Stopwatch_Record_Collector {
 			}, $start_priority );
 		}
 
-		if ( null !== $stop ) {
+		if ( '' !== $stop ) {
 			add_action( $stop, function ( $input = null ) use ( $collector, $event ) {
 				$collector->stop( $event );
 
