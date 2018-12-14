@@ -21,6 +21,7 @@ class Core_Events implements Hook_Event_Config_Interface {
 			[ 'Admin Init', 'core', 'admin_init' ],
 			[ 'Admin Menu', 'core', '_admin_menu', 'admin_menu' ],
 			[ 'Toolbar', 'core', 'admin_bar_menu', '' ],
+			[ 'Head Hook', 'theme', 'wp_head' ],
 			[ 'Main Loop', 'theme', 'loop_start', 'loop_end' ],
 			[ 'Admin Print Scripts', 'core', 'admin_enqueue_scripts', 'admin_print_scripts' ],
 		];
