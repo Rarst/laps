@@ -49,7 +49,7 @@ class Recursive_Record_Iterator extends \ArrayIterator implements \RecursiveIter
 		$origin_a = $record_a->get_origin();
 		$origin_b = $record_b->get_origin();
 
-		if ( $origin_a === $origin_b ) {
+		if ( abs( $origin_a - $origin_b ) < 0.0001 ) { // Float math! Makes nesting results more sane.
 			return 0;
 		}
 
