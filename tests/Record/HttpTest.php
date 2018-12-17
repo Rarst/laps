@@ -2,6 +2,7 @@
 
 namespace Rarst\Laps\Tests\Record;
 
+use Brain\Monkey\Functions;
 use Rarst\Laps\Record\Http_Record_Collector;
 use Rarst\Laps\Tests\LapsTestCase;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -9,6 +10,9 @@ use Symfony\Component\Stopwatch\Stopwatch;
 class HttpTest extends LapsTestCase {
 
 	public function testCollector() {
+
+		Functions\expect( 'wp_normalize_path' )->zeroOrMoreTimes()->andReturnFirstArg();
+		Functions\expect( 'wp_debug_backtrace_summary' )->zeroOrMoreTimes()->andReturn( [] );
 
 		$stopwatch = new Stopwatch();
 		$url       = 'https://example.com/';
