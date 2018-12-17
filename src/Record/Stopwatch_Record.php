@@ -16,13 +16,18 @@ class Stopwatch_Record implements Record_Interface {
 	/** @var StopwatchEvent */
 	protected $stopwatch_event;
 
+	/** @var string */
+	protected $description = '';
+
 	/**
 	 * @param string         $name            Event name.
 	 * @param StopwatchEvent $stopwatch_event Stopwatch event instance.
+	 * @param string         $description     Optional description for the event.
 	 */
-	public function __construct( string $name, StopwatchEvent $stopwatch_event ) {
+	public function __construct( string $name, StopwatchEvent $stopwatch_event, string $description = '' ) {
 		$this->name            = $name;
 		$this->stopwatch_event = $stopwatch_event;
+		$this->description     = $description;
 	}
 
 	/**
@@ -37,10 +42,11 @@ class Stopwatch_Record implements Record_Interface {
 	 */
 	public function get_description(): string {
 
-		$duration = round( $this->stopwatch_event->getDuration() );
-		$memory   = $this->stopwatch_event->getMemory() / 1024 / 1024;
+		$duration    = round( $this->stopwatch_event->getDuration() );
+		$memory      = $this->stopwatch_event->getMemory() / 1024 / 1024;
+		$description = '' !== $this->description ? "<hr />{$this->description}" : '';
 
-		return "{$this->name} – {$duration} ms – {$memory} MB";
+		return "{$this->name} – {$duration} ms – {$memory} MB{$description}";
 	}
 
 	/**
