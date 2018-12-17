@@ -47,6 +47,8 @@ class Backtrace_Formatter {
 
 		if ( \is_string( $backtrace ) ) {
 			$backtrace = explode( ', ', $backtrace );
+		} else {
+			$backtrace = array_reverse( $backtrace );
 		}
 
 		$backtrace = array_filter( $backtrace, [ $this, 'filter' ] );
