@@ -27,7 +27,7 @@ class Core_Events implements Hook_Event_Config_Interface {
 			[ 'Main Loop', 'theme', 'loop_start', 'loop_end' ],
 			[ 'Sidebar', 'theme', 'dynamic_sidebar_before', 'dynamic_sidebar_after' ],
 			[ 'Toolbar', 'core', 'admin_bar_menu', '' ],
-			[ 'Footer Hook', 'theme', 'wp_footer', '' ],
+			[ 'Footer Hook', 'theme', 'wp_footer' ],
 		];
 	}
 }

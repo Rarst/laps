@@ -4,7 +4,9 @@ declare( strict_types=1 );
 namespace Rarst\Laps\Record;
 
 use Rarst\Laps\Event\Hook_Event_Config_Interface;
+use Rarst\Laps\Formatter\Hook_Formatter;
 use Symfony\Component\Stopwatch\Stopwatch;
+use Symfony\Component\Stopwatch\StopwatchEvent;
 
 /**
  * Processes events based on hooked starts and stops.
@@ -16,6 +18,12 @@ class Hook_Record_Collector extends Stopwatch_Record_Collector {
 
 	/** @var array $events */
 	protected $events = [];
+
+	/** @var array */
+	protected $callbacks = [];
+
+	/** @var Hook_Formatter */
+	protected $formatter;
 
 	/**
 	 * @param Stopwatch                     $stopwatch     Stopwatch instance.
@@ -31,6 +39,8 @@ class Hook_Record_Collector extends Stopwatch_Record_Collector {
 		$this->event_configs = $event_configs;
 
 		add_action( 'after_setup_theme', [ $this, 'after_setup_theme' ], 15 );
+
+		$this->formatter = new Hook_Formatter();
 	}
 
 	/**
@@ -84,10 +94,15 @@ class Hook_Record_Collector extends Stopwatch_Record_Collector {
 		}
 
 		if ( '' !== $start ) {
-			add_action( $start, function ( $input = null ) use ( $event, $category ) {
+			add_action( $start, function ( $input = null ) use ( $event, $category, $start, $stop ) {
 
 				if ( 'Sidebar' === $event ) {
 					$event = $input;
+				}
+
+				if ( $start === $stop ) {
+					global $wp_filter;
+					$this->callbacks[ $event ] = $wp_filter[ $start ];
 				}
 
 				$this->start( $event, $category );
@@ -172,5 +187,22 @@ class Hook_Record_Collector extends Stopwatch_Record_Collector {
 		$this->stop( 'Footer Hook' );
 
 		return parent::get_records();
+	}
+
+	/**
+	 * @param string         $name  Event name.
+	 * @param StopwatchEvent $event Stopwatch event instance.
+	 *
+	 * @return Stopwatch_Record
+	 */
+	protected function transform( string $name, StopwatchEvent $event ): Stopwatch_Record {
+
+		$description = '';
+
+		if ( isset( $this->callbacks[ $name ] ) ) {
+			$description = implode( '<br />', $this->formatter->format( $this->callbacks[ $name ] ) );
+		}
+
+		return new Stopwatch_Record( $name, $event, $description );
 	}
 }

@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - call backtraces to SQL records and HTTP calls
 - new format of hook events
 - sidebar tracking
+- list of callbacks to hook events
 
 ### Changed
 - required PHP version to 7.1
