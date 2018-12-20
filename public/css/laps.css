@@ -198,4 +198,7 @@
   line-height: 20px;
   text-align: left;
 }
+#wpadminbar .tooltip-inner br {
+  line-height: inherit;
+}
 /*# sourceMappingURL=laps.css.map */

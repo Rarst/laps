@@ -78,6 +78,6 @@ class Http_Record_Collector extends Stopwatch_Record_Collector {
 
 		$backtrace = $this->formatter->format( $this->callers[ $name ] );
 
-		return new Stopwatch_Record( $name, $event, implode( ' → ', $backtrace ) );
+		return new Stopwatch_Record( $name, $event, implode( '<br />', $backtrace ) );
 	}
 }
