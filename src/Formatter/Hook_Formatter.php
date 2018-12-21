@@ -8,12 +8,27 @@ namespace Rarst\Laps\Formatter;
  */
 class Hook_Formatter {
 
+	/** @var array $truncate_paths Paths to truncate from includes. */
+	protected $truncate_paths = [];
+
 	/**
-	 * @param \WP_Hook|array $hook
+	 * Set up object properties.
+	 */
+	public function __construct() {
+
+		$this->truncate_paths = [
+			wp_normalize_path( WP_CONTENT_DIR ),
+			wp_normalize_path( ABSPATH ),
+			'wp-admin/',
+		];
+	}
+
+	/**
+	 * @param \WP_Hook|array $hook Hook instance.
 	 *
 	 * @return array
 	 */
-	public function format($hook): array {
+	public function format( $hook ): array {
 
 		$callbacks = [];
 
@@ -22,40 +37,84 @@ class Hook_Formatter {
 		}
 		ksort( $hook );
 
-		foreach ( $hook as $priority => $functions ) {
-			foreach ( $functions as $function ) {
-				$callback = $function['function'];
+		$functions = array_merge( ...$hook );
 
-				if ( is_string( $callback ) ) {
+		foreach ( $functions as $function ) {
+			$callback = $this->get_callback_name( $function['function'], $function['accepted_args'] );
 
-				} elseif ( is_a( $callback, 'Closure' ) ) {
-					$closure  = new \ReflectionFunction( $callback );
-					$callback = 'closure from ' . $closure->getFileName() . '::' . $closure->getStartLine();
-
-					if ( false !== strpos( $callback, 'Hook_Collector' ) ) {
-						continue;
-					}
-				} elseif ( is_object( $callback ) ) {
-					$class = new \ReflectionClass( $callback );
-					$name  = $class->getName();
-					if ( 0 === strpos( $name, 'class@anonymous' ) ) {
-						$callback = 'anonymous class from ' . $class->getFileName() . '::' . $class->getStartLine();
-					} else {
-						$callback = $name;
-					}
-				} elseif ( is_string( $callback[0] ) ) { // Static method call.
-					$callback = $callback[0] . '::' . $callback[1];
-				} elseif ( is_object( $callback[0] ) ) {
-					$callback = get_class( $callback[0] ) . '->' . $callback[1];
-				}
-
-				$callback .= ( 1 === (int) $function['accepted_args'] ) ? '' : "({$function['accepted_args']})";
-
-				$callbacks[] = $callback;
+			if ( false !== strpos( $callback, 'Hook_Collector' ) ) {
+				continue;
 			}
+
+			$callbacks[] = $callback;
 		}
 
 		return $callbacks;
+	}
+
+	/**
+	 * @param string|object|array $callback Hook callback.
+	 * @param int                 $args     Number of accepted arguments.
+	 *
+	 * @return string
+	 */
+	protected function get_callback_name( $callback, int $args ): string {
+
+		switch ( gettype( $callback ) ) {
+			case 'object':
+				$callback = $this->get_class_name( $callback );
+				break;
+
+			case 'array':
+				$class    = is_string( $callback[0] )
+					? $callback[0] . '::'
+					: $this->get_class_name( $callback[0] ) . '->';
+				$callback = $class . $callback[1];
+				break;
+		}
+
+		$callback .= ( 1 === $args ) ? '' : "({$args})";
+
+		return $callback;
+	}
+
+	/**
+	 * @param object $object Object to retrieve name for.
+	 *
+	 * @return string
+	 */
+	protected function get_class_name( $object ): string {
+
+		if ( is_a( $object, 'CLosure' ) ) {
+			$class = new \ReflectionFunction( $object );
+
+			return 'closure from ' . $this->shorten_path( $class->getFileName() ) . ':' . $class->getStartLine();
+		}
+
+		$class = new \ReflectionClass( $object );
+		$name  = $class->getName();
+
+		if ( 0 === strpos( $name, 'class@anonymous' ) ) {
+			return 'anonymous class from ' . $this->shorten_path( $class->getFileName() ) . ':' . $class->getStartLine();
+		}
+
+		return $name;
+	}
+
+	/**
+	 * @param string $path Path to shorten.
+	 *
+	 * @return string
+	 */
+	protected function shorten_path( string $path ): string {
+		$path = wp_normalize_path( $path );
+		$path = str_replace( $this->truncate_paths, '', $path );
+		if ( ':' === $path[1] ) {
+			$path = substr( $path, 2 );
+		}
+		$path = ltrim( $path, '/' );
+
+		return $path;
 	}
 }
 

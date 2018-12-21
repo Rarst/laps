@@ -3,6 +3,7 @@ declare( strict_types=1 );
 
 namespace Rarst\Laps\Tests\Record;
 
+use function Brain\Monkey\Functions\expect;
 use Rarst\Laps\Event\Core_Events;
 use Rarst\Laps\Record\Collector\Hook_Collector;
 use Rarst\Laps\Tests\LapsTestCase;
@@ -11,6 +12,8 @@ use Symfony\Component\Stopwatch\Stopwatch;
 class HookTest extends LapsTestCase {
 
 	public function testCollector() {
+
+		expect( 'wp_normalize_path' )->zeroOrMoreTimes()->andReturnFirstArg();
 
 		$stopwatch = new Stopwatch();
 		$collector = new Hook_Collector( $stopwatch, [ 'core' => new Core_Events() ] );
