@@ -28,7 +28,7 @@ Laps automatically tracks many events, such as:
 
 For Ajax and REST API — Laps outputs performance information by Server Timing API, for use with clients such as Chrome Dev Tools.
 
-Note that REST API requests need nonce to be fully authenticated with cookies and show the information. Alternately `laps_can_see` check can be filtered.
+Note that REST API requests need nonce, to be fully authenticated with cookies, to show the information. Alternately `laps_can_see` check can be filtered.
 
 ![Laps v3 dev tools screenshot](https://i.imgur.com/hkl1Qk9.png)
 
