@@ -61,7 +61,7 @@ class Server_Timing_Manager {
 				continue;
 			}
 
-			$header .= sprintf( '%s;dur=%d;desc="%s", ', $record->get_category(), $duration, $record->get_name() );
+			$header .= sprintf( '%s;dur=%.2f;desc="%s", ', $record->get_category(), $duration, $record->get_name() );
 		}
 
 		header( 'Server-Timing: ' . $header );
