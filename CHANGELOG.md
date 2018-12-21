@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - new format of hook events
 - sidebar tracking
 - list of callbacks to hook events
+- Server Timing output for Ajax and REST APIs
 
 ### Changed
 - required PHP version to 7.1

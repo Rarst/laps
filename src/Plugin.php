@@ -68,10 +68,6 @@ class Plugin extends Container {
 	 */
 	public function run(): void {
 
-		if ( \defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-			return;
-		}
-
 		foreach ( $this->providers as $provider ) {
 
 			if ( $provider instanceof Bootable_Provider_Interface ) {

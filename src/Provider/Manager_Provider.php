@@ -5,6 +5,7 @@ namespace Rarst\Laps\Provider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
+use Rarst\Laps\Manager\Server_Timing_Manager;
 use Rarst\Laps\Plugin;
 use Rarst\Laps\Manager\Asset_Manager;
 use Rarst\Laps\Manager\Load_Order_Manager;
@@ -25,6 +26,7 @@ class Manager_Provider implements ServiceProviderInterface, Bootable_Provider_In
 				new Load_Order_Manager(),
 				new Asset_Manager(),
 				new Toolbar_Manager( $laps ),
+				new Server_Timing_Manager( $laps ),
 			];
 		};
 	}
