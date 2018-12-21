@@ -3,9 +3,9 @@ declare( strict_types=1 );
 
 namespace Rarst\Laps\Manager;
 
-use Rarst\Laps\Record\Recursive_Record_Iterator;
+use Rarst\Laps\Record\Iterator\Recursive_Record_Iterator;
 use Rarst\Laps\Plugin;
-use Rarst\Laps\Record\Timeline_Iterator;
+use Rarst\Laps\Record\Iterator\Timeline_Iterator;
 
 /**
  * Implements toolbar menu and visualization.

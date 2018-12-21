@@ -1,7 +1,9 @@
 <?php
 declare( strict_types=1 );
 
-namespace Rarst\Laps\Record;
+namespace Rarst\Laps\Record\Iterator;
+
+use Rarst\Laps\Record\Record_Interface;
 
 /**
  * Processes records, recursively bumping overlapping ones to children.

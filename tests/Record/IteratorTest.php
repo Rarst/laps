@@ -2,17 +2,17 @@
 
 namespace Rarst\Laps\Tests\Record;
 
-use Rarst\Laps\Record\Recursive_Record_Iterator;
+use Rarst\Laps\Record\Iterator\Recursive_Record_Iterator;
 use Rarst\Laps\Record\Record;
-use Rarst\Laps\Record\Timeline_Iterator;
+use Rarst\Laps\Record\Iterator\Timeline_Iterator;
 use Rarst\Laps\Tests\LapsTestCase;
 
 class IteratorTest extends LapsTestCase {
 
 	/**
-	 * @covers \Rarst\Laps\Record\Recursive_Record_Iterator
+	 * @covers \Rarst\Laps\Record\Iterator\Recursive_Record_Iterator
 	 *
-	 * @return Recursive_Record_Iterator
+	 * @return \Rarst\Laps\Record\Iterator\Recursive_Record_Iterator
 	 */
 	public function testRecord() {
 
@@ -41,7 +41,7 @@ class IteratorTest extends LapsTestCase {
 	}
 
 	/**
-	 * @covers \Rarst\Laps\Record\Timeline_Iterator
+	 * @covers \Rarst\Laps\Record\Iterator\Timeline_Iterator
 	 *
 	 * @depends testRecord
 	 */

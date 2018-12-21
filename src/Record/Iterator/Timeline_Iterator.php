@@ -1,7 +1,11 @@
 <?php
 declare( strict_types=1 );
 
-namespace Rarst\Laps\Record;
+namespace Rarst\Laps\Record\Iterator;
+
+use Rarst\Laps\Record\Record;
+use Rarst\Laps\Record\Record_Interface;
+use Rarst\Laps\Record\Iterator\Recursive_Record_Iterator;
 
 /**
  * Processes records into sets for display by template.
