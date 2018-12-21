@@ -18,6 +18,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Deprecated
 - old format of hook events
 
+### Fixed
+- error when no SQL queries logged by core
+
 ## 2.0 - 2018-02-26
 
 ### Added

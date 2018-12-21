@@ -56,11 +56,11 @@ class Sql_Record_Collector implements Record_Collector_Interface {
 	 */
 	public function get_records(): array {
 
-		if ( ! $this->is_savequeries() ) {
+		global $wpdb;
+
+		if ( empty( $wpdb->queries ) ) {
 			return [];
 		}
-
-		global $wpdb;
 
 		/** @var array $wpdb->queries */
 		return array_map( [ $this, 'transform' ], array_keys( $wpdb->queries ), $wpdb->queries );
