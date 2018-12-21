@@ -1,4 +1,9 @@
+![Laps v3 toolbar screenshot](https://i.imgur.com/NtgAxhp.png)
+
 # Laps — light WordPress profiler
+
+_Make a site, make it fast._
+
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Rarst/laps/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Rarst/laps/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/Rarst/laps/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Rarst/laps/build-status/master)
 [![Code Coverage](https://scrutinizer-ci.com/g/Rarst/laps/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Rarst/laps/?branch=master)
@@ -8,18 +13,24 @@
 [![PDS Skeleton](https://img.shields.io/badge/pds-skeleton-blue.svg)](https://github.com/php-pds/skeleton)
 [![Download Laps](https://img.shields.io/badge/dynamic/json.svg?label=download&url=https://api.github.com/repos/rarst/laps/releases/latest&query=$.assets%5B0%5D.name)](https://www.rarst.net/download/laps)
 
-_Make a site, make it fast._
-
-![Laps v2 screenshot](https://i.imgur.com/6n36KPE.png)
-
 Laps is a plugin that **shows performance information** about WordPress page load.
 
 It provides a visual summary in toolbar that is quick and easy to inspect.
 
-Laps tracks many events, such as:
-- PHP, core, plugins, and themes load, main posts loop
+## Page profiling
+
+Laps automatically tracks many events, such as:
+- PHP, core, plugins, and themes load, main posts loop, sidebars
 - database queries (with [`SAVEQUERIES` constant](http://codex.wordpress.org/Editing_wp-config.php#Save_queries_for_analysis) enabled)
 - network requests to other sites 
+
+## API profiling
+
+For Ajax and REST API — Laps outputs performance information by Server Timing API, for use with clients such as Chrome Dev Tools.
+
+Note that REST API requests need nonce to be fully authenticated with cookies and show the information. Alternately `laps_can_see` check can be filtered.
+
+![Laps v3 dev tools screenshot](https://i.imgur.com/hkl1Qk9.png)
 
 ## Installation
 
