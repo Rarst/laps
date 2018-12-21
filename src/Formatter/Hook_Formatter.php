@@ -32,7 +32,7 @@ class Hook_Formatter {
 					$closure  = new \ReflectionFunction( $callback );
 					$callback = 'closure from ' . $closure->getFileName() . '::' . $closure->getStartLine();
 
-					if ( false !== strpos( $callback, 'Hook_Record_Collector' ) ) {
+					if ( false !== strpos( $callback, 'Hook_Collector' ) ) {
 						continue;
 					}
 				} elseif ( is_object( $callback ) ) {

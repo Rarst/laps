@@ -4,13 +4,13 @@ namespace Rarst\Laps\Tests\Record;
 
 use Brain\Monkey\Functions;
 use Rarst\Laps\Record\Record;
-use Rarst\Laps\Record\Sql_Record_Collector;
+use Rarst\Laps\Record\Collector\Sql_Collector;
 use Rarst\Laps\Tests\LapsTestCase;
 
 class SqlTest extends LapsTestCase {
 
 	/**
-	 * @covers \Rarst\Laps\Record\Sql_Record_Collector
+	 * @covers \Rarst\Laps\Record\Collector\Sql_Collector
 	 */
 	public function testCollector() {
 
@@ -22,7 +22,7 @@ class SqlTest extends LapsTestCase {
 		}
 		Functions\expect( 'wp_normalize_path' )->zeroOrMoreTimes()->andReturnFirstArg();
 
-		$collector = new Sql_Record_Collector();
+		$collector = new Sql_Collector();
 
 		$this->assertTrue( has_filter( 'query', [ $collector, 'query' ] ) );
 

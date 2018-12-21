@@ -1,17 +1,18 @@
 <?php
 declare( strict_types=1 );
 
-namespace Rarst\Laps\Record;
+namespace Rarst\Laps\Record\Collector;
 
 use Rarst\Laps\Event\Hook_Event_Config_Interface;
 use Rarst\Laps\Formatter\Hook_Formatter;
+use Rarst\Laps\Record\Stopwatch_Record;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Stopwatch\StopwatchEvent;
 
 /**
  * Processes events based on hooked starts and stops.
  */
-class Hook_Record_Collector extends Stopwatch_Record_Collector {
+class Hook_Collector extends Stopwatch_Collector {
 
 	/** @var Hook_Event_Config_Interface[] $event_configs */
 	protected $event_configs = [];

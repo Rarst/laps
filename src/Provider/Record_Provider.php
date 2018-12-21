@@ -6,11 +6,11 @@ namespace Rarst\Laps\Provider;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Rarst\Laps\Plugin;
-use Rarst\Laps\Record\Core_Load_Collector;
-use Rarst\Laps\Record\Hook_Record_Collector;
-use Rarst\Laps\Record\Http_Record_Collector;
-use Rarst\Laps\Record\Record_Collector_Interface;
-use Rarst\Laps\Record\Sql_Record_Collector;
+use Rarst\Laps\Record\Collector\Core_Load_Collector;
+use Rarst\Laps\Record\Collector\Hook_Collector;
+use Rarst\Laps\Record\Collector\Http_Collector;
+use Rarst\Laps\Record\Collector\Record_Collector_Interface;
+use Rarst\Laps\Record\Collector\Sql_Collector;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 /**
@@ -30,9 +30,9 @@ class Record_Provider implements ServiceProviderInterface, Bootable_Provider_Int
 		$pimple['collectors'] = function ( Plugin $laps ): array {
 			return [
 				'core' => new Core_Load_Collector(),
-				'hook' => new Hook_Record_Collector( $laps['stopwatch'], $laps['hook.events'] ),
-				'http' => new Http_Record_Collector( $laps['stopwatch'] ),
-				'sql'  => new Sql_Record_Collector(),
+				'hook' => new Hook_Collector( $laps['stopwatch'], $laps['hook.events'] ),
+				'http' => new Http_Collector( $laps['stopwatch'] ),
+				'sql'  => new Sql_Collector(),
 			];
 		};
 

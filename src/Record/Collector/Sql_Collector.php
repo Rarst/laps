@@ -1,14 +1,15 @@
 <?php
 declare( strict_types=1 );
 
-namespace Rarst\Laps\Record;
+namespace Rarst\Laps\Record\Collector;
 
 use Rarst\Laps\Formatter\Backtrace_Formatter;
+use Rarst\Laps\Record\Record;
 
 /**
  * Processes SQL events from data logged by wpdb.
  */
-class Sql_Record_Collector implements Record_Collector_Interface {
+class Sql_Collector implements Record_Collector_Interface {
 
 	/** @var array $query_starts Log of query start times. */
 	protected $query_starts = [];

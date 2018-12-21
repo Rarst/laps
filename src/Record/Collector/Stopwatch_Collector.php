@@ -1,15 +1,16 @@
 <?php
 declare( strict_types=1 );
 
-namespace Rarst\Laps\Record;
+namespace Rarst\Laps\Record\Collector;
 
+use Rarst\Laps\Record\Stopwatch_Record;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Stopwatch\StopwatchEvent;
 
 /**
  * Generic Stopwatch–based collector. Can be used by itself or extended.
  */
-class Stopwatch_Record_Collector implements Record_Collector_Interface {
+class Stopwatch_Collector implements Record_Collector_Interface {
 
 	/** @var Stopwatch $stopwatch */
 	protected $stopwatch;

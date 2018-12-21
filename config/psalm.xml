@@ -26,17 +26,17 @@
         <MixedArgument>
             <errorLevel type="suppress">
                 <file name="src/Provider/Record_Provider.php" />
-                <file name="src/Record/Hook_Record_Collector.php" />
+                <file name="src/Record/Collector/Hook_Collector.php" />
             </errorLevel>
         </MixedArgument>
         <MissingClosureParamType>
             <errorLevel type="suppress">
-                <file name="src/Record/Hook_Record_Collector.php" />
+                <file name="src/Record/Collector/Hook_Collector.php" />
             </errorLevel>
         </MissingClosureParamType>
         <MissingClosureReturnType>
             <errorLevel type="suppress">
-                <file name="src/Record/Hook_Record_Collector.php" />
+                <file name="src/Record/Collector/Hook_Collector.php" />
             </errorLevel>
         </MissingClosureReturnType>
     </issueHandlers>

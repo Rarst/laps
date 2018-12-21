@@ -3,7 +3,7 @@
 namespace Rarst\Laps\Tests\Record;
 
 use Rarst\Laps\Record\Stopwatch_Record;
-use Rarst\Laps\Record\Stopwatch_Record_Collector;
+use Rarst\Laps\Record\Collector\Stopwatch_Collector;
 use Rarst\Laps\Tests\LapsTestCase;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Stopwatch\StopwatchEvent;
@@ -11,11 +11,11 @@ use Symfony\Component\Stopwatch\StopwatchEvent;
 class StopwatchTest extends LapsTestCase {
 
 	/**
-	 * @covers \Rarst\Laps\Record\Stopwatch_Record_Collector
+	 * @covers \Rarst\Laps\Record\Collector\Stopwatch_Collector
 	 */
 	public function testCollector() {
 
-		$collector = new Stopwatch_Record_Collector( new Stopwatch() );
+		$collector = new Stopwatch_Collector( new Stopwatch() );
 
 		$collector->start( 'Event', 'info' );
 		$collector->start( 'Not stopped', 'info' );

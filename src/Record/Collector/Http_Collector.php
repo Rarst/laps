@@ -1,16 +1,17 @@
 <?php
 declare( strict_types=1 );
 
-namespace Rarst\Laps\Record;
+namespace Rarst\Laps\Record\Collector;
 
 use Rarst\Laps\Formatter\Backtrace_Formatter;
+use Rarst\Laps\Record\Stopwatch_Record;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Stopwatch\StopwatchEvent;
 
 /**
  * Captures time of network requests made with HTTP API.
  */
-class Http_Record_Collector extends Stopwatch_Record_Collector {
+class Http_Collector extends Stopwatch_Collector {
 
 	/** @var Backtrace_Formatter */
 	private $formatter;

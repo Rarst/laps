@@ -1,7 +1,10 @@
 <?php
 declare( strict_types=1 );
 
-namespace Rarst\Laps\Record;
+namespace Rarst\Laps\Record\Collector;
+
+use Rarst\Laps\Record\Record;
+use Rarst\Laps\Record\Record_Interface;
 
 /**
  * Covers pre–plugin load time from available data.

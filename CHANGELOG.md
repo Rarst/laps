@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - required PHP version to 7.1
+- organization and names for Record classes
 
 ### Deprecated
 - old format of hook events

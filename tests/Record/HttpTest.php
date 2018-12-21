@@ -3,7 +3,7 @@
 namespace Rarst\Laps\Tests\Record;
 
 use Brain\Monkey\Functions;
-use Rarst\Laps\Record\Http_Record_Collector;
+use Rarst\Laps\Record\Collector\Http_Collector;
 use Rarst\Laps\Tests\LapsTestCase;
 use Symfony\Component\Stopwatch\Stopwatch;
 
@@ -16,7 +16,7 @@ class HttpTest extends LapsTestCase {
 
 		$stopwatch = new Stopwatch();
 		$url       = 'https://example.com/';
-		$collector = new Http_Record_Collector( $stopwatch );
+		$collector = new Http_Collector( $stopwatch );
 
 		$this->assertTrue( has_action( 'pre_http_request', [ $collector, 'pre_http_request' ] ) );
 		$this->assertTrue( has_action( 'http_api_debug', [ $collector, 'http_api_debug' ] ) );

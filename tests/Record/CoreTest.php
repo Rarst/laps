@@ -2,7 +2,7 @@
 
 namespace Rarst\Laps\Tests\Record;
 
-use Rarst\Laps\Record\Core_Load_Collector;
+use Rarst\Laps\Record\Collector\Core_Load_Collector;
 use Rarst\Laps\Record\Record_Interface;
 use Rarst\Laps\Tests\LapsTestCase;
 
