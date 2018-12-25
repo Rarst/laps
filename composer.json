@@ -54,9 +54,5 @@
 				"js/tests"
 			]
 		}
-	},
-	"scripts": {
-		"phan" : "phan --config-file=config/phan.php --allow-polyfill-parser",
-		"psalm": "psalm --config=config/psalm.xml"
 	}
 }
