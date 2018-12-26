@@ -28,9 +28,13 @@ Laps automatically tracks many events, such as:
 
 For Ajax and REST API — Laps outputs performance information by Server Timing API, for use with clients such as Chrome Dev Tools.
 
-Note that REST API requests need nonce, to be fully authenticated with cookies, to show the information. Alternately `laps_can_see` check can be filtered.
-
 ![Laps v3 dev tools screenshot](https://i.imgur.com/hkl1Qk9.png)
+
+### API authentication
+
+API requests need to be authenticated as admin for performance data to be sent. For Ajax requests cookies are sufficient. REST API requests also [need nonce passed](https://developer.wordpress.org/rest-api/using-the-rest-api/authentication/#cookie-authentication).
+
+`laps_can_see` check can be filtered to relax required permissions on the plugin’s side.
 
 ## Installation
 
