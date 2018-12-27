@@ -4,6 +4,7 @@ declare( strict_types=1 );
 namespace Rarst\Laps\Manager;
 
 use Rarst\Laps\Plugin;
+use Rarst\Laps\Record\Collector\Record_Collector_Interface;
 use Rarst\Laps\Record\Record_Interface;
 
 /**
@@ -11,15 +12,15 @@ use Rarst\Laps\Record\Record_Interface;
  */
 class Server_Timing_Manager {
 
-	/** @var Plugin */
-	private $laps;
+	/** @var Record_Collector_Interface */
+	private $collector;
 
 	/**
-	 * @param Plugin $laps Container instance.
+	 * @param Record_Collector_Interface $collector Collector of all records.
 	 */
-	public function __construct( Plugin $laps ) {
+	public function __construct( Record_Collector_Interface $collector ) {
 
-		$this->laps = $laps;
+		$this->collector = $collector;
 
 		add_action( 'admin_init', [ $this, 'send_timing_header' ], PHP_INT_MAX );
 		add_action( 'rest_pre_serve_request', [ $this, 'send_timing_header' ] );
@@ -50,11 +51,10 @@ class Server_Timing_Manager {
 			return $input;
 		}
 
-		$records = $this->laps['records'];
 		$header  = '';
 
 		/** @var Record_Interface $record */
-		foreach ( $records as $record ) {
+		foreach ( $this->collector->get_records() as $record ) {
 			$duration = $record->get_duration() * 1000;
 
 			if ( $duration < 1 ) {

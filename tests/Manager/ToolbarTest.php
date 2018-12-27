@@ -1,14 +1,15 @@
 <?php
+declare( strict_types=1 );
 
 namespace Rarst\Laps\Tests\Manager;
 
 use Brain\Monkey\Functions;
 use Rarst\Laps\Manager\Toolbar_Manager;
-use Rarst\Laps\Plugin;
+use Rarst\Laps\Record\Collector\Lazy_Proxy_Collector;
 use Rarst\Laps\Tests\LapsTestCase;
 
 /**
- * @coversDefaultClass Rarst\Laps\Manager\Toolbar_Manager
+ * @coversDefaultClass \Rarst\Laps\Manager\Toolbar_Manager
  */
 class ToolbarTest extends LapsTestCase {
 
@@ -19,8 +20,8 @@ class ToolbarTest extends LapsTestCase {
 	 */
 	public function test__construct() {
 
-		$laps    = new Plugin( [ 'records' => [] ] );
-		$manager = new Toolbar_Manager( $laps );
+		$collector = new Lazy_Proxy_Collector( [] );
+		$manager   = new Toolbar_Manager( $collector, new \Mustache_Engine() );
 
 		$this->assertTrue( has_action( 'admin_bar_menu', [ $manager, 'admin_bar_menu' ] ) );
 

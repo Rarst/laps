@@ -25,8 +25,8 @@ class Manager_Provider implements ServiceProviderInterface, Bootable_Provider_In
 			return [
 				new Load_Order_Manager(),
 				new Asset_Manager(),
-				new Toolbar_Manager( $laps ),
-				new Server_Timing_Manager( $laps ),
+				new Toolbar_Manager( $laps['records.lazy'], $laps['mustache'] ),
+				new Server_Timing_Manager( $laps['records.lazy'] ),
 			];
 		};
 	}

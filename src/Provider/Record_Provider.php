@@ -9,7 +9,7 @@ use Rarst\Laps\Plugin;
 use Rarst\Laps\Record\Collector\Core_Load_Collector;
 use Rarst\Laps\Record\Collector\Hook_Collector;
 use Rarst\Laps\Record\Collector\Http_Collector;
-use Rarst\Laps\Record\Collector\Record_Collector_Interface;
+use Rarst\Laps\Record\Collector\Lazy_Proxy_Collector;
 use Rarst\Laps\Record\Collector\Sql_Collector;
 use Symfony\Component\Stopwatch\Stopwatch;
 
@@ -36,16 +36,12 @@ class Record_Provider implements ServiceProviderInterface, Bootable_Provider_Int
 			];
 		};
 
+		$pimple['records.lazy'] = function ( Plugin $laps ): Lazy_Proxy_Collector {
+			return new Lazy_Proxy_Collector( $laps['collectors'] );
+		};
+
 		$pimple['records'] = function ( Plugin $laps ): array {
-
-			$records = [];
-
-			/** @var Record_Collector_Interface $collector */
-			foreach ( $laps['collectors'] as $collector ) {
-				$records[] = $collector->get_records();
-			}
-
-			return array_merge( ...$records );
+			return $laps['records.lazy']->get_records();
 		};
 	}
 

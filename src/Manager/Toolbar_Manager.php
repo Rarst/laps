@@ -3,6 +3,8 @@ declare( strict_types=1 );
 
 namespace Rarst\Laps\Manager;
 
+use Mustache_Engine;
+use Rarst\Laps\Record\Collector\Record_Collector_Interface;
 use Rarst\Laps\Record\Iterator\Recursive_Record_Iterator;
 use Rarst\Laps\Plugin;
 use Rarst\Laps\Record\Iterator\Timeline_Iterator;
@@ -12,15 +14,20 @@ use Rarst\Laps\Record\Iterator\Timeline_Iterator;
  */
 class Toolbar_Manager {
 
-	/** @var Plugin $laps */
-	protected $laps;
+	/** @var Record_Collector_Interface $collector */
+	protected $collector;
+
+	/** @var Mustache_Engine */
+	private $mustache;
 
 	/**
-	 * @param Plugin $laps Container instance.
+	 * @param Record_Collector_Interface $collector Collector of all records..
+	 * @param Mustache_Engine            $mustache  Mustache instance.
 	 */
-	public function __construct( Plugin $laps ) {
+	public function __construct( Record_Collector_Interface $collector, Mustache_Engine $mustache ) {
 
-		$this->laps = $laps;
+		$this->collector = $collector;
+		$this->mustache  = $mustache;
 
 		add_action( 'admin_bar_menu', [ $this, 'admin_bar_menu' ], 1000 );
 	}
@@ -49,8 +56,8 @@ class Toolbar_Manager {
 			'id'     => 'laps_output',
 			'parent' => 'laps',
 			'meta'   => [ // TODO consider doing render lazily, but might not be worth the effort.
-				'html' => $this->laps['mustache']->render( 'laps', [
-					'timelines' => new Timeline_Iterator( new Recursive_Record_Iterator( $this->laps['records'] ) ),
+				'html' => $this->mustache->render( 'laps', [
+					'timelines' => new Timeline_Iterator( new Recursive_Record_Iterator( $this->collector->get_records() ) ),
 				] ),
 			],
 		] );
