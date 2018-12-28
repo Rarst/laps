@@ -1,0 +1,55 @@
+<?php
+declare( strict_types=1 );
+
+namespace Rarst\Laps\Tests\Formatter;
+
+use Brain\Monkey\Functions;
+use Rarst\Laps\Formatter\Hook_Formatter;
+use Rarst\Laps\Tests\LapsTestCase;
+
+/**
+ * @coversDefaultClass \Rarst\Laps\Formatter\Hook_Formatter
+ */
+class HookTest extends LapsTestCase {
+
+	/**
+	 * @covers ::__construct
+	 *
+	 * @return Hook_Formatter
+	 */
+	public function test__construct() {
+
+		if ( ! defined( 'ABSPATH' ) ) {
+			define( 'ABSPATH', '/wp' );
+			define( 'WP_CONTENT_DIR', '/wp-content/' );
+		}
+
+		Functions\expect( 'wp_normalize_path' )->zeroOrMoreTimes()->andReturnFirstArg();
+
+		return new Hook_Formatter();
+	}
+
+	/**
+	 * @depends test__construct
+	 */
+	public function testFormat( Hook_Formatter $formatter ) {
+
+		if ( ! defined( 'ABSPATH' ) ) {
+			define( 'ABSPATH', '/wp' );
+			define( 'WP_CONTENT_DIR', '/wp-content/' );
+		}
+
+		Functions\expect( 'wp_normalize_path' )->zeroOrMoreTimes()->andReturnFirstArg();
+
+		$hook = [
+			[ [ 'function' => 'function', 'accepted_args' => 2 ] ],
+			[ [ 'function' => [ 'class', 'method' ], 'accepted_args' => 1 ] ],
+		];
+
+		$result = $formatter->format( $hook );
+
+		$this->assertInternalType( 'array', $result );
+		$this->assertArraySubset( [ 'function(2)', 'class::method' ], array_values( $result ) );
+	}
+}
+
