@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## 3.0 - 2018-12-28
+
 ### Added
 - call backtraces to SQL records and HTTP calls
 - new format of hook events
