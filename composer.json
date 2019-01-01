@@ -47,11 +47,6 @@
 			],
 			"symfony/stopwatch": [
 				"Tests"
-			],
-			"twbs/bootstrap"   : [
-				"docs",
-				"grunt",
-				"js/tests"
 			]
 		}
 	}
