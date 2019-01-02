@@ -43,7 +43,7 @@ class Stopwatch_Record implements Record_Interface {
 	public function get_description(): string {
 
 		$duration    = round( $this->stopwatch_event->getDuration() );
-		$memory      = $this->stopwatch_event->getMemory() / 1024 / 1024;
+		$memory      = round( $this->stopwatch_event->getMemory() / 1024 / 1024, 2 );
 		$description = '' !== $this->description ? "<hr />{$this->description}" : '';
 
 		return "{$this->name} – {$duration} ms – {$memory} MB{$description}";
