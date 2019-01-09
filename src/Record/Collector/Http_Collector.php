@@ -35,16 +35,16 @@ class Http_Collector extends Stopwatch_Collector {
 	/**
 	 * Capture start time of HTTP request
 	 *
-	 * @param boolean $false Whether to preempt an HTTP request's return value. Default false.
-	 * @param array   $args  HTTP request arguments.
-	 * @param string  $url   The request URL.
+	 * @param false|array|\WP_Error $false Whether to preempt an HTTP request's return value. Default false.
+	 * @param array                 $args  HTTP request arguments.
+	 * @param string                $url   The request URL.
 	 *
 	 * @return boolean
 	 */
-	public function pre_http_request( bool $false, array $args, string $url ): bool {
+	public function pre_http_request( $false, array $args, string $url ) {
 
 		$this->start( $url, 'http' );
-		$this->callers[ $url ] = wp_debug_backtrace_summary( __CLASS__, 5, true );
+		$this->callers[ $url ] = wp_debug_backtrace_summary( __CLASS__, 5 );
 
 		return $false;
 	}

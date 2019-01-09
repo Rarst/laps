@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## 3.0.1 - 2019-01-09
+
+### Fixed
+- fatal error when HTTP request is pre–filtered
+
 ## 3.0 - 2018-12-28
 
 ### Added
