@@ -4,7 +4,7 @@ declare( strict_types=1 );
 namespace Rarst\Laps\Event;
 
 /**
- * Events for Yoast plugins
+ * Events for WooCommerce plugin
  */
 class WooCommerce_Events implements Hook_Event_Config_Interface {
 
