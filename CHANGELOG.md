@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Added
+- WooCommerce events
+
 ### Fixed
 - headers error from new line in Server Timing
 

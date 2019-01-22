@@ -7,6 +7,7 @@ use Rarst\Laps\Event\Core_Events;
 use Rarst\Laps\Event\Genesis_Events;
 use Rarst\Laps\Event\Hybrid_Events;
 use Rarst\Laps\Event\THA_Events;
+use Rarst\Laps\Event\WooCommerce_Events;
 use Rarst\Laps\Event\Yoast_Events;
 use Rarst\Laps\Tests\LapsTestCase;
 
@@ -57,6 +58,19 @@ class EventTest extends LapsTestCase {
 		define( 'THA_HOOKS_VERSION', '1.0' );
 
 		$events = $tha->get_events();
+
+		$this->assertInternalType( 'array', $events );
+		$this->assertNotEmpty( $events );
+	}
+
+	public function testWooCommerce() {
+
+		$woocommerce = new WooCommerce_Events();
+		$this->assertEmpty( $woocommerce->get_events() );
+
+		$this->getMockBuilder( 'WooCommerce' )->allowMockingUnknownTypes()->getMock();
+
+		$events = $woocommerce->get_events();
 
 		$this->assertInternalType( 'array', $events );
 		$this->assertNotEmpty( $events );
