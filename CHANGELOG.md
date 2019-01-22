@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - WooCommerce events
 - PHP version and OPcache status information
+- error message on incomplete install
 
 ### Fixed
 - headers error from new line in Server Timing
