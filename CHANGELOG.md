@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## 3.1 - 2019-01-22
+
 ### Added
 - WooCommerce events
 - PHP version and OPcache status information
