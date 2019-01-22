@@ -64,7 +64,7 @@ class Server_Timing_Manager {
 			$header .= sprintf( '%s;dur=%.2f;desc="%s", ', $record->get_category(), $duration, $record->get_name() );
 		}
 
-		header( 'Server-Timing: ' . $header );
+		header( 'Server-Timing: ' . preg_replace( '/\R/', '', $header ) );
 
 		return $input;
 	}

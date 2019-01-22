@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Fixed
+- headers error from new line in Server Timing
+
 ## 3.0.1 - 2019-01-09
 
 ### Fixed
