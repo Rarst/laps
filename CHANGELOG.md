@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Fixed
+- handling of reoccurring hook events
+
 ## 3.1 - 2019-01-22
 
 ### Added

@@ -26,6 +26,9 @@ class Hook_Collector extends Stopwatch_Collector {
 	/** @var Hook_Formatter */
 	protected $formatter;
 
+	/** @var array $calls Tracks number of calls for recurrent events. */
+	private $calls = [];
+
 	/**
 	 * @param Stopwatch                     $stopwatch     Stopwatch instance.
 	 * @param Hook_Event_Config_Interface[] $event_configs Starts and stops configuration.
@@ -97,6 +100,8 @@ class Hook_Collector extends Stopwatch_Collector {
 		if ( '' !== $start ) {
 			add_action( $start, function ( $input = null ) use ( $event, $category, $start, $stop ) {
 
+				$event .= $this->get_count_suffix( $event, true );
+
 				if ( 'Sidebar' === $event ) {
 					$event = $input;
 				}
@@ -115,6 +120,8 @@ class Hook_Collector extends Stopwatch_Collector {
 		if ( '' !== $stop ) {
 			add_action( $stop, function ( $input = null ) use ( $event ) {
 
+				$event .= $this->get_count_suffix( $event );
+
 				if ( 'Sidebar' === $event ) {
 					$event = $input;
 				}
@@ -124,6 +131,29 @@ class Hook_Collector extends Stopwatch_Collector {
 				return $input;
 			}, $stop_priority );
 		}
+	}
+
+	/**
+	 * Get the suffix to use if event occurs multiple times.
+	 *
+	 * @param string  $event     Event name.
+	 * @param boolean $increment Flag to increment count.
+	 *
+	 * @return string
+	 */
+	private function get_count_suffix( string $event, bool $increment = false ): string {
+
+		if ( ! isset( $this->calls[ $event ] ) ) {
+			$this->calls[ $event ] = 0;
+		}
+
+		if ( $increment ) {
+			$this->calls[ $event ] ++;
+		}
+
+		$count = (int) $this->calls[ $event ];
+
+		return $count > 1 ? " ({$count})" : '';
 	}
 
 	/**
