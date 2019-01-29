@@ -37,7 +37,12 @@ class Hook_Collector extends Stopwatch_Collector {
 
 		parent::__construct( $stopwatch );
 
-		$this->start( 'Plugins Load', 'plugin' );
+		if ( did_action( 'muplugins_loaded' ) ) {
+			$this->start( 'Plugins Load', 'plugin' );
+		} else {
+			$this->start( 'Network & MU Plugins Load', 'plugin' );
+			add_action( 'muplugins_loaded', [ $this, 'muplugins_loaded' ], PHP_INT_MAX );
+		}
 		$this->add_events( $event_configs['core']->get_events() );
 		unset( $event_configs['core'] );
 		$this->event_configs = $event_configs;
@@ -45,6 +50,14 @@ class Hook_Collector extends Stopwatch_Collector {
 		add_action( 'after_setup_theme', [ $this, 'after_setup_theme' ], 15 );
 
 		$this->formatter = new Hook_Formatter();
+	}
+
+	/**
+	 * Time the point between network/MU plugins and regular if network activated.
+	 */
+	public function muplugins_loaded() {
+		$this->stop( 'Network & MU Plugins Load' );
+		$this->start( 'Plugins Load', 'plugin' );
 	}
 
 	/**

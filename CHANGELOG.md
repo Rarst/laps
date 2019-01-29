@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - handling of reoccurring hook events
+- tracking of load events when network–activated
 
 ## 3.1 - 2019-01-22
 

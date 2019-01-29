@@ -18,7 +18,6 @@ class HookTest extends LapsTestCase {
 		$stopwatch = new Stopwatch();
 		$collector = new Hook_Collector( $stopwatch, [ 'core' => new Core_Events() ] );
 
-		$this->assertTrue( $stopwatch->isStarted( 'Plugins Load' ) );
 		$this->assertTrue( has_action( 'after_setup_theme', [ $collector, 'after_setup_theme' ] ) );
 
 		$this->assertTrue( has_action( 'plugins_loaded', 'function ($input)' ) );

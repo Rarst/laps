@@ -14,11 +14,15 @@ class Core_Load_Collector implements Record_Collector_Interface {
 	/** @var float $timeload */
 	protected $timeload;
 
+	/** @var bool Flag if Laps is network activated. */
+	private $network_activated;
+
 	/**
-	 * Store core load end, plugin load start mark.
+	 * Store plugin load start mark.
 	 */
 	public function __construct() {
-		$this->timeload = microtime( true );
+		$this->timeload          = microtime( true );
+		$this->network_activated = ! did_action( 'muplugins_loaded' );
 	}
 
 	/**
@@ -37,14 +41,15 @@ class Core_Load_Collector implements Record_Collector_Interface {
 			$php         .= empty( $zend_status['opcache_enabled'] ) ? '' : ' – OPcache';
 		}
 
+		$load = $this->network_activated ? 'Core Load' : 'Core & MU Plugins Load';
+
 		/**
 		 * @var float $request_time
 		 * @var float $timestart
 		 */
 		return [
 			new Record( $php, $request_time, $timestart - $request_time, '', 'php' ),
-			// TODO This includes network plugins on multisite, need conditional label if Laps is network–activated.
-			new Record( 'Core and MU Plugins Load', $timestart, $this->timeload - $timestart, '', 'core' ),
+			new Record( $load, $timestart, $this->timeload - $timestart, '', 'core' ),
 		];
 	}
 }
