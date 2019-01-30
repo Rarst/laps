@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Added
+- Beaver Builder events
+
 ### Fixed
 - handling of reoccurring hook events
 - tracking of load events when network–activated
