@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## 3.2 - 2019-01-30
+
 ### Added
 - Beaver Builder events
 - error message on unsupported PHP version
