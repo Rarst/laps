@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - Beaver Builder events
+- error message on unsupported PHP version
 
 ### Fixed
 - handling of reoccurring hook events
