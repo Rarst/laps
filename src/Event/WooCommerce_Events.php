@@ -5,6 +5,8 @@ namespace Rarst\Laps\Event;
 
 /**
  * Events for WooCommerce plugin
+ *
+ * @deprecated 3.2:4.0 Events going to be moved to Extension_Events class.
  */
 class WooCommerce_Events implements Hook_Event_Config_Interface {
 

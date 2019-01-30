@@ -7,6 +7,8 @@ namespace Rarst\Laps\Event;
  * Events for Theme Hook Alliance
  *
  * @link http://zamoose.github.io/themehookalliance/
+ *
+ * @deprecated 3.2:4.0 Events going to be moved to Extension_Events class.
  */
 class THA_Events implements Hook_Event_Config_Interface {
 

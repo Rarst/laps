@@ -5,6 +5,8 @@ namespace Rarst\Laps\Event;
 
 /**
  * Events for Yoast plugins
+ *
+ * @deprecated 3.2:4.0 Events going to be moved to Extension_Events class.
  */
 class Yoast_Events implements Hook_Event_Config_Interface {
 

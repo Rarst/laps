@@ -7,6 +7,8 @@ namespace Rarst\Laps\Event;
  * Events for Genesis Framework based themes
  *
  * @link http://my.studiopress.com/themes/genesis/
+ *
+ * @deprecated 3.2:4.0 Events going to be moved to Extension_Events class.
  */
 class Genesis_Events implements Hook_Event_Config_Interface {
 
