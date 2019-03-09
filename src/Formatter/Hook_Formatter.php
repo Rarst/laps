@@ -37,16 +37,18 @@ class Hook_Formatter {
 		}
 		ksort( $hook );
 
-		$functions = array_merge( ...$hook );
+		if ( $hook ) {
+			$functions = array_merge( ...$hook );
 
-		foreach ( $functions as $function ) {
-			$callback = $this->get_callback_name( $function['function'], $function['accepted_args'] );
+			foreach ( $functions as $function ) {
+				$callback = $this->get_callback_name( $function['function'], $function['accepted_args'] );
 
-			if ( false !== strpos( $callback, 'Hook_Collector' ) ) {
-				continue;
+				if ( false !== strpos( $callback, 'Hook_Collector' ) ) {
+					continue;
+				}
+
+				$callbacks[] = $callback;
 			}
-
-			$callbacks[] = $callback;
 		}
 
 		return $callbacks;
