@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Added
+- plotting of early SQL queries (WP 5.1+)
+
 ### Changed
 - unit tests for PHPUnit 8
 

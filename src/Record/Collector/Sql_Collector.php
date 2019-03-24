@@ -25,7 +25,7 @@ class Sql_Collector implements Record_Collector_Interface {
 		$this->formatter = new Backtrace_Formatter();
 
 		if ( $this->is_savequeries() ) {
-			add_filter( 'query', [ $this, 'query' ], 20 ); // TODO refactor when core provides time start data in 5.0.
+			add_filter( 'query', [ $this, 'query' ], 20 ); // TODO Drop recording time if dropping support for WP <5.1.
 		}
 	}
 
@@ -80,7 +80,7 @@ class Sql_Collector implements Record_Collector_Interface {
 	 *
 	 * @param int   $key        Query key in captured data.
 	 * @param array $query_data Array of captured query data.
-	 * @psalm-param array{0: string, 1: float, 2: string} $query_data
+	 * @psalm-param array{0: string, 1: float, 2: string, 3: float} $query_data
 	 *
 	 * @return Record
 	 */
@@ -91,7 +91,7 @@ class Sql_Collector implements Record_Collector_Interface {
 		[ $sql, $duration, $caller ] = $query_data;
 
 		/** @var float $query_start */
-		$query_start = $this->query_starts[ $key ] ?? $last_query_end;
+		$query_start = $query_data[3] ?? $this->query_starts[ $key ] ?? $last_query_end;
 		$sql         = trim( $sql );
 		$category    = 'sql-read';
 		if ( 0 === stripos( $sql, 'INSERT' ) || 0 === stripos( $sql, 'UPDATE' ) ) {
