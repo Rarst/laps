@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - unit tests for PHPUnit 8
 
+### Fixed
+- error when formatting empty hook.
+
 ## 3.2 - 2019-01-30
 
 ### Added

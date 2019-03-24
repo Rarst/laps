@@ -55,6 +55,8 @@ class HookTest extends LapsTestCase {
 		$this->assertEquals( 'class::method', $result[1] );
 		$this->assertStringStartsWith( 'closure from', $result[2] );
 		$this->assertStringStartsWith( 'anonymous class from', $result[3] );
+
+		$this->assertEquals( [], $formatter->format( [] ) );
 	}
 }
 

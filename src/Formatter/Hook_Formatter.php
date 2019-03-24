@@ -16,6 +16,7 @@ class Hook_Formatter {
 	 */
 	public function __construct() {
 
+		// TODO inject paths instead of reaching for global constants.
 		$this->truncate_paths = [
 			wp_normalize_path( WP_CONTENT_DIR ),
 			wp_normalize_path( ABSPATH ),
@@ -35,6 +36,11 @@ class Hook_Formatter {
 		if ( $hook instanceof \WP_Hook ) {
 			$hook = $hook->callbacks;
 		}
+
+		if ( empty( $hook ) ) {
+			return $callbacks;
+		}
+
 		ksort( $hook );
 
 		$functions = array_merge( ...$hook );
