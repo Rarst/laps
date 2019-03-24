@@ -26,7 +26,7 @@ class StopwatchTest extends LapsTestCase {
 
 		$records = $collector->get_records();
 
-		$this->assertInternalType( 'array', $records );
+		$this->assertIsArray( $records );
 		$this->assertCount( 1, $records );
 		$this->assertInstanceOf( Stopwatch_Record::class, $records[0] );
 
@@ -47,6 +47,6 @@ class StopwatchTest extends LapsTestCase {
 		$this->assertEquals( 'info', $record->get_category() );
 		$this->assertEquals( $event->getOrigin() / 1000, $record->get_origin() );
 		$this->assertEquals( $event->getDuration() / 1000, $record->get_duration() );
-		$this->assertContains( 'Event', $record->get_description() );
+		$this->assertStringContainsString( 'Event', $record->get_description() );
 	}
 }

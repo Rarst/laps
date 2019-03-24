@@ -50,8 +50,9 @@ class HookTest extends LapsTestCase {
 
 		$result = $formatter->format( $hook );
 
-		$this->assertInternalType( 'array', $result );
-		$this->assertArraySubset( [ 'function(2)', 'class::method' ], $result );
+		$this->assertIsArray( $result );
+		$this->assertEquals( 'function(2)', $result[0] );
+		$this->assertEquals( 'class::method', $result[1] );
 		$this->assertStringStartsWith( 'closure from', $result[2] );
 		$this->assertStringStartsWith( 'anonymous class from', $result[3] );
 	}

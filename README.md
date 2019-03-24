@@ -42,6 +42,14 @@ API requests need to be authenticated as admin for performance data to be sent. 
 | -------------------------------------------------- | -------- |  
 | `composer require rarst/laps` | [![Download Laps](https://img.shields.io/badge/dynamic/json.svg?label=download&url=https%3A%2F%2Fapi.github.com%2Frepos%2Frarst%2Flaps%2Freleases%2Flatest&query=%24.assets[0].name&style=for-the-badge)](https://www.rarst.net/download/laps) |  
 
+## Tests
+
+Tests require [Brain Monkey](https://github.com/Brain-WP/BrainMonkey) (included in dependencies) and PHPUnit 8 (not included).
+
+```bash
+phpunit
+```
+
 ## License
 
 MIT

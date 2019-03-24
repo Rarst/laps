@@ -51,8 +51,10 @@ class BacktraceTest extends LapsTestCase {
 
 		$result = $formatter->format( $backtrace );
 
-		$this->assertInternalType( 'array', $result );
-		$this->assertArraySubset( [ 'foo', 'path.php' ], array_values( $result ) );
+		$this->assertIsArray( $result );
+		$result = array_values( $result );
+		$this->assertEquals( 'foo', $result[0] );
+		$this->assertEquals( 'path.php', $result[1] );
 	}
 }
 

@@ -17,7 +17,7 @@ class CoreTest extends LapsTestCase {
 
 		$records = $collector->get_records();
 
-		$this->assertInternalType( 'array', $records );
+		$this->assertIsArray( $records );
 		$this->assertCount( 2, $records );
 		$this->assertInstanceOf( Record_Interface::class, $records[0] );
 	}

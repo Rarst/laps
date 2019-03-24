@@ -38,15 +38,15 @@ class SqlTest extends LapsTestCase {
 
 		$records = $collector->get_records();
 
-		$this->assertInternalType( 'array', $records );
+		$this->assertIsArray( $records );
 		$this->assertCount( 1, $records );
 
 		$record = $records[0];
 
 		$this->assertInstanceOf( Record::class, $record );
 		$this->assertEquals( $query, $record->get_name() );
-		$this->assertContains( $query, $record->get_description() );
-		$this->assertInternalType( 'float', $record->get_origin() );
+		$this->assertStringContainsString( $query, $record->get_description() );
+		$this->assertIsFloat( $record->get_origin() );
 		$this->assertEquals( $duration, $record->get_duration() );
 		$this->assertEquals( 'sql-read', $record->get_category() );
 	}

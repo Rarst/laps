@@ -24,8 +24,8 @@ class RecordTest extends LapsTestCase {
 		$this->assertEquals( $name, $record->get_name() );
 		$this->assertEquals( $origin, $record->get_origin() );
 		$this->assertEquals( $duration, $record->get_duration() );
-		$this->assertContains( $name, $record->get_description() );
-		$this->assertContains( (string) ( $duration * 1000 ), $record->get_description() );
+		$this->assertStringContainsString( $name, $record->get_description() );
+		$this->assertStringContainsString( (string) ( $duration * 1000 ), $record->get_description() );
 		$this->assertEmpty( $record->get_category() );
 
 		$record = new Record( $name, $origin, $duration, $description, $category );

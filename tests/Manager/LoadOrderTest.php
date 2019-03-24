@@ -43,7 +43,7 @@ class LoadOrderTest extends LapsTestCase {
 
 		$plugins = $manager->pre_update_option_active_plugins( $plugins );
 
-		$this->assertInternalType( 'array', $plugins );
+		$this->assertIsArray( $plugins );
 		$this->assertCount( 3, $plugins );
 		$this->assertEquals( 'laps/laps.php', $plugins[0] );
 	}

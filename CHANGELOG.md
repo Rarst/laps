@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Changed
+- unit tests for PHPUnit 8
+
 ## 3.2 - 2019-01-30
 
 ### Added
@@ -17,7 +20,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - tracking of load events when network–activated
 
 ### Deprecated
-- dedicated classes for extension events.
+- dedicated classes for extension events
 
 ## 3.1 - 2019-01-22
 

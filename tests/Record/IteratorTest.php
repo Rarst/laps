@@ -53,7 +53,7 @@ class IteratorTest extends LapsTestCase {
 		$this->assertTrue( $iterator->valid() );
 
 		$records = $iterator->current();
-		$this->assertInternalType( 'array', $records );
+		$this->assertIsArray( $records );
 
 		$this->assertArrayHasKey( 'description', $records[0] );
 		$this->assertArrayHasKey( 'category', $records[0] );
@@ -64,7 +64,7 @@ class IteratorTest extends LapsTestCase {
 		$this->assertTrue( $iterator->valid() );
 
 		$records = $iterator->current();
-		$this->assertInternalType( 'array', $records );
+		$this->assertIsArray( $records );
 
 		$iterator->next();
 		$this->assertFalse( $iterator->valid() );

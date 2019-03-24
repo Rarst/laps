@@ -17,7 +17,7 @@ class EventTest extends LapsTestCase {
 
 		$events = ( new Core_Events() )->get_events();
 
-		$this->assertInternalType( 'array', $events );
+		$this->assertIsArray( $events );
 		$this->assertNotEmpty( $events );
 	}
 
@@ -29,7 +29,7 @@ class EventTest extends LapsTestCase {
 		Functions\expect( 'genesis' )->zeroOrMoreTimes();
 		$events = $genesis->get_events();
 
-		$this->assertInternalType( 'array', $events );
+		$this->assertIsArray( $events );
 		$this->assertNotEmpty( $events );
 	}
 
@@ -46,7 +46,7 @@ class EventTest extends LapsTestCase {
 
 		$events = $hybrid->get_events();
 
-		$this->assertInternalType( 'array', $events );
+		$this->assertIsArray( $events );
 		$this->assertNotEmpty( $events );
 	}
 
@@ -59,7 +59,7 @@ class EventTest extends LapsTestCase {
 
 		$events = $tha->get_events();
 
-		$this->assertInternalType( 'array', $events );
+		$this->assertIsArray( $events );
 		$this->assertNotEmpty( $events );
 	}
 
@@ -72,7 +72,7 @@ class EventTest extends LapsTestCase {
 
 		$events = $woocommerce->get_events();
 
-		$this->assertInternalType( 'array', $events );
+		$this->assertIsArray( $events );
 		$this->assertNotEmpty( $events );
 	}
 
@@ -85,7 +85,7 @@ class EventTest extends LapsTestCase {
 
 		$events = $yoast->get_events();
 
-		$this->assertInternalType( 'array', $events );
+		$this->assertIsArray( $events );
 		$this->assertNotEmpty( $events );
 	}
 }
