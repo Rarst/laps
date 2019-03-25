@@ -64,7 +64,9 @@ class Sql_Collector implements Record_Collector_Interface {
 		}
 
 		/** @var array $wpdb->queries */
-		return array_map( [ $this, 'transform' ], array_keys( $wpdb->queries ), $wpdb->queries );
+		$records = array_filter( array_map( [ $this, 'transform' ], array_keys( $wpdb->queries ), $wpdb->queries ) );
+
+		return $records;
 	}
 
 	/**
@@ -84,21 +86,20 @@ class Sql_Collector implements Record_Collector_Interface {
 	 *
 	 * @return Record
 	 */
-	protected function transform( int $key, array $query_data ): Record {
-
-		static $last_query_end = 0;
+	protected function transform( int $key, array $query_data ): ?Record {
 
 		[ $sql, $duration, $caller ] = $query_data;
 
 		/** @var float $query_start */
-		$query_start = $query_data[3] ?? $this->query_starts[ $key ] ?? $last_query_end;
+		$query_start = $query_data[3] ?? $this->query_starts[ $key ] ?? 0;
+		if ( empty( $query_start ) ) {
+			return null;
+		}
 		$sql         = trim( $sql );
 		$category    = 'sql-read';
 		if ( 0 === stripos( $sql, 'INSERT' ) || 0 === stripos( $sql, 'UPDATE' ) ) {
 			$category = 'sql-write';
 		}
-		$last_query_end = $query_start + $duration;
-
 		$desc_duration = round( $duration * 1000 );
 		$backtrace     = $this->formatter->format( $caller );
 		$description   = $sql . ' – ' . $desc_duration . 'ms<hr />' . implode( '<br />', $backtrace );
