@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - plotting of early SQL queries (WP 5.1+)
+- tracking load of individual plugin load (WP 5.1+)
 
 ### Changed
 - unit tests for PHPUnit 8
