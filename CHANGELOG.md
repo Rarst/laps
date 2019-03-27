@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## 3.3 - 2019-03-27
+
 ### Added
 - plotting of early SQL queries (WP 5.1+)
 - tracking load of individual plugin load (WP 5.1+)
