@@ -20,6 +20,8 @@ class Hook_Event_Provider implements ServiceProviderInterface {
 
 	/**
 	 * @param Container $pimple Container instance.
+	 *
+	 * @psalm-suppress DeprecatedClass
 	 */
 	public function register( Container $pimple ): void {
 
