@@ -13,7 +13,7 @@ namespace Rarst\Laps\Event;
 class Hybrid_Events implements Hook_Event_Config_Interface {
 
 	/**
-	 * @return array
+	 * @inheritDoc
 	 */
 	public function get_events(): array {
 

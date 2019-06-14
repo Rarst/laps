@@ -9,7 +9,7 @@ namespace Rarst\Laps\Event;
 class Extension_Events implements Hook_Event_Config_Interface {
 
 	/**
-	 * @return array[]
+	 * @inheritDoc
 	 */
 	public function get_events(): array {
 
@@ -19,7 +19,7 @@ class Extension_Events implements Hook_Event_Config_Interface {
 	/**
 	 * Beaver Builder events.
 	 *
-	 * @return array
+	 * @return array[]
 	 */
 	private function beaver_builder(): array {
 

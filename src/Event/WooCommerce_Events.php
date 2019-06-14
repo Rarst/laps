@@ -11,7 +11,7 @@ namespace Rarst\Laps\Event;
 class WooCommerce_Events implements Hook_Event_Config_Interface {
 
 	/**
-	 * @return array
+	 * @inheritDoc
 	 */
 	public function get_events(): array {
 
