@@ -78,11 +78,11 @@ class Hook_Collector extends Stopwatch_Collector {
 		/**
 		 * @var int|string $key
 		 * @var array      $data
+		 * @psalm-var array{0:string} $data
 		 */
 		foreach ( $stops as $key => $data ) {
 
 			if ( is_int( $key ) ) {
-				/** @var array{0:string} $data */
 				$this->add_event( ...$data );
 				continue;
 			}
@@ -121,6 +121,7 @@ class Hook_Collector extends Stopwatch_Collector {
 
 		if ( '' !== $start ) {
 			add_action( $start, function ( $input = null ) use ( $event, $category, $start, $stop ) {
+				global $wp_filter;
 
 				$event .= $this->get_count_suffix( $event, true );
 
@@ -130,7 +131,6 @@ class Hook_Collector extends Stopwatch_Collector {
 				}
 
 				if ( $start === $stop ) {
-					global $wp_filter;
 					/** @psalm-var array<string, \WP_Hook> $wp_filter */
 					$this->callbacks[ $event ] = $wp_filter[ $start ];
 				}
