@@ -21,9 +21,6 @@ class Plugin extends Container {
 	/**
 	 * @param array $values Configuration values to apply.
 	 * @psalm-param array<string, mixed> $values
-	 *
-	 * @psalm-suppress MixedArgument
-	 * @psalm-suppress MixedAssignment
 	 */
 	public function __construct( array $values = [] ) {
 
@@ -64,8 +61,6 @@ class Plugin extends Container {
 
 	/**
 	 * Start Stopwatch and timing plugin load immediately, then set up core events and needed hooks.
-	 *
-	 * @psalm-suppress MixedAssignment
 	 */
 	public function run(): void {
 

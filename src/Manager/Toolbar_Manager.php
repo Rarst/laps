@@ -36,8 +36,6 @@ class Toolbar_Manager {
 	 * Render interface and add to the toolbar.
 	 *
 	 * @param \WP_Admin_Bar $wp_admin_bar WordPress core toolbar object.
-	 *
-	 * @psalm-suppress MixedArgument
 	 */
 	public function admin_bar_menu( \WP_Admin_Bar $wp_admin_bar ): void {
 

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <psalm
-        totallyTyped="true"
+        totallyTyped="false"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="https://getpsalm.org/schema/config"
         xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
@@ -18,12 +18,5 @@
         <UndefinedFunction errorLevel="suppress"/>
         <UndefinedClass errorLevel="suppress"/>
         <UndefinedDocblockClass errorLevel="suppress"/>
-        <MixedArgument>
-            <errorLevel type="suppress">
-                <file name="src/Provider/Record_Provider.php" />
-                <file name="src/Provider/Manager_Provider.php" />
-<!--                <file name="src/Record/Collector/Hook_Collector.php" />-->
-            </errorLevel>
-        </MixedArgument>
     </issueHandlers>
 </psalm>

@@ -82,7 +82,6 @@ class Backtrace_Formatter {
 	 * @return string
 	 *
 	 * @psalm-suppress PossiblyFalseOperand
-	 * @psalm-suppress MixedInferredReturnType
 	 */
 	protected function shorten_include( string $item ): string {
 

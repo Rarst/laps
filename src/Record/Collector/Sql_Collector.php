@@ -37,8 +37,6 @@ class Sql_Collector implements Record_Collector_Interface {
 	 * @param string $query SQL query.
 	 *
 	 * @return string
-	 *
-	 * @psalm-suppress MixedPropertyFetch
 	 */
 	public function query( $query ): string {
 
@@ -61,7 +59,6 @@ class Sql_Collector implements Record_Collector_Interface {
 
 		global $wpdb;
 
-		/** @psalm-suppress MixedPropertyFetch */
 		if ( empty( $wpdb->queries ) ) {
 			return [];
 		}
