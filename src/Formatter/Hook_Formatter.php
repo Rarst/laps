@@ -25,11 +25,11 @@ class Hook_Formatter {
 	}
 
 	/**
-	 * @template Callback as string|object|array
-	 * @template AcceptedArgs as int
-	 * @template Hook as array{function: Callback, accepted_args: AcceptedArgs}
-	 * @template Priority as array-key
-	 * @template Hooks as array<Priority, array<Hook>>
+	 * @psalm-type  Callback = string|object|array
+	 * @psalm-type  AcceptedArgs = int
+	 * @psalm-type  Hook = array{function: Callback, accepted_args: AcceptedArgs}
+	 * @psalm-type  Priority = array-key
+	 * @psalm-type  Hooks = array<Priority, array<Hook>>
 	 *
 	 * @param \WP_Hook|array $hook Hook instance.
 	 * @psalm-param \WP_Hook|Hooks $hook
@@ -51,12 +51,9 @@ class Hook_Formatter {
 
 		ksort( $hook );
 
-		/** @psalm-suppress InvalidArgument */
 		$functions = array_merge( ...$hook );
 
-		/** @psalm-var Hook[] $functions */
 		foreach ( $functions as $function ) {
-			/** @psalm-var Hook $function */
 			$callback = $this->get_callback_name( $function['function'], $function['accepted_args'] );
 
 			if ( false !== strpos( $callback, 'Hook_Collector' ) ) {
