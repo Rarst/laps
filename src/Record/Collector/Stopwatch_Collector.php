@@ -51,6 +51,7 @@ class Stopwatch_Collector implements Record_Collector_Interface {
 	 */
 	public function get_records(): array {
 
+		/** @psalm-var array<string, StopwatchEvent> $events */
 		$events = $this->stopwatch->getSectionEvents( '__root__' );
 
 		/** @var string $name */

@@ -20,6 +20,7 @@ class Plugin extends Container {
 
 	/**
 	 * @param array $values Configuration values to apply.
+	 * @psalm-param array<string, mixed> $values
 	 *
 	 * @psalm-suppress MixedArgument
 	 * @psalm-suppress MixedAssignment

@@ -42,7 +42,14 @@ class Record_Provider implements ServiceProviderInterface, Bootable_Provider_Int
 			return new Lazy_Proxy_Collector( $laps['collectors'] );
 		};
 
+		/**
+		 * @psalm-suppress MixedInferredReturnType
+		 */
 		$pimple['records'] = function ( Plugin $laps ): array {
+			/**
+			 * @psalm-suppress MixedMethodCall
+			 * @psalm-suppress MixedReturnStatement
+			 */
 			return $laps['records.lazy']->get_records();
 		};
 	}

@@ -16,7 +16,10 @@ class Http_Collector extends Stopwatch_Collector {
 	/** @var Backtrace_Formatter */
 	private $formatter;
 
-	/** @var array */
+	/**
+	 * @var array $callers
+	 * @psalm-var array<string, string> $callers
+	 */
 	private $callers = [];
 
 	/**
@@ -39,7 +42,7 @@ class Http_Collector extends Stopwatch_Collector {
 	 * @param array                 $args  HTTP request arguments.
 	 * @param string                $url   The request URL.
 	 *
-	 * @return boolean
+	 * @return false|array|\WP_Error
 	 */
 	public function pre_http_request( $false, array $args, string $url ) {
 

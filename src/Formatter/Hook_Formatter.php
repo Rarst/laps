@@ -25,7 +25,14 @@ class Hook_Formatter {
 	}
 
 	/**
+	 * @template Callback as string|object|array
+	 * @template AcceptedArgs as int
+	 * @template Hook as array{function: Callback, accepted_args: AcceptedArgs}
+	 * @template Priority as array-key
+	 * @template Hooks as array<Priority, array<Hook>>
+	 *
 	 * @param \WP_Hook|array $hook Hook instance.
+	 * @psalm-param \WP_Hook|Hooks $hook
 	 *
 	 * @return array
 	 */
@@ -34,6 +41,7 @@ class Hook_Formatter {
 		$callbacks = [];
 
 		if ( $hook instanceof \WP_Hook ) {
+			/** @psalm-var Hooks $hook->callbacks */
 			$hook = $hook->callbacks;
 		}
 
@@ -43,9 +51,12 @@ class Hook_Formatter {
 
 		ksort( $hook );
 
+		/** @psalm-suppress InvalidArgument */
 		$functions = array_merge( ...$hook );
 
+		/** @psalm-var Hook[] $functions */
 		foreach ( $functions as $function ) {
+			/** @psalm-var Hook $function */
 			$callback = $this->get_callback_name( $function['function'], $function['accepted_args'] );
 
 			if ( false !== strpos( $callback, 'Hook_Collector' ) ) {
@@ -61,27 +72,27 @@ class Hook_Formatter {
 	/**
 	 * @param string|object|array $callback Hook callback.
 	 * @param int                 $args     Number of accepted arguments.
-	 *
-	 * @return string
 	 */
 	protected function get_callback_name( $callback, int $args ): string {
 
 		switch ( gettype( $callback ) ) {
 			case 'object':
-				$callback = $this->get_class_name( $callback );
+				$name = $this->get_class_name( $callback );
 				break;
 
 			case 'array':
-				$class    = is_string( $callback[0] )
+				/** @psalm-var array{0: object|string, 1: string} $callback */
+				$class = is_string( $callback[0] )
 					? $callback[0] . '::'
 					: $this->get_class_name( $callback[0] ) . '->';
-				$callback = $class . $callback[1];
+				$name  = $class . $callback[1];
 				break;
+
+			default:
+				$name = $callback;
 		}
 
-		$callback .= ( 1 === $args ) ? '' : "({$args})";
-
-		return $callback;
+		return $name . ( ( 1 === $args ) ? '' : "({$args})" );
 	}
 
 	/**
@@ -91,7 +102,7 @@ class Hook_Formatter {
 	 */
 	protected function get_class_name( $object ): string {
 
-		if ( is_a( $object, 'CLosure' ) ) {
+		if ( $object instanceof \Closure ) {
 			$class = new \ReflectionFunction( $object );
 
 			return 'closure from ' . $this->shorten_path( $class->getFileName() ) . ':' . $class->getStartLine();

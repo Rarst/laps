@@ -8,6 +8,8 @@ use Rarst\Laps\Record\Record;
 
 /**
  * Processes SQL events from data logged by wpdb.
+ *
+ * @template QueryData as array{0: string, 1: float, 2: string, 3: float}
  */
 class Sql_Collector implements Record_Collector_Interface {
 
@@ -59,11 +61,13 @@ class Sql_Collector implements Record_Collector_Interface {
 
 		global $wpdb;
 
+		/** @psalm-suppress MixedPropertyFetch */
 		if ( empty( $wpdb->queries ) ) {
 			return [];
 		}
 
 		/** @var array $wpdb->queries */
+		/** @psalm-var array<int, QueryData> $wpdb->queries */
 		$records = array_filter( array_map( [ $this, 'transform' ], array_keys( $wpdb->queries ), $wpdb->queries ) );
 
 		return $records;

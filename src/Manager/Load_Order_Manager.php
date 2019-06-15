@@ -21,8 +21,6 @@ class Load_Order_Manager {
 	 * Reorder active plugins so Laps is first and starts timing load early.
 	 *
 	 * @param array $plugins Filtered array of active plugins’ basenames.
-	 *
-	 * @return array
 	 */
 	public function pre_update_option_active_plugins( array $plugins ): array {
 

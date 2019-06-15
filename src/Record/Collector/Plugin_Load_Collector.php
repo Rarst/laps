@@ -54,10 +54,8 @@ class Plugin_Load_Collector implements Record_Collector_Interface {
 	 * Converts recorded information into a Record instance.
 	 *
 	 * @param array $entry Data entry for the plugin.
-	 *
-	 * @return Record_Interface
 	 */
-	private function create_record( array $entry ): Record_Interface {
+	private function create_record( array $entry ): Record {
 		return new Record(
 			plugin_basename( $entry['name'] ),
 			$entry['origin'],

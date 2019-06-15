@@ -16,28 +16,14 @@
     <issueHandlers>
         <LessSpecificReturnType errorLevel="info"/>
         <UndefinedFunction errorLevel="suppress"/>
-        <UndefinedClass>
-            <errorLevel type="suppress">
-                <referencedClass name="WP_Admin_Bar"/>
-                <referencedClass name="WP_Error"/>
-                <referencedClass name="WP_Hook"/>
-            </errorLevel>
-        </UndefinedClass>
+        <UndefinedClass errorLevel="suppress"/>
+        <UndefinedDocblockClass errorLevel="suppress"/>
         <MixedArgument>
             <errorLevel type="suppress">
                 <file name="src/Provider/Record_Provider.php" />
-                <file name="src/Record/Collector/Hook_Collector.php" />
+                <file name="src/Provider/Manager_Provider.php" />
+<!--                <file name="src/Record/Collector/Hook_Collector.php" />-->
             </errorLevel>
         </MixedArgument>
-        <MissingClosureParamType>
-            <errorLevel type="suppress">
-                <file name="src/Record/Collector/Hook_Collector.php" />
-            </errorLevel>
-        </MissingClosureParamType>
-        <MissingClosureReturnType>
-            <errorLevel type="suppress">
-                <file name="src/Record/Collector/Hook_Collector.php" />
-            </errorLevel>
-        </MissingClosureReturnType>
     </issueHandlers>
 </psalm>

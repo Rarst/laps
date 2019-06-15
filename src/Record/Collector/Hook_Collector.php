@@ -20,13 +20,19 @@ class Hook_Collector extends Stopwatch_Collector {
 	/** @var array $events */
 	protected $events = [];
 
-	/** @var array */
+	/**
+	 * @var array $callbacks
+	 * @psalm-var array<string, \WP_Hook> $callbacks
+	 */
 	protected $callbacks = [];
 
 	/** @var Hook_Formatter */
 	protected $formatter;
 
-	/** @var array $calls Tracks number of calls for recurrent events. */
+	/**
+	 * @var array $calls Tracks number of calls for recurrent events.
+	 * @psalm-var array<string, int> $calls
+	 */
 	private $calls = [];
 
 	/**
@@ -55,7 +61,7 @@ class Hook_Collector extends Stopwatch_Collector {
 	/**
 	 * Time the point between network/MU plugins and regular if network activated.
 	 */
-	public function muplugins_loaded() {
+	public function muplugins_loaded(): void {
 		$this->stop( 'Network & MU Plugins Load' );
 		$this->start( 'Plugins Load', 'plugin' );
 	}
@@ -97,6 +103,9 @@ class Hook_Collector extends Stopwatch_Collector {
 	 * @param string|null $stop           Stop hook name (defaults to start name). Pass empty string to ignore.
 	 * @param int         $start_priority Start hook priority (defaults to -1).
 	 * @param int         $stop_priority  Stop hook priority (defaults to max int).
+	 *
+	 * @psalm-suppress MissingClosureReturnType
+	 * @psalm-suppress MissingClosureParamType
 	 */
 	private function add_event(
 		string $event,
@@ -116,11 +125,13 @@ class Hook_Collector extends Stopwatch_Collector {
 				$event .= $this->get_count_suffix( $event, true );
 
 				if ( 'Sidebar' === $event ) {
+					/** @var string $input */
 					$event = $input;
 				}
 
 				if ( $start === $stop ) {
 					global $wp_filter;
+					/** @psalm-var array<string, \WP_Hook> $wp_filter */
 					$this->callbacks[ $event ] = $wp_filter[ $start ];
 				}
 
@@ -136,6 +147,7 @@ class Hook_Collector extends Stopwatch_Collector {
 				$event .= $this->get_count_suffix( $event );
 
 				if ( 'Sidebar' === $event ) {
+					/** @var string $input */
 					$event = $input;
 				}
 
