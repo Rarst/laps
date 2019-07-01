@@ -21,7 +21,7 @@ It provides a visual summary in toolbar that is quick and easy to inspect.
 
 Laps automatically tracks many events, such as:
 - PHP, core, plugins, and themes load, main posts loop, sidebars
-- database queries (with [`SAVEQUERIES` constant](http://codex.wordpress.org/Editing_wp-config.php#Save_queries_for_analysis) enabled)
+- database queries (with [`SAVEQUERIES` defined constant set to true](https://wordpress.org/support/article/editing-wp-config-php/#save-queries-for-analysis))
 - network requests to other sites 
 
 ## API profiling
