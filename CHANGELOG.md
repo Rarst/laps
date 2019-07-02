@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Fixed
+- crash from broken plugin loaded hook input from global
+
 ## 3.3 - 2019-03-27
 
 ### Added

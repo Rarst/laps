@@ -32,15 +32,22 @@ class Plugin_Load_Collector implements Record_Collector_Interface {
 	 *
 	 * @param string $plugin Plugin file path.
 	 */
-	public function plugin_loaded( string $plugin ): void {
+	public function plugin_loaded( $plugin ): void {
 
-		$time            = microtime( true );
+		$time = microtime( true );
+
+		if ( ! is_string( $plugin ) ) { // Broken hook input from global.
+			$this->last = $time;
+
+			return;
+		}
+
 		$this->entries[] = [
 			'name'     => $plugin,
 			'origin'   => $this->last,
 			'duration' => $time - $this->last,
 		];
-		$this->last      = $time;
+		$this->last = $time;
 	}
 
 	/**
