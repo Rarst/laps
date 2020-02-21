@@ -3,7 +3,6 @@
 namespace Rarst\Laps\Tests;
 
 use Brain\Monkey\Functions;
-use Pimple\ServiceProviderInterface;
 use Rarst\Laps\Provider\Bootable_Provider_Interface;
 
 class PluginTest extends LapsTestCase {
@@ -12,7 +11,7 @@ class PluginTest extends LapsTestCase {
 
 		$container = new \Rarst\Laps\Plugin();
 
-		$service = $this->getMockBuilder( [ ServiceProviderInterface::class, Bootable_Provider_Interface::class ] )
+		$service = $this->getMockBuilder( Bootable_Provider_Interface::class )
                         ->getMock();
 
 		$service->expects( $this->once() )

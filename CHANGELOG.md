@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Changed
+- `Bootable_Provider_Interface` to extend `ServiceProviderInterface`, so that it can be mocked in PHPUnit 9
+
 ### Fixed
 - Mustache.php version to resolve issues on PHP 7.4
 
