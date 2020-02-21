@@ -31,6 +31,8 @@ class Plugin_Load_Collector implements Record_Collector_Interface {
 	 * Records time for a plugin that just finished loading.
 	 *
 	 * @param string $plugin Plugin file path.
+	 *
+	 * @psalm-suppress DocblockTypeContradiction
 	 */
 	public function plugin_loaded( $plugin ): void {
 

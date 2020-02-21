@@ -18,5 +18,6 @@
         <UndefinedFunction errorLevel="suppress"/>
         <UndefinedClass errorLevel="suppress"/>
         <UndefinedDocblockClass errorLevel="suppress"/>
+        <UndefinedConstant errorLevel="suppress"/>
     </issueHandlers>
 </psalm>

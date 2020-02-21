@@ -61,9 +61,7 @@ class Http_Collector extends Stopwatch_Collector {
 	 * @param array           $args     HTTP request arguments.
 	 * @param string          $url      The request URL.
 	 *
-	 * @return mixed
-	 *
-	 * @noinspection MoreThanThreeArgumentsInspection
+	 * @return array|\WP_Error
 	 */
 	public function http_api_debug( $response, string $type, $class, array $args, string $url ) {
 

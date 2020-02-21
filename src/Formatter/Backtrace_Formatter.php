@@ -77,11 +77,11 @@ class Backtrace_Formatter {
 
 	/**
 	 *
+	 * @psalm-suppress PossiblyFalseOperand
+	 *
 	 * @param string $item Backtrace item.
 	 *
 	 * @return string
-	 *
-	 * @psalm-suppress PossiblyFalseOperand
 	 */
 	protected function shorten_include( string $item ): string {
 
