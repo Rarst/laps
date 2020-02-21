@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Fixed
+- Mustache.php version to resolve issues on PHP 7.4
+
 ## 3.3.1 - 2019-07-02
 
 ### Fixed
