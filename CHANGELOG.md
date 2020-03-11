@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## 3.3.3 - 2020-03-11
+
+### Fixed
+- wrong plugin version in header
+
 ## 3.3.2 - 2020-03-11
 
 ### Changed
