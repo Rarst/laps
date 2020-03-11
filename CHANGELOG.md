@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## 3.3.2 - 2020-03-11
+
 ### Changed
 - `Bootable_Provider_Interface` to extend `ServiceProviderInterface`, so that it can be mocked in PHPUnit 9
 
