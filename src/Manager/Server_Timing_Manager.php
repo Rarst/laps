@@ -57,11 +57,15 @@ class Server_Timing_Manager {
 		foreach ( $this->collector->get_records() as $record ) {
 			$duration = $record->get_duration() * 1000;
 
-			if ( $duration < 1 ) {
+			if ( $duration < 1 ) { // Filter out less than 1ms events as too noisy.
 				continue;
 			}
 
 			$header .= sprintf( '%s;dur=%.2f;desc="%s", ', $record->get_category(), $duration, $record->get_name() );
+
+			if ( strlen( $header ) > 4000 ) { // 8+KB headers break proxies, so we cut off at 1/2 that limit.
+				break;
+			}
 		}
 
 		header( 'Server-Timing: ' . preg_replace( '/\R/', '', $header ) );
