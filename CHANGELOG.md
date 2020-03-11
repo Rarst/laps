@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - Mustache.php version to resolve issues on PHP 7.4
+- type crash when URL passed to network request filters is invalid
 
 ## 3.3.1 - 2019-07-02
 

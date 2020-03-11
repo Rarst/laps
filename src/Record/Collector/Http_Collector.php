@@ -43,11 +43,16 @@ class Http_Collector extends Stopwatch_Collector {
 	 * @param string                $url   The request URL.
 	 *
 	 * @return false|array|\WP_Error
+	 *
+	 * @psalm-suppress RedundantConditionGivenDocblockType
+	 * @noinspection   PhpUnusedParameterInspection
 	 */
-	public function pre_http_request( $false, array $args, string $url ) {
+	public function pre_http_request( $false, $args, $url ) {
 
-		$this->start( $url, 'http' );
-		$this->callers[ $url ] = wp_debug_backtrace_summary( __CLASS__, 5 );
+		if ( $url && is_string( $url ) ) {
+			$this->start( $url, 'http' );
+			$this->callers[ $url ] = wp_debug_backtrace_summary( __CLASS__, 5 );
+		}
 
 		return $false;
 	}
@@ -62,10 +67,15 @@ class Http_Collector extends Stopwatch_Collector {
 	 * @param string          $url      The request URL.
 	 *
 	 * @return array|\WP_Error
+	 *
+	 * @psalm-suppress RedundantConditionGivenDocblockType
+	 * @noinspection   PhpUnusedParameterInspection
 	 */
-	public function http_api_debug( $response, string $type, $class, array $args, string $url ) {
+	public function http_api_debug( $response, $type, $class, $args, $url ) {
 
-		$this->stop( $url );
+		if ( $url && is_string( $url ) ) {
+			$this->stop( $url );
+		}
 
 		return $response;
 	}
