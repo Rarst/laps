@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## 3.3.4 - 2020-11-16
+
+### Fixed
+- non-ASCII characters in Server Timing headers
+
 ## 3.3.3 - 2020-03-11
 
 ### Fixed

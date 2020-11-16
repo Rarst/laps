@@ -68,7 +68,8 @@ class Server_Timing_Manager {
 			}
 		}
 
-		header( 'Server-Timing: ' . preg_replace( '/\R/', '', $header ) );
+		// Sanitize to visible US ASCII character range (32-126).
+		header( 'Server-Timing: ' . preg_replace( '/[^\x20-\x7E]/', '', $header ) );
 
 		return $input;
 	}
