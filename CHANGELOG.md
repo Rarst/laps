@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - reduced maximum Server Timing headers size to 2K (half of possible nginx defaults) 
 
+### Fixed
+- allowed Composer install on PHP 8
+
 ## 3.3.4 - 2020-11-16
 
 ### Fixed
