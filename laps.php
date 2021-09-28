@@ -7,8 +7,8 @@ Description: Light WordPress profiler.
 Author: Andrey “Rarst” Savchenko
 Version: 3.3.4
 Author URI: https://www.rarst.net/
-Text Domain: laps
-Domain Path: /lang
+Requires PHP: 7.1.3
+Update URI: false
 License: MIT
 */
 
