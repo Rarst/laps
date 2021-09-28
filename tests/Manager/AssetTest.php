@@ -20,8 +20,8 @@ class AssetTest extends LapsTestCase {
 
 		$manager = new Asset_Manager();
 
-		$this->assertTrue( has_action( 'wp_enqueue_scripts', [ $manager, 'enqueue_scripts' ] ) );
-		$this->assertTrue( has_action( 'admin_enqueue_scripts', [ $manager, 'enqueue_scripts' ] ) );
+		$this->assertTrue( (bool) has_action( 'wp_enqueue_scripts', [ $manager, 'enqueue_scripts' ] ) );
+		$this->assertTrue( (bool) has_action( 'admin_enqueue_scripts', [ $manager, 'enqueue_scripts' ] ) );
 
 		return $manager;
 	}

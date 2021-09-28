@@ -18,8 +18,8 @@ class HttpTest extends LapsTestCase {
 		$url       = 'https://example.com/';
 		$collector = new Http_Collector( $stopwatch );
 
-		$this->assertTrue( has_action( 'pre_http_request', [ $collector, 'pre_http_request' ] ) );
-		$this->assertTrue( has_action( 'http_api_debug', [ $collector, 'http_api_debug' ] ) );
+		$this->assertTrue( (bool) has_action( 'pre_http_request', [ $collector, 'pre_http_request' ] ) );
+		$this->assertTrue( (bool) has_action( 'http_api_debug', [ $collector, 'http_api_debug' ] ) );
 
 		$collector->pre_http_request( false, [], $url );
 

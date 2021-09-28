@@ -23,7 +23,7 @@ class ToolbarTest extends LapsTestCase {
 		$collector = new Lazy_Proxy_Collector( [] );
 		$manager   = new Toolbar_Manager( $collector, new \Mustache_Engine() );
 
-		$this->assertTrue( has_action( 'admin_bar_menu', [ $manager, 'admin_bar_menu' ] ) );
+		$this->assertTrue( (bool) has_action( 'admin_bar_menu', [ $manager, 'admin_bar_menu' ] ) );
 
 		return $manager;
 	}

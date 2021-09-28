@@ -24,7 +24,7 @@ class SqlTest extends LapsTestCase {
 
 		$collector = new Sql_Collector();
 
-		$this->assertTrue( has_filter( 'query', [ $collector, 'query' ] ) );
+		$this->assertTrue( (bool) has_filter( 'query', [ $collector, 'query' ] ) );
 
 		$query = 'SELECT * FROM wp_posts';
 

@@ -20,8 +20,8 @@ class LoadOrderTest extends LapsTestCase {
 
 		$manager = new Load_Order_Manager();
 
-		$this->assertTrue( has_action( 'pre_update_option_active_plugins', [ $manager, 'pre_update_option_active_plugins' ] ) );
-		$this->assertTrue( has_action( 'pre_update_site_option_active_sitewide_plugins', [ $manager, 'pre_update_option_active_plugins' ] ) );
+		$this->assertTrue( (bool) has_action( 'pre_update_option_active_plugins', [ $manager, 'pre_update_option_active_plugins' ] ) );
+		$this->assertTrue( (bool) has_action( 'pre_update_site_option_active_sitewide_plugins', [ $manager, 'pre_update_option_active_plugins' ] ) );
 
 		return $manager;
 
