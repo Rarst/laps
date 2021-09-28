@@ -10,7 +10,6 @@ _Make a site, make it fast._
 [![Total Downloads](https://img.shields.io/packagist/dt/rarst/laps.svg)](https://packagist.org/packages/rarst/laps)
 [![Latest Stable Version](https://img.shields.io/packagist/v/rarst/laps.svg?label=version)](https://packagist.org/packages/rarst/laps)
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/rarst/laps.svg)](https://packagist.org/packages/rarst/laps)
-[![PDS Skeleton](https://img.shields.io/badge/pds-skeleton-blue.svg)](https://github.com/php-pds/skeleton)
 [![Download Laps](https://img.shields.io/badge/download-laps.zip-blue)](https://github.com/Rarst/laps/releases/latest/download/laps.zip)
 
 Laps is a plugin that **shows performance information** about WordPress page load.
@@ -44,7 +43,7 @@ API requests need to be authenticated as admin for performance data to be sent. 
 
 ## Tests
 
-Tests require [Brain Monkey](https://github.com/Brain-WP/BrainMonkey) (included in dependencies) and PHPUnit 8 (not included).
+Tests require [Brain Monkey](https://github.com/Brain-WP/BrainMonkey) (included in dependencies) and PHPUnit 9 (not included).
 
 ```bash
 phpunit
