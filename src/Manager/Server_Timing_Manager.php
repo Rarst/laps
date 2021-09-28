@@ -63,7 +63,7 @@ class Server_Timing_Manager {
 
 			$header .= sprintf( '%s;dur=%.2f;desc="%s", ', $record->get_category(), $duration, $record->get_name() );
 
-			if ( strlen( $header ) > 4000 ) { // 8+KB headers break proxies, so we cut off at 1/2 that limit.
+			if ( strlen( $header ) > 2000 ) { // 8+KB headers break proxies, 4+KB nginx, so we cut off at 1/2 that limit.
 				break;
 			}
 		}

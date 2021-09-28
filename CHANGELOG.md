@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Changed
+- reduced maximum Server Timing headers size to 2K (half of possible nginx defaults) 
+
 ## 3.3.4 - 2020-11-16
 
 ### Fixed
