@@ -7,6 +7,9 @@ use Rarst\Laps\Record\Record_Interface;
 
 /**
  * Processes records, recursively bumping overlapping ones to children.
+ *
+ * @template-extends \ArrayIterator<array-key,Record_Interface>
+ * @template-implements \RecursiveIterator<array-key,Record_Interface>
  */
 class Recursive_Record_Iterator extends \ArrayIterator implements \RecursiveIterator {
 
@@ -15,7 +18,7 @@ class Recursive_Record_Iterator extends \ArrayIterator implements \RecursiveIter
 
 	/**
 	 * @param Record_Interface[] $records Records to process.
-	 * @param int                $flags   Configuration flags.
+	 * @psalm-param 0|1|2|3      $flags   Configuration flags.
 	 */
 	public function __construct( array $records, int $flags = 0 ) {
 

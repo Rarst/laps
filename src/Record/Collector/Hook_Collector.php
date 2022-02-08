@@ -78,7 +78,6 @@ class Hook_Collector extends Stopwatch_Collector {
 		/**
 		 * @var int|string $key
 		 * @var array      $data
-		 * @psalm-var array{0:string} $data
 		 */
 		foreach ( $stops as $key => $data ) {
 

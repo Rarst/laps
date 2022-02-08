@@ -5,10 +5,11 @@ namespace Rarst\Laps\Record\Iterator;
 
 use Rarst\Laps\Record\Record;
 use Rarst\Laps\Record\Record_Interface;
-use Rarst\Laps\Record\Iterator\Recursive_Record_Iterator;
 
 /**
  * Processes records into sets for display by template.
+ *
+ * @template-implements \Iterator<array>
  *
  * @psalm-suppress PropertyNotSetInConstructor
  */
