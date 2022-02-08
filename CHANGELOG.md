@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - updated dependencies (Mustache.php, Pimple)
 - minimum required PHP version 7.2.5 (was de-facto required by dependencies before)
 
+### Fixed
+- deprecation notices on PHP 8.1
+
 ## 3.3.5 - 2021-09-28
 
 ### Changed

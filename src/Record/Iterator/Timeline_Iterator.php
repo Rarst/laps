@@ -60,12 +60,14 @@ class Timeline_Iterator implements \Iterator {
 	}
 
 	/**
+	 * Key is unused and is only type hinted to possible `int` for PHP 8.1 `mixed` type compatibility.
+	 *
 	 * @codeCoverageIgnore
 	 *
-	 * @return void
+	 * @return null
 	 */
-	public function key(): void {
-
+	public function key(): ?int {
+		return null;
 	}
 
 	/**

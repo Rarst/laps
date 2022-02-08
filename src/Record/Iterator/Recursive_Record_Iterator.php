@@ -67,10 +67,10 @@ class Recursive_Record_Iterator extends \ArrayIterator implements \RecursiveIter
 	}
 
 	/**
-	 * @return static
+	 * This should be `static` for possible subclassing, but problems hinting that for PHP <8, also don't subclass this.
 	 */
-	public function getChildren() {
+	public function getChildren(): self {
 
-		return new static( $this->children );
+		return new self( $this->children );
 	}
 }
