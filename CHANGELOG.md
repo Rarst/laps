@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## 3.3.6 - 2022-02-08
+
 ### Changed
 - updated dependencies (Mustache.php, Pimple)
 - minimum required PHP version 7.2.5 (was de-facto required by dependencies before)
