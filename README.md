@@ -41,7 +41,7 @@ API requests need to be authenticated as admin for performance data to be sent. 
 
 ## Tests
 
-Tests require [Brain Monkey](https://github.com/Brain-WP/BrainMonkey) (included in dependencies) and PHPUnit 9 (not included).
+Tests require [Brain Monkey](https://github.com/Brain-WP/BrainMonkey) (included in dependencies) and PHPUnit 8 (not included).
 
 ```bash
 phpunit
