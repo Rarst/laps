@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Fixed
+- PHP warning, when accessing OPcache status with `opcache.restrict_api`
+
 ## 3.3.6 - 2022-02-08
 
 ### Changed
