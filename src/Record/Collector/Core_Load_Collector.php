@@ -37,7 +37,11 @@ class Core_Load_Collector implements Record_Collector_Interface {
 		$php = 'PHP Load – ' . PHP_VERSION;
 
 		if ( $this->opcache_api_available() ) {
-			$zend_status = opcache_get_status();
+			/**
+			 * This is silenced since it might still emit warning for correct `opcache.resrict_api` configuration.
+			 * @see https://github.com/php/php-src/issues/8799
+			 */
+			$zend_status = @opcache_get_status();
 			$php         .= empty( $zend_status['opcache_enabled'] ) ? '' : ' – OPcache';
 		}
 
@@ -67,7 +71,7 @@ class Core_Load_Collector implements Record_Collector_Interface {
 		/**
 		 * The paths aren't normalized, because it is unclear if they are in PHP itself
 		 * and this should rather be false negative to prevent warning emitted.
-		*/
+		 */
 		return 0 === stripos( __FILE__, $restrict_api );
 	}
 }
