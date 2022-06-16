@@ -169,7 +169,7 @@ class RoboFile extends \Robo\Tasks {
 		$zipFile = __DIR__ . '/release/laps.zip';
 
 		$this->makeArchive();
-		$this->_exec("gh release upload $version $zipFile");
+		$this->_exec("gh release create $version $zipFile");
 		$this->_remove( $zipFile );
 	}
 
