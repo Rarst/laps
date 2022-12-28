@@ -17,6 +17,8 @@ jobs:
         with:
           php-version: '7.2'
           tools: phpunit:8,psalm:4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup problem matchers for PHPUnit
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
