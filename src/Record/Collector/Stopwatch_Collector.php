@@ -61,6 +61,7 @@ class Stopwatch_Collector implements Record_Collector_Interface {
 			}
 		}
 
+		/** @psalm-suppress PossiblyInvalidArgument */
 		return array_map( [ $this, 'transform' ], array_keys( $events ), $events );
 	}
 

@@ -44,7 +44,7 @@ class Http_Collector extends Stopwatch_Collector {
 	 *
 	 * @return false|array|\WP_Error
 	 *
-	 * @psalm-suppress RedundantConditionGivenDocblockType
+	 * @psalm-suppress RedundantCondition
 	 * @noinspection   PhpUnusedParameterInspection
 	 */
 	public function pre_http_request( $false, $args, $url ) {
@@ -68,7 +68,7 @@ class Http_Collector extends Stopwatch_Collector {
 	 *
 	 * @return array|\WP_Error
 	 *
-	 * @psalm-suppress RedundantConditionGivenDocblockType
+	 * @psalm-suppress RedundantCondition
 	 * @noinspection   PhpUnusedParameterInspection
 	 */
 	public function http_api_debug( $response, $type, $class, $args, $url ) {

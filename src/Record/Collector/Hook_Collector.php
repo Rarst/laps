@@ -103,7 +103,6 @@ class Hook_Collector extends Stopwatch_Collector {
 	 * @param int         $start_priority Start hook priority (defaults to -1).
 	 * @param int         $stop_priority  Stop hook priority (defaults to max int).
 	 *
-	 * @psalm-suppress MissingClosureReturnType
 	 * @psalm-suppress MissingClosureParamType
 	 */
 	private function add_event(

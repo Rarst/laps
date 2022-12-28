@@ -65,6 +65,7 @@ class Sql_Collector implements Record_Collector_Interface {
 
 		/** @var array $wpdb->queries */
 		/** @psalm-var array<int, QueryData> $wpdb->queries */
+		/** @psalm-suppress PossiblyInvalidArgument */
 		$records = array_filter( array_map( [ $this, 'transform' ], array_keys( $wpdb->queries ), $wpdb->queries ) );
 
 		return $records;

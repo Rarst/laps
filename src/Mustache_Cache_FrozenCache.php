@@ -11,8 +11,6 @@ class Mustache_Cache_FrozenCache extends \Mustache_Cache_FilesystemCache {
 	/**
 	 * Cache and load a compiled Mustache_Template class.
 	 *
-	 * @psalm-suppress InvalidScalarArgument
-	 *
 	 * @param string $key   Key.
 	 * @param string $value Value.
 	 *

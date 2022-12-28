@@ -10,6 +10,8 @@ use Rarst\Laps\Record\Record_Interface;
  *
  * @template-extends \ArrayIterator<array-key,Record_Interface>
  * @template-implements \RecursiveIterator<array-key,Record_Interface>
+ *
+ * @psalm-suppress TooManyTemplateParams
  */
 class Recursive_Record_Iterator extends \ArrayIterator implements \RecursiveIterator {
 

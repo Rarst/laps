@@ -11,7 +11,7 @@ use Rarst\Laps\Record\Record_Interface;
  *
  * @template-implements \Iterator<array>
  *
- * @psalm-suppress PropertyNotSetInConstructor
+ * @psalm-suppress PropertyNotSetInConstructor, TooManyTemplateParams
  */
 class Timeline_Iterator implements \Iterator {
 
@@ -30,7 +30,7 @@ class Timeline_Iterator implements \Iterator {
 	/**
 	 * @param Recursive_Record_Iterator $iterator Record iterator.
 	 *
-	 * @psalm-suppress PossiblyFalsePropertyAssignmentValue
+	 * @psalm-suppress PossiblyFalsePropertyAssignmentValue, PossiblyUndefinedArrayOffset
 	 */
 	public function __construct( Recursive_Record_Iterator $iterator ) {
 

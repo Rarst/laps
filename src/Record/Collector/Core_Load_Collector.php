@@ -27,6 +27,8 @@ class Core_Load_Collector implements Record_Collector_Interface {
 
 	/**
 	 * @return Record_Interface[]
+	 *
+	 * @psalm-suppress PossiblyUndefinedArrayOffset
 	 */
 	public function get_records(): array {
 
